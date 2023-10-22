@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const models = require('../../models/index.js');
 const File = require('../../helpers/file-upload');
 const moment = require('moment');
+const correo = require('../../helpers/correo');
 
 class ConexionUsuario extends ConexionSequelize {
 
@@ -57,6 +58,8 @@ class ConexionUsuario extends ConexionSequelize {
 
     verificarCorreo = async(id) => {  
         let resultado = null;
+
+        console.log(id);
 
         try {
             const usuario = await models.User.findByPk(id);

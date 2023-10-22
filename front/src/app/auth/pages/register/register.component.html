@@ -90,15 +90,16 @@
   </div>
 </div>
 
-<!-- <div class="position-absolute top-50 start-50 translate-middle mensaje card shadow-lg p-3 mb-5 bg-body rounded" *ngIf="registroCorrecto == 1 || registroCorrecto == 2" style="width: 400px;">
-  <div *ngIf="registroCorrecto == 1" class="card-body">
-    <span><i class="fa-solid fa-triangle-exclamation me-2" style="color:var(--colorRojo)"></i>
-      {{result.msg}}</span>
+<div class="position-absolute top-50 start-50 translate-middle mensaje card shadow-lg mb-5 bg-body rounded" *ngIf="registroCorrecto == 1 || registroCorrecto == 2" style="width: 400px;">
+  <div *ngIf="registroCorrecto == 1" class="card-body text-center p-0 pb-3">
+    <div style="background-color: #ffa8ba;" class="p-3 mb-3"><i class="fa-solid fa-triangle-exclamation me-2" style="color:var(--colorBlanco); font-size: var(--TamTitulo);"></i></div>
+    <span class="pt-5 m-3">{{resultado.msg}}</span>
   </div>
-  <div *ngIf="registroCorrecto == 2" class="card-body text-center">
-    <span  style="display: block;"><i class="fa-solid fa-circle-check me-2"></i>
-    {{result.msg}}</span>
-    <button (click)="abrirLogin()" class="btn btn-light mt-3 p-2 px-5">Login</button>
+
+  <div *ngIf="registroCorrecto == 2" class="card-body text-center p-0">
+    <div style="background-color: #ffa8ba;" class="p-3 mb-3"><i class="fa-solid fa-circle-check me-2" style="color:var(--colorBlanco); font-size: var(--TamTitulo);"></i></div>
+    <span class="pt-5 m-3">{{resultado.msg}}</span><br>
+    <button (click)="abrirLogin()" class="btn boton btn-light m-4 p-2 px-5">Login</button>
   </div>
-</div> -->
+</div>
 
