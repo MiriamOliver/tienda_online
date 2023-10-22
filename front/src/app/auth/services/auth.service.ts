@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Registro, Resultado, Auth } from '../interfaces/auth.interface';
+import { Registro, Resultado, Auth, Sesion } from '../interfaces/auth.interface';
 import { environment } from './../../../environments/environment'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +24,10 @@ export class AuthService {
     formReg.append('password', usuario.password);
 
     return this.http.post<Resultado>(`${ this.baseUrl }/registro`, formReg);
+  }
+
+  login(usuario:Sesion): Observable<Auth>  {
+    return this.http.post<Auth>(`${ this.baseUrl }/login`, usuario)
+      .pipe(tap(auths => this.auth = auths));
   }
 }

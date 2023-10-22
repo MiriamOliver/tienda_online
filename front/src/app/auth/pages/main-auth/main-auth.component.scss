@@ -1,6 +1,6 @@
 .fondo-inicio{
   background-image: url(../../../../assets/imgs/stacked-waves-haikei.svg);
-  background-position: center;
+  background-position: bottom;
   background-size:cover;
   background-color: var(--colorRosa);
   .container{
@@ -12,6 +12,6 @@
   .fondo-inicio{
     background-image: url(../../../../assets/imgs/stacked-waves-haikei-movil.svg);
     background-size:cover;
-    background-position: center;
+    background-position: bottom;
   }
 }

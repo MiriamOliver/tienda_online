@@ -89,7 +89,7 @@ export class RegisterComponent implements OnInit{
           this.resultado.msg = resp.msg;
         }
         clearTimeout(this.timer);
-        this.timer = window.setTimeout(() => {this.registroCorrecto = -1;}, 800000);
+        this.timer = window.setTimeout(() => {this.registroCorrecto = -1;}, 8000);
       });
     }
     else {

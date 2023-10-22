@@ -6,13 +6,15 @@ import { MainAuthComponent } from './pages/main-auth/main-auth.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { InicioComponent } from './pages/inicio/inicio.component';
+import { LoginComponent } from './pages/login/login.component';
 
 
 @NgModule({
   declarations: [
     RegisterComponent,
     MainAuthComponent,
-    InicioComponent
+    InicioComponent,
+    LoginComponent
   ],
   providers: [],
   imports: [
