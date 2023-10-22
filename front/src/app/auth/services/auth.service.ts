@@ -10,14 +10,11 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   private baseUrl: string = environment.baseUrl;
-  private usuario: Registro[];
   private auth: Auth | undefined;
 
   constructor(
     private http: HttpClient
-  ) {
-    this.usuario = [];
-  }
+  ) {}
 
   registro(usuario: Registro): Observable<Resultado> {
     const formReg = new FormData();
