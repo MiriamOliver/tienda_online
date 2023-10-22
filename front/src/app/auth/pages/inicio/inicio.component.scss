@@ -1,0 +1,54 @@
+.fondo-inicio{
+  background-image: url(../../../../assets/imgs/layered-waves-haikei.svg);
+  background-position: right;
+  background-size:cover;
+  //background-color: var(--colorGris);
+  .info-inicio{
+    h1{
+      font-family: var(--TipoTitulo);
+      font-size: var(--TamTitulos);
+      color: var(--colorAzul);
+    }
+    p{
+      font-family: var(--TipoTexto);
+    }
+    .boton {
+      font-size: 20px;
+      font-weight: 200;
+      letter-spacing: 1px;
+      padding: 13px 50px 13px;
+      outline: 0;
+      border: 1px solid black;
+      cursor: pointer;
+      position: relative;
+      background-color: rgba(0, 0, 0, 0);
+    }
+
+    .boton::after {
+      content: "";
+      border-radius: 0.25rem;
+      background-color: var(--colorAmarillo);
+      width: 100%;
+      z-index: -1;
+      position: absolute;
+      height: 100%;
+      top: 7px;
+      left: 7px;
+      transition: 0.2s;
+    }
+
+    .boton:hover::after {
+      top: 0px;
+      left: 0px;
+    }
+  }
+}
+@media (max-width: 992px) {
+  .fondo-inicio{
+    background-image: url(../../../../assets/imgs/layered-waves-haikei-movil.svg);
+    background-position: right;
+    background-size:cover;
+  }
+}
+
+

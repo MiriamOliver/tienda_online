@@ -1,0 +1,104 @@
+<div class="row rounded-1">
+  <div class="col-lg-6 col-12 portada align-items-center py-5 px-5 text-center">
+    <h1 class="h1 mb-5 pb-3 pt-5">PICTOON</h1>
+    <p class="mb-5">¿Ya estas registrado? <br>Inicia sesión con tu cuenta</p>
+    <div class="pt-1 mb-2">
+      <button  (click)="abrirLogin()" type="button" class="btn px-4 py-2 boton rounded-1">Log In</button>
+    </div>
+  </div>
+  <div class="col-lg-6 col-12 py-4 intro">
+    <div class="card-body p-4 text-black text-center">
+      <form #regForm="ngForm" [formGroup]="registerForm" (ngSubmit)="registro()">
+        <div class="mb-4 border-bottom border-3">
+          <h2 class="fw-bold mb-0 mb-3 pb-1">REGRISTRO</h2>
+        </div>
+
+        <div class="mb-4 text-start">
+          <label for="formFile" class="form-label">Avatar</label>
+          <input class="form-control"
+            formControlName="avatar"
+            [ngClass]="{'is-invalid' : form['avatar'].invalid && form['avatar'].touched}"
+            type="file" id="formFile"
+            (change)="onFileSelected($event)"/>
+          <div *ngIf="form['avatar'].invalid" class="invalid-feedback">
+            <div *ngIf="form['avatar'].errors?.['required']" class="error alert alert-danger mt-2">Elige una imagen de perfil</div>
+          </div>
+        </div>
+
+        <div class="form-outline mb-4 text-start">
+          <label class="form-label">Nombre</label>
+
+          <input type="text"
+            formControlName="nombre"
+            [ngClass]="{'is-invalid' : form['nombre'].invalid && form['nombre'].dirty}"
+            class="form-control"/>
+
+          <div *ngIf="form['nombre'].invalid" class="invalid-feedback">
+            <div *ngIf="form['nombre'].errors?.['required']" class="error alert alert-danger mt-2">El nombre es obligatorio</div>
+          </div>
+        </div>
+
+       <div class="form-outline mb-4 text-start">
+          <label class="form-label">Email</label>
+
+          <input type="email"
+            formControlName="email"
+            [ngClass]="{'is-invalid' : form['email'].invalid && form['email'].dirty}"
+            class="form-control"/>
+
+          <div *ngIf="form['email'].errors" class="invalid-feedback">
+            <div *ngIf="form['email'].errors?.['required']" class="error alert alert-danger mt-2">El email es obligatorio</div>
+            <div *ngIf="form['email'].errors?.['pattern']" class="error alert alert-danger mt-2">El email debe ser válido</div>
+          </div>
+        </div>
+
+        <ng-container formGroupName="passwords">
+          <div class="form-outline mb-4 text-start">
+            <label class="form-label">Contraseña</label>
+
+            <input type="password"
+                formControlName="passwd"
+                class="form-control"
+                [ngClass]="{'is-invalid' : passwords.get('passwd')?.invalid && passwords.get('passwd')?.dirty}" />
+
+            <div *ngIf="passwords.get('passwd')?.invalid" class="invalid-feedback">
+              <div *ngIf="passwords.get('passwd')?.errors?.['required']" class="error alert alert-danger mt-2">La contraseña es obligatoria</div>
+            </div>
+          </div>
+
+          <div class="form-outline text-start">
+            <label class="form-label" for="form2Example2">Confirmar Contraseña</label>
+
+            <input type="password"
+              formControlName="passwdConf"
+              class="form-control"
+              [ngClass]="{'is-invalid' : passwords.get('passwdConf')?.invalid && passwords.get('passwdConf')?.dirty}" />
+
+            <div *ngIf="passwords.get('passwdConf')?.invalid" class="invalid-feedback">
+              <div *ngIf="passwords.get('passwdConf')?.errors?.['required']" class="error alert alert-danger mt-2 mb-0">Repetir la contraseña es obligatorio</div>
+            </div>
+
+          </div>
+          <div *ngIf="passwords.errors?.['confirmarPasswd']" class="text-start error alert alert-danger mt-2">Las contraseñas deben de coincidir</div>
+        </ng-container>
+
+        <div class="pt-1 mb-2 mt-4">
+          <button class="btn rounded-1 boton py-2 px-4" [disabled]="registerForm.invalid" type="submit">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="position-absolute top-50 start-50 translate-middle mensaje card shadow-lg p-3 mb-5 bg-body rounded" *ngIf="registroCorrecto == 1 || registroCorrecto == 2" style="width: 400px;">
+  <div *ngIf="registroCorrecto == 1" class="card-body">
+    <span><i class="fa-solid fa-triangle-exclamation me-2" style="color:var(--colorRojo)"></i>
+      {{result.msg}}</span>
+  </div>
+  <div *ngIf="registroCorrecto == 2" class="card-body text-center">
+    <span  style="display: block;"><i class="fa-solid fa-circle-check me-2"></i>
+    {{result.msg}}</span>
+    <button (click)="abrirLogin()" class="btn btn-light mt-3 p-2 px-5">Login</button>
+  </div>
+</div> -->
+
