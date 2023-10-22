@@ -1,1 +1,55 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: font-texto;
+  src: url(./assets/tipografia/Linotte-Regular.otf) format("woff2");
+}
+
+@font-face {
+  font-family: font-titulo;
+  src: url(./assets/tipografia/Linotte-Heavy.otf) format("woff2");
+}
+
+:root {
+
+    //----------------------COLORES----------------------//
+
+    --colorRosa:#ffa8ba;
+    --colorGris:#ECEDED;
+    --colorAzul:#72E6F5;
+    --colorAmarillo:#ffe54c; //#D2AD76
+    --colorBlanco:#ffffff;
+    --colorTransparente: #00102abd;
+
+    //--------------------TIPOGRAFÍA----------------------//
+
+    --TipoTexto: font-texto;
+    --TipoTitulo: font-titulo;
+
+    //-----------------TAMAÑO-TIPOGRAFÍA------------------//
+
+    --TamTitulos: 55px;
+    --TamMenu: 13px;
+    --TamTexto:14px;
+    --TamError:13px;
+    --TamGame:16px;
+
+    //------------------PESO-TIPOGRAFÍA-------------------//
+
+
+    //------------------HOVER-TIPOGRAFÍA-------------------//
+
+    --BottomOffset: 0;
+    --LineHeight: 20px;
+    --LineColor: linear-gradient(-90deg, #ffffff00, #A1011B, #A1011B,#ffffff00)
+
+}
+body{
+  font-family: var(--TipoTexto);
+  overflow-x: hidden;
+  position:sticky;
+}
+
+a{
+  text-decoration: none;
+  color: #000;
+}
+

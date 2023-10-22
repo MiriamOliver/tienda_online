@@ -1,0 +1,17 @@
+.fondo-inicio{
+  background-image: url(../../../../assets/imgs/stacked-waves-haikei.svg);
+  background-position: center;
+  background-size:cover;
+  background-color: var(--colorRosa);
+  .container{
+    width: 80%;
+  }
+}
+
+@media (max-width: 992px) {
+  .fondo-inicio{
+    background-image: url(../../../../assets/imgs/stacked-waves-haikei-movil.svg);
+    background-size:cover;
+    background-position: center;
+  }
+}
