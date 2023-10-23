@@ -25,10 +25,12 @@ module.exports = {
         type: Sequelize.STRING
       },
       conectado: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        default: 0
       },
       habilitado: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        default: 1
       },
       verifiedAt: {
         type: Sequelize.DATE

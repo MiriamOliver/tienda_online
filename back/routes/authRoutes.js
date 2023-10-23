@@ -3,7 +3,7 @@ const router = Router();
 const controlador = require('../controllers/authController');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
-const { emailExiste, nombreExiste } = require('../helpers/db-validators');
+const { emailExiste, nombreExiste, emailDesconocido, emailVerificado } = require('../helpers/db-validators');
 
 router.post('/registro', 
 [
@@ -18,6 +18,17 @@ router.post('/registro',
 ],controlador.register);
 
 router.get('/verificarcorreo/:id', controlador.verificarCorreo);
+
+router.post('/login',
+[
+    check('email').not().isEmpty(),
+    check('email', 'El correo no es válido').isEmail(),
+    check('email', 'El correo no existe').custom(emailDesconocido),
+    check('email', 'El correo no esta verificado').custom(emailVerificado),
+    check('password').not().isEmpty(),
+    validarCampos 
+
+],controlador.login);
 
 
 module.exports = router
