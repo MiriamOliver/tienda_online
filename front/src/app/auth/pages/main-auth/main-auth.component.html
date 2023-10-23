@@ -1,13 +1,13 @@
-<div class="fondo-inicio">
+<div class="fondo-inicio mh-100">
   <div class="container">
     <div class="row d-flex justify-content-center align-items-center py-4 px-5">
       <ng-container *ngIf="inicio == 'registro'">
         <app-register></app-register>
       </ng-container>
-<!--           <ng-container *ngIf="inicio == 'login'">
+      <ng-container *ngIf="inicio == 'login'">
         <app-login></app-login>
       </ng-container>
-      <ng-container *ngIf="inicio == 'recpasswd'">
+<!--       <ng-container *ngIf="inicio == 'recpasswd'">
         <app-recuperacion-passwd></app-recuperacion-passwd>
       </ng-container>
       <ng-container *ngIf="inicio == 'genpasswd'">

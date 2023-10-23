@@ -4,6 +4,7 @@ const models = require('../../models/index.js');
 const File = require('../../helpers/file-upload');
 const moment = require('moment');
 const correo = require('../../helpers/correo');
+const { Op } = require('sequelize');
 
 class ConexionUsuario extends ConexionSequelize {
 
@@ -37,6 +38,34 @@ class ConexionUsuario extends ConexionSequelize {
             throw err;
         }
     }
+
+    loginUsuario = async (req) => {
+
+        const user = await models.User.findOne({
+            attributes: ['id', 'nombre', 'avatar'],
+            where : {
+                email: req.body.email,
+                password: req.body.password,
+                habilitado: 1,
+                verifiedAt:{[Op.ne]: null}
+            },  
+
+            include: 'RolesAsignados'
+        });
+        
+        const idRol = user.dataValues.RolesAsignados[0].dataValues.id_rol;
+        const rol = await models.Rol.findByPk(idRol);
+
+        await models.User.update({conectado: 1}, 
+                                {where: {id:user.dataValues.id}});
+
+        return {
+            id: user.dataValues.id,
+            avatar: process.env.URL + process.env.PORT + "/upload/" + user.dataValues.avatar,
+            nombre: user.dataValues.nombre,
+            rol: rol.dataValues.rol,
+        };
+    } 
 
     getIdRol = async (rol) => {
         

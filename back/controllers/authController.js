@@ -29,7 +29,31 @@ const verificarCorreo = (req, res = response) => {
         });
 }
 
+const login =  (req = request, res = response) => {
+    const conx = new ConexionSequelize();
+    conx.loginUsuario(req)    
+        .then( user => {
+            const resp = {
+                success: true,
+                msg: '¡Inicio de Sesión correcto!. Bienvenido a PICTOON',
+                data: {
+                    id: user.id,
+                    nombre: user.nombre,
+                    rol: user.rol,
+                    avatar: user.avatar,
+                    token: generarJWT(user.id, user.nombre, user.rol, user.avatar),
+                },
+            }
+            res.status(200).json(resp);
+        })
+        .catch ( err => {
+            console.log(err);
+            res.status(203).json({success:false, msg:'¡Error!. Fallo en Inicio de Sesión', err});
+        });
+}
+
     module.exports = {
         register,
-        verificarCorreo
+        verificarCorreo,
+        login
     }
