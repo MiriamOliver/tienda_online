@@ -138,6 +138,27 @@ class ConexionUsuario extends ConexionSequelize {
         }
          
     }
+
+    restaurarPasswd = async (codigo, passwd) => {
+        let resultado = null
+
+        try{
+            const idUser = await models.User.findOne({
+                attributes: ['id'],
+                where: { codigo: codigo },
+            });
+
+            const usuario = await models.User.findByPk(idUser.dataValues.id);
+
+            if(usuario){
+                resultado = await usuario.update({password: passwd});    
+            }
+
+            return resultado;
+        }catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = ConexionUsuario;

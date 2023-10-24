@@ -36,6 +36,6 @@ export class AuthService {
   }
 
   generarPassword(passwd: string, codigo:string): Observable<Resultado>{
-    return this.http.post<Resultado>(`${this.baseUrl}/generarpasswd/`, {password: passwd, codigo: codigo});
+    return this.http.post<Resultado>(`${this.baseUrl}/genpassword/`, {password: passwd, codigo: codigo});
   }
 }

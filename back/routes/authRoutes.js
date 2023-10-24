@@ -39,5 +39,13 @@ router.post('/recpassword',
 ],
 controlador.emailPasswd);
 
+router.post('/genpassword',
+[
+    check('codigo').not().isEmpty(),
+    check('password').not().isEmpty(),
+    validarCampos
+],
+controlador.guardarPassword);
+
 
 module.exports = router

@@ -62,9 +62,21 @@ const emailPasswd = (req, res = response) => {
     });
 }
 
+const guardarPassword = (req, res = response) => {
+    const conx = new ConexionSequelize();
+    conx.restaurarPasswd(req.body.codigo, req.body.password)
+    .then(resp => {
+        res.send({success:true, msg:'Restauración de contraseña exitosa'});
+    }).catch(err => {
+        console.log(err);
+        res.send({success:false, msg:'Fallo en la restauración de contraseña', err});
+    });
+}
+
     module.exports = {
         register,
         verificarCorreo,
         login,
-        emailPasswd
+        emailPasswd,
+        guardarPassword
     }
