@@ -52,8 +52,31 @@ const login =  (req = request, res = response) => {
         });
 }
 
+const emailPasswd = (req, res = response) => {
+    const conx = new ConexionSequelize();
+    conx.enviarCodigo(req.body.email)
+    .then(resp => {
+        res.send({success:true, msg:'Revisa tu correo para obtener el código de restauración de contraseña'});
+    }).catch(err => {
+        res.send({success:false, msg:'Fallo en la recuperación de contraseña. El email es incorrecto', err});
+    });
+}
+
+const guardarPassword = (req, res = response) => {
+    const conx = new ConexionSequelize();
+    conx.restaurarPasswd(req.body.codigo, req.body.password)
+    .then(resp => {
+        res.send({success:true, msg:'Restauración de contraseña exitosa'});
+    }).catch(err => {
+        console.log(err);
+        res.send({success:false, msg:'Fallo en la restauración de contraseña', err});
+    });
+}
+
     module.exports = {
         register,
         verificarCorreo,
-        login
+        login,
+        emailPasswd,
+        guardarPassword
     }

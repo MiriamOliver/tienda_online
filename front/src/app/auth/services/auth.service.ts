@@ -30,4 +30,12 @@ export class AuthService {
     return this.http.post<Auth>(`${ this.baseUrl }/login`, usuario)
       .pipe(tap(auths => this.auth = auths));
   }
+
+  recPassword(email:string): Observable<Resultado>{
+    return this.http.post<Resultado>(`${ this.baseUrl }/recpassword`, { email: email });
+  }
+
+  generarPassword(passwd: string, codigo:string): Observable<Resultado>{
+    return this.http.post<Resultado>(`${this.baseUrl}/genpassword/`, {password: passwd, codigo: codigo});
+  }
 }
