@@ -52,8 +52,19 @@ const login =  (req = request, res = response) => {
         });
 }
 
+const emailPasswd = (req, res = response) => {
+    const conx = new ConexionSequelize();
+    conx.enviarCodigo(req.body.email)
+    .then(resp => {
+        res.send({success:true, msg:'Revisa tu correo para obtener el código de restauración de contraseña'});
+    }).catch(err => {
+        res.send({success:false, msg:'Fallo en la recuperación de contraseña. El email es incorrecto', err});
+    });
+}
+
     module.exports = {
         register,
         verificarCorreo,
-        login
+        login,
+        emailPasswd
     }

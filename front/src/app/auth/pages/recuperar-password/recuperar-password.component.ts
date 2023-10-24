@@ -41,12 +41,10 @@ export class RecuperarPasswordComponent implements OnInit{
 
   recPasswd() {
     this.authService.recPassword(this.passwdForm.get('email')?.value).subscribe(resp => {
-      console.log(resp);
       if (resp.success) {
         this.router.navigate(['auth/genpasswd'])
       }else{
         this.cambioPasswd = 1;
-        console.log(resp.msg);
         this.resultado.msg = resp.msg
       }
       clearTimeout(this.timer);

@@ -32,6 +32,6 @@ export class AuthService {
   }
 
   recPassword(email:string): Observable<Resultado>{
-    return this.http.post<Resultado>(`${ this.baseUrl }/emailpasswd`, { email: email });
+    return this.http.post<Resultado>(`${ this.baseUrl }/recpassword`, { email: email });
   }
 }

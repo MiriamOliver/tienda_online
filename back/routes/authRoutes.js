@@ -30,5 +30,14 @@ router.post('/login',
 
 ],controlador.login);
 
+router.post('/recpassword',
+[
+    check('email').not().isEmpty(),
+    check('email', 'El correo no es válido').isEmail(),
+    check('email', 'El correo no existe').custom(emailDesconocido),
+    validarCampos 
+],
+controlador.emailPasswd);
+
 
 module.exports = router

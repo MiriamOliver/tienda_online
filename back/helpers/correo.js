@@ -31,7 +31,26 @@ const verificarCorreo = (userId, receptor, ruta) => {
     });
 }
 
+const emailRecPasswd = (receptor, codigo) => {
+    message = {
+        from: process.env.EMAIL_ACCOUNT,
+        to: receptor,
+        subject: "Restauración de Contraseña",
+        html: `<p>El código de restauración de contraseña es: <b>${codigo}</b></p>`
+    };
+
+
+    transporter.sendMail(message, (error, info) => {
+        if (error) {
+            console.log(error.message)
+        } else {
+            console.log('Email enviado' + info.response);
+        } 
+    });
+}
+
 
 module.exports = {
     verificarCorreo,
+    emailRecPasswd
 }

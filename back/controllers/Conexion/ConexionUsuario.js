@@ -5,6 +5,7 @@ const File = require('../../helpers/file-upload');
 const moment = require('moment');
 const correo = require('../../helpers/correo');
 const { Op } = require('sequelize');
+const libreria = require('../../helpers/libreria');
 
 class ConexionUsuario extends ConexionSequelize {
 
@@ -77,6 +78,15 @@ class ConexionUsuario extends ConexionSequelize {
         return idRol;
     }
 
+    getIdUser = async (email) => {
+        const idUser = await models.User.findOne({
+            attributes: ['id'],
+            where: { email: email },
+        });
+
+        return idUser.dataValues.id;
+    } 
+
     asignarRol = async (idUser, idRol) => {
         const resp = await models.RolesAsignados.create({
             id_user: idUser,
@@ -102,6 +112,31 @@ class ConexionUsuario extends ConexionSequelize {
         catch (err) {
             throw err;
         }
+    }
+
+    enviarCodigo = async(email) => {
+        let resultado = null
+
+        try{
+            const usuario = await models.User.findOne({
+                where: { email: email },
+            });
+
+            if(usuario){
+
+                const codigo = libreria.generarCodigo();
+                resultado = await usuario.update({codigo: codigo});
+                if(resultado){
+                    correo.emailRecPasswd(email, codigo);
+                } 
+            }
+
+            return resultado;
+
+        }catch (err) {
+            throw err;
+        }
+         
     }
 }
 
