@@ -8,6 +8,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { InicioComponent } from './pages/inicio/inicio.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RecuperarPasswordComponent } from './pages/recuperar-password/recuperar-password.component';
+import { GenerarPasswordComponent } from './pages/generar-password/generar-password.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { RecuperarPasswordComponent } from './pages/recuperar-password/recuperar
     MainAuthComponent,
     InicioComponent,
     LoginComponent,
-    RecuperarPasswordComponent
+    RecuperarPasswordComponent,
+    GenerarPasswordComponent
   ],
   providers: [],
   imports: [

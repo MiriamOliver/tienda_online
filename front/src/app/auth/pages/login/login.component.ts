@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit{
   }
 
   abrirRecPasswd() {
-    this.router.navigate(['auth/recpasswd']);
+    this.router.navigate(['auth/recpassword']);
   }
 }
 

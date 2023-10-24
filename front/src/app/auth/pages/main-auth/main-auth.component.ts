@@ -19,11 +19,11 @@ ngOnInit(): void {
   else if (this.router.url.includes('registro')) {
     this.inicio = 'registro';
   }
-  else if (this.router.url.includes('recpasswd')) {
-    this.inicio = 'recpasswd';
+  else if (this.router.url.includes('recpassword')) {
+    this.inicio = 'recpassword';
   }
-  else if (this.router.url.includes('genpasswd')) {
-    this.inicio = 'genpasswd';
+  else if (this.router.url.includes('genpassword')) {
+    this.inicio = 'genpassword';
   }
 }
 

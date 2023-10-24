@@ -11,8 +11,8 @@ const routes: Routes = [
       { path: 'registro', component: MainAuthComponent },
       { path: '', component: InicioComponent },
       { path: 'login', component: MainAuthComponent},
-      { path: 'recpasswd', component: MainAuthComponent },
-      { path: 'genpasswd', component: MainAuthComponent }
+      { path: 'recpassword', component: MainAuthComponent },
+      { path: 'genpassword', component: MainAuthComponent }
     ]
   }
 ];
