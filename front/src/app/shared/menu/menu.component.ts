@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { PerfilService } from '../services/perfil.service';
+import { Perfil } from '../interfaces/perfil.interface';
 
 @Component({
   selector: 'app-menu',
@@ -12,6 +14,23 @@ export class MenuComponent {
   rol:string = 'cliente';
 
   constructor(
+    private perfilService: PerfilService,
+    private activatedRoute: ActivatedRoute,
     private router: Router) { }
+
+    perfil:Perfil = {
+      nombre: JSON.parse(localStorage.getItem('user')!).nombre,
+      avatar: JSON.parse(localStorage.getItem('user')!).avatar
+    }
+
+    cerrarSesion(){
+      this.perfilService.cerrarSesion(JSON.parse(localStorage.getItem('user')!).id)
+      .subscribe(resp => {
+        if(resp.success){
+          localStorage.clear();
+          this.router.navigate(['']);
+        }
+      });
+    }
 
 }

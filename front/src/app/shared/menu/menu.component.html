@@ -15,18 +15,18 @@
   <div class="menu-icon col-md-2 d-flex justify-content-end align-items-center">
     <div class="dropdown-center info-usuario me-3">
       <button class="btn btn-secondary p-0 rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <img > <!-- src="{{usuario.avatar}}" -->
+        <img src="{{perfil.avatar}}">
       </button>
       <ul class="dropdown-menu p-0">
         <li>
           <div class="dropdown-item rounded-top-1 info-perfil py-2">
-            <img class="rounded-1 me-3" > <!-- src="{{usuario.avatar}}" -->
-            <p>User name</p>
+            <img class="rounded-1 me-3" src="{{perfil.avatar}}">
+            <p>{{perfil.nombre}}</p>
           </div>
         </li>
-        <li><button class="dropdown-item py-2" type="button">Perfil</button></li>
-        <li><button class="dropdown-item py-2" type="button">Cuenta</button></li>
-        <li><button class="dropdown-item rounded-bottom-1 border-top border-3 py-2" type="button">Cerrar Sesión</button></li>
+        <li><a class="dropdown-item py-2">Perfil</a></li>
+        <li><a class="dropdown-item py-2">Cuenta</a></li>
+        <li><a (click)="cerrarSesion()" class="dropdown-item rounded-bottom-1 border-top border-3 py-2">Cerrar Sesión</a></li>
       </ul>
     </div>
     <a><i class="fa-solid fa-heart rounded-circle me-3 p-2"></i></a>
