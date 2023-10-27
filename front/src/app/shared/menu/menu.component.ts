@@ -18,10 +18,10 @@ export class MenuComponent {
     private activatedRoute: ActivatedRoute,
     private router: Router) { }
 
-    /* perfil:Perfil = {
+    perfil:Perfil = {
       nombre: JSON.parse(localStorage.getItem('user')!).nombre,
       avatar: JSON.parse(localStorage.getItem('user')!).avatar
-    } */
+    }
 
     cerrarSesion(){
       this.perfilService.cerrarSesion(JSON.parse(localStorage.getItem('user')!).id)
