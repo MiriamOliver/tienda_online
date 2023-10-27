@@ -47,5 +47,7 @@ router.post('/genpassword',
 ],
 controlador.guardarPassword);
 
+router.put('/logout', controlador.logout);
+
 
 module.exports = router
