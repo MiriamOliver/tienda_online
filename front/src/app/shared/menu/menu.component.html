@@ -1,0 +1,36 @@
+<nav class="navbar row px-4 py-2">
+  <div class="p-0 d-flex col-md-2 justify-content-between align-items-center contenedor-menu">
+    <div class="justify-content-start d-flex align-items-center ms-2">
+        <h5 class="p-0 pe-3">PICTOON</h5>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <ng-container *ngIf="rol == 'cliente'">
+      <app-menu-cliente class="contenedor-menu"></app-menu-cliente>
+    </ng-container>
+    <ng-container *ngIf="rol == 'administrador'">
+      <app-menu-administrador class="contenedor-menu"></app-menu-administrador>
+    </ng-container>
+  </div>
+  <div class="menu-icon col-md-2 d-flex justify-content-end align-items-center">
+    <div class="dropdown-center info-usuario me-3">
+      <button class="btn btn-secondary p-0 rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <img > <!-- src="{{usuario.avatar}}" -->
+      </button>
+      <ul class="dropdown-menu p-0">
+        <li>
+          <div class="dropdown-item rounded-top-1 info-perfil py-2">
+            <img class="rounded-1 me-3" > <!-- src="{{usuario.avatar}}" -->
+            <p>User name</p>
+          </div>
+        </li>
+        <li><button class="dropdown-item py-2" type="button">Perfil</button></li>
+        <li><button class="dropdown-item py-2" type="button">Cuenta</button></li>
+        <li><button class="dropdown-item rounded-bottom-1 border-top border-3 py-2" type="button">Cerrar Sesión</button></li>
+      </ul>
+    </div>
+    <a><i class="fa-solid fa-heart rounded-circle me-3 p-2"></i></a>
+    <a><i class="fa-solid fa-cart-shopping rounded-circle p-2 me-3"></i></a>
+    <a><i class="fa-solid fa-bell rounded-circle p-2 "></i></a>
+  </div>
+</nav>

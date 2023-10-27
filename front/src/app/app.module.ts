@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { AuthRoutingModule } from './auth/auth-routing.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
     FormsModule,
     AuthRoutingModule,
     AuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
