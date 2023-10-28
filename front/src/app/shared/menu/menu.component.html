@@ -1,27 +1,30 @@
 <nav class="navbar row px-4 py-2">
-  <div class="p-0 d-flex col-md-2 justify-content-between align-items-center contenedor-menu">
+
+  <div class="col-lg-2 col-3 p-0 d-flex justify-content-between align-items-center contenedor-menu">
     <div class="justify-content-start d-flex align-items-center ms-2">
-        <h5 class="p-0 pe-3">PICTOON</h5>
+        <h5 class="p-0 pe-4">PICTOON</h5>
     </div>
   </div>
-  <div class="col-md-8">
-    <ng-container *ngIf="rol == 'cliente'">
-      <app-menu-cliente class="contenedor-menu"></app-menu-cliente>
-    </ng-container>
-    <ng-container *ngIf="rol == 'administrador'">
-      <app-menu-administrador class="contenedor-menu"></app-menu-administrador>
-    </ng-container>
+  <div class="col-lg-8 aparecegrande">
+    <ul class="navbar text-decoration-none list-unstyled m-0 p-0">
+      <ng-container *ngIf="rol == 'cliente'">
+        <app-menu-cliente class="contenedor-menu d-flex justify-content-start"></app-menu-cliente>
+      </ng-container>
+      <ng-container *ngIf="rol == 'administrador'">
+        <app-menu-administrador class="contenedor-menu"></app-menu-administrador>
+      </ng-container>
+    </ul>
   </div>
-  <div class="menu-icon col-md-2 d-flex justify-content-end align-items-center">
-    <div class="dropdown-center info-usuario me-3">
-      <button class="btn btn-secondary p-0 rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <div class="col-lg-2 col-8 menu-icon d-flex justify-content-end align-items-center">
+    <div class="dropdown-center info-usuario me-3 aparecegrande">
+      <button class="btn btn-secondary p-0 rounded-circle border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="{{perfil.avatar}}">
       </button>
-      <ul class="dropdown-menu p-0">
+      <ul class="dropdown-menu p-0 mt-1">
         <li>
-          <div class="dropdown-item rounded-top-1 info-perfil py-2">
-            <img class="rounded-1 me-3" src="{{perfil.avatar}}">
-            <p>{{perfil.nombre}}</p>
+          <div class="rounded-top-1 info-perfil py-3 text-center">
+            <img class="m-1" src="{{perfil.avatar}}">
+            <p class="p-0 mt-1 m-0">{{perfil.nombre}}</p>
           </div>
         </li>
         <li><a class="dropdown-item py-2">Perfil</a></li>
@@ -29,8 +32,45 @@
         <li><a (click)="cerrarSesion()" class="dropdown-item rounded-bottom-1 border-top border-3 py-2">Cerrar Sesión</a></li>
       </ul>
     </div>
+    <div class="info-usuario me-3 aparecepequenio">
+      <button class="btn btn-secondary p-0 rounded-circle border-0 navbar-toggler border-0" type="button"  data-bs-toggle="collapse"
+              data-bs-target="#navbarTogglerDemo04" aria-controls="navbarTogglerDemo04" aria-expanded="false" aria-label="Toggle navigation">
+        <img src="{{perfil.avatar}}">
+      </button>
+    </div>
     <a><i class="fa-solid fa-heart rounded-circle me-3 p-2"></i></a>
     <a><i class="fa-solid fa-cart-shopping rounded-circle p-2 me-3"></i></a>
     <a><i class="fa-solid fa-bell rounded-circle p-2 "></i></a>
+  </div>
+  <div class="col-1 aparecepequenio">
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fa-solid fa-bars" style="color: var(--colorRosa);"></i></span>
+    </button>
+  </div>
+
+  <div class="aparecepequenio col-12">
+    <div class="collapse navbar-collapse pt-2 mt-2" id="navbarTogglerDemo03" style="border-top: 2px dotted var(--colorRosa);">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+        <ng-container *ngIf="rol == 'cliente'">
+          <app-menu-cliente class="contenedor-menu"></app-menu-cliente>
+        </ng-container>
+        <ng-container *ngIf="rol == 'administrador'">
+          <app-menu-administrador class="contenedor-menu"></app-menu-administrador>
+        </ng-container>
+      </ul>
+    </div>
+    <div class="collapse navbar-collapse pt-2 mt-2" id="navbarTogglerDemo04" style="border-top: 2px dotted var(--colorRosa);">
+      <ul class="p-0 mt-1 navbar-nav text-center">
+        <li>
+          <div class="rounded-top-1 info-perfil py-3 text-center">
+            <img class="m-1" src="{{perfil.avatar}}">
+            <p class="p-0 mt-1 m-0">{{perfil.nombre}}</p>
+          </div>
+        </li>
+        <li><a class="dropdown-item py-2">Perfil</a></li>
+        <li><a class="dropdown-item py-2">Cuenta</a></li>
+        <li><a (click)="cerrarSesion()" class="dropdown-item rounded-bottom-1 border-top border-3 py-2">Cerrar Sesión</a></li>
+      </ul>
+    </div>
   </div>
 </nav>
