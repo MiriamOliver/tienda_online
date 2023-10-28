@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { AuthRoutingModule } from './auth/auth-routing.module';
 import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './home/home.module';
+import { DesignRoutingModule } from './design/design-routing.module';
+import { EstadisticaModule } from './estadistica/estadistica.module';
 
 
 @NgModule({
@@ -21,7 +24,11 @@ import { SharedModule } from './shared/shared.module';
     AuthRoutingModule,
     AuthModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    HomeModule,
+    DesignRoutingModule,
+    HomeModule,
+    EstadisticaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

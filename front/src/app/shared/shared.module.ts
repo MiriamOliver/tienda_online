@@ -24,7 +24,7 @@ import { FooterComponent } from './footer/footer.component';
     MenuComponent,
     MenuClienteComponent,
     MenuAdministradorComponent,
-    FooterComponent
+    FooterComponent,
   ]
 })
 export class SharedModule { }
