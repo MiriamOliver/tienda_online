@@ -8,6 +8,11 @@
   src: url(./assets/tipografia/Linotte-Heavy.otf) format("woff2");
 }
 
+@font-face {
+  font-family: font-subtitulo;
+  src: url(./assets/tipografia/Linotte-Bold.otf) format("woff2");
+}
+
 :root {
 
     //----------------------COLORES----------------------//
@@ -23,6 +28,7 @@
 
     --TipoTexto: font-texto;
     --TipoTitulo: font-titulo;
+    --TipoSubtitulo: font-subtitulo;
 
     //-----------------TAMAÑO-TIPOGRAFÍA------------------//
 

@@ -4,6 +4,7 @@ import { MenuComponent } from './menu/menu.component';
 import { MenuClienteComponent } from './menu-cliente/menu-cliente.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuAdministradorComponent } from './menu-administrador/menu-administrador.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -11,7 +12,8 @@ import { MenuAdministradorComponent } from './menu-administrador/menu-administra
   declarations: [
     MenuComponent,
     MenuClienteComponent,
-    MenuAdministradorComponent
+    MenuAdministradorComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,9 @@ import { MenuAdministradorComponent } from './menu-administrador/menu-administra
   exports: [
     CommonModule,
     MenuComponent,
-    MenuClienteComponent
+    MenuClienteComponent,
+    MenuAdministradorComponent,
+    FooterComponent
   ]
 })
 export class SharedModule { }
