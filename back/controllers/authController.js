@@ -73,10 +73,32 @@ const guardarPassword = (req, res = response) => {
     });
 }
 
+const mostrarImg = (req, res = response) => {
+
+    if (req.params.img) {
+        const pathImagen = path.join(__dirname, '../uploads', 'imgs', req.params.img);
+        if (fs.existsSync(pathImagen)) {
+            return res.sendFile(pathImagen)
+        }
+    }
+}
+
+const logout = (req = request, res = response) => {
+    const conx = new ConexionSequelize();
+    conx.cerrarSesion(req.body.id)
+    .then(resp => {
+        res.send({success:true, msg:'!OK!'});
+    }).catch(err => {
+        res.send({success:false, msg:'¡Error!', err});
+    });
+}
+
     module.exports = {
         register,
         verificarCorreo,
         login,
         emailPasswd,
-        guardarPassword
+        guardarPassword,
+        logout,
+        mostrarImg
     }

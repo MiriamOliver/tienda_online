@@ -47,5 +47,9 @@ router.post('/genpassword',
 ],
 controlador.guardarPassword);
 
+router.get('/upload/:img', controlador.mostrarImg);
+
+router.put('/logout', controlador.logout);
+
 
 module.exports = router

@@ -8,6 +8,11 @@
   src: url(./assets/tipografia/Linotte-Heavy.otf) format("woff2");
 }
 
+@font-face {
+  font-family: font-subtitulo;
+  src: url(./assets/tipografia/Linotte-Bold.otf) format("woff2");
+}
+
 :root {
 
     //----------------------COLORES----------------------//
@@ -23,14 +28,15 @@
 
     --TipoTexto: font-texto;
     --TipoTitulo: font-titulo;
+    --TipoSubtitulo: font-subtitulo;
 
     //-----------------TAMAÑO-TIPOGRAFÍA------------------//
 
     --TamTitulos: 55px;
-    --TamMenu: 13px;
+    --TamLogo: 26px;
+    --TamMenu: 14px;
     --TamTexto:14px;
     --TamError:13px;
-    --TamGame:16px;
 
     //------------------PESO-TIPOGRAFÍA-------------------//
 
@@ -39,7 +45,6 @@
 
     --BottomOffset: 0;
     --LineHeight: 20px;
-    --LineColor: linear-gradient(-90deg, #ffffff00, #A1011B, #A1011B,#ffffff00)
 
 }
 body{

@@ -1,0 +1,72 @@
+nav{
+  background-color: var(--colorAzul);
+  color: var(--colorBlanco);
+  h5{
+    font-family: var(--TipoTitulo);
+    font-size: var(--TamLogo);
+    margin: auto;
+    border-right: 2px dotted var(--colorRosa);
+  }
+  .menu-icon{
+    .info-usuario{
+      img{
+        width: 36px;
+        height: 36px;
+        border-radius: 18px;
+      }
+      .dropdown-menu{
+        .dropdown-item:active {
+          background-color: var(--colorRosa);
+          color: #fff;
+        }
+      }
+    }
+    i:hover{
+      background-color: var(--colorAmarillo);
+      transform: scale(1);
+      transition: all 0.8s;
+    }
+  }
+  a{
+    cursor: pointer;
+  }
+  .info-perfil{
+    background-color: var(--colorGris);
+    img{
+      width: 56px;
+      height: 56px;
+      border-radius: 28px;
+    }
+    p{
+      color: var(--colorRosa);
+      font-family: var(--TipoTitulo);
+    }
+  }
+  .aparecegrande{
+    display: block;
+  }
+  .aparecepequenio{
+    display: none;
+  }
+
+
+  @media (max-width: 992px) {
+    .aparecegrande{
+      display: none;
+    }
+    .aparecepequenio{
+      display: block;
+      ul{
+        display: block;
+      }
+      .navbar-toggler{
+        outline: none;
+        box-shadow: none;
+      }
+      .dropdown-item:active {
+        background-color: var(--colorRosa);
+        color: #fff;
+      }
+    }
+  }
+}
