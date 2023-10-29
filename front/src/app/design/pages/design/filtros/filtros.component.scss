@@ -1,0 +1,12 @@
+div{
+  line-height: 1.8em;
+  .opcion{
+    background-color: #fff;
+  }
+  h5{
+    color: var(--colorRosa);
+  }
+  input{
+    border: 2px solid var(--colorRosa);
+  }
+}
