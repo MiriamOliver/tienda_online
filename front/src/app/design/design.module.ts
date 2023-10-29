@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FiltrosComponent } from './pages/design/filtros/filtros.component';
 import { BuscadorComponent } from './pages/design/buscador/buscador.component';
 import { ListadoComponent } from './pages/design/listado/listado.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -20,7 +21,8 @@ import { ListadoComponent } from './pages/design/listado/listado.component';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   exports: [
     MainDesignComponent,
