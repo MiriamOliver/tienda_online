@@ -10,8 +10,7 @@ import { Perfil } from '../interfaces/perfil.interface';
 })
 export class MenuComponent {
 
-  //rol:string = JSON.parse(localStorage.getItem('user')!).rol;
-  rol:string = 'cliente';
+  rol:string = JSON.parse(localStorage.getItem('user')!).rol;
 
   constructor(
     private perfilService: PerfilService,
