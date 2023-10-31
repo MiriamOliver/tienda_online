@@ -63,11 +63,7 @@ export class LoginComponent implements OnInit{
         this.timer = window.setTimeout(() => {this.loginCorrecto = -1;}, 5000);
       }else{
         localStorage.setItem('user', JSON.stringify(resp.data));
-        if(JSON.parse(localStorage.getItem('user')!).rol == 'cliente'){
-          this.router.navigate(['inicio']);
-        }else if(JSON.parse(localStorage.getItem('user')!).rol == 'administrador'){
-          this.router.navigate(['administrador/inicio']);
-        }
+        this.router.navigate(['inicio']);
       }
     });
   }
