@@ -15,7 +15,7 @@ class ConexionDiseno extends ConexionSequelize {
             disenos = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', users.nombre, 
                                                         DATE_FORMAT(disenos.createdAt, "%d/%m/%Y") AS 'fecha', disenos.tema,disenos.estilo FROM disenos 
                                                         JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
-                                                        JOIN users on users.id = disenosartistas.id_user;`, 
+                                                        JOIN users on users.id = disenosartistas.id_user ORDER BY disenos.createdAt DESC;`, 
                                                         { type: QueryTypes.SELECT });
 
 
@@ -29,6 +29,25 @@ class ConexionDiseno extends ConexionSequelize {
             return this.ordenarDisenoProductos(disenos, productos); 
 
             
+        }catch (err){
+
+            throw err;
+        }     
+    }
+
+    getArtistaAfin = async(id) =>{
+
+        let favoritos = null;
+
+        try{
+
+            favoritos = await models.sequelize.query(`select COUNT(disenosartistas.id_diseno) as 'disenos', disenosartistas.id_user as 'artista' from disenosartistas 
+                                                        JOIN favoritos on disenosartistas.id_diseno=favoritos.id_diseno 
+                                                        where favoritos.id_user= 2 group by disenosartistas.id_user ORDER BY disenosartistas.id_diseno;`, 
+                                                        { type: QueryTypes.SELECT });
+
+            return favoritos;
+     
         }catch (err){
 
             throw err;
