@@ -3,13 +3,10 @@
   position: absolute;
   z-index: -1;
 }
-.buscador{
+.filtro, .listado, .buscador{
   background-color: var(--colorTransparente);
-}
-.filtro{
-  background-color: var(--colorTransparente);
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  clip-path: inset(0px -15px 0px 0px);
+  //box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  //clip-path: inset(0px -15px 0px 0px);
 }
 
 

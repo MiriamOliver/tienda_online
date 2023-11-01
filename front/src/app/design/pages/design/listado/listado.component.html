@@ -1,1 +1,14 @@
-<p>listado works!</p>
+<div class="d-flex mb-3 ms-1">
+  <button class="btn rounded-1 boton py-1 px-4 me-4" (click)="listDesignDefault()" type="submit">Todo</button>
+  <button class="btn rounded-1 boton py-1 px-4" type="submit">Afin</button>
+</div>
+<div class="row p-0">
+  <div class="col-lg-2 col-6 design p-2 rounded-1 shadow-sm m-3" *ngFor="let design of listDesign">
+    <img class="img-thumbnail mb-2" src="{{design.imagen}}">
+    <label class="resaltado my-1"><span>{{letraMayuscula(design.titulo)}}</span></label>
+    <div class="d-flex justify-content-between">
+      <label>De <span>{{letraMayuscula(design.nombre)}}</span></label>
+      <label>{{design.fecha}}</label>
+    </div>
+  </div>
+</div>

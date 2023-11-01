@@ -13,7 +13,7 @@ class ConexionDiseno extends ConexionSequelize {
         try{
 
             disenos = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', users.nombre, 
-                                                        DATE_FORMAT(disenos.createdAt, "%d %M %Y") AS 'fecha', disenos.tema,disenos.estilo FROM disenos 
+                                                        DATE_FORMAT(disenos.createdAt, "%d/%m/%Y") AS 'fecha', disenos.tema,disenos.estilo FROM disenos 
                                                         JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
                                                         JOIN users on users.id = disenosartistas.id_user;`, 
                                                         { type: QueryTypes.SELECT });
@@ -26,7 +26,8 @@ class ConexionDiseno extends ConexionSequelize {
                                                         { type: QueryTypes.SELECT });
             
             
-            resultado = this.ordenarDisenoProductos(disenos, productos); 
+            return this.ordenarDisenoProductos(disenos, productos); 
+
             
         }catch (err){
 
@@ -34,7 +35,7 @@ class ConexionDiseno extends ConexionSequelize {
         }     
     }
 
-    
+
     ordenarDisenoProductos = (disenos, productos) => {
         disenos.forEach(diseno => {
             let listaProductos = [];
