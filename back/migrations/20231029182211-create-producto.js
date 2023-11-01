@@ -21,6 +21,9 @@ module.exports = {
       precio: {
         type: Sequelize.INTEGER
       },
+      id_tipo: {
+        type: Sequelize.INTEGER
+      }
     });
   },
   async down(queryInterface, Sequelize) {
