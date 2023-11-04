@@ -9,3 +9,20 @@ export interface Design {
   estilo:string,
   productos:any
 }
+
+export interface contFavorito{
+  disenos:number,
+  artista:number
+}
+
+export interface TipoProducto{
+  tipo:string,
+  checked:boolean
+}
+
+export interface FiltroDisenos{
+    fecha: string,
+    estilo:string,
+    tema:string,
+    productos:TipoProducto[]
+}

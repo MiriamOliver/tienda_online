@@ -6,7 +6,6 @@ const listadoDisenos = (req, res = response) => {
     const conex = new ConexionSequelize();
     conex.getDisenos()
         .then( disenos => {
-            console.log(disenos);
             res.status(200).json(disenos); 
         })
         .catch(err => {
@@ -25,9 +24,29 @@ const listadoArtistaAfin = (req, res = response) => {
         })
 }
 
+const listadoProductos = (req, res = response) => {
+    let listaProductos = [];
+    const conex = new ConexionSequelize();
+    conex.getProductos()
+        .then( productos => {
+            productos.forEach(p => {
+                p.checked = false;
+                listaProductos.push({
+                    tipo: p.tipo,
+                    checked: false
+                });
+            });
+            res.status(200).json(listaProductos); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
 
 
 module.exports = {
     listadoDisenos,
-    listadoArtistaAfin
+    listadoArtistaAfin,
+    listadoProductos
 }

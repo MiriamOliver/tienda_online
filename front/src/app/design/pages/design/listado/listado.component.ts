@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Design } from 'src/app/design/interfaces/design.interface';
 import { DesignService } from 'src/app/design/services/design.service';
 
+
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.component.html',
@@ -10,8 +11,6 @@ import { DesignService } from 'src/app/design/services/design.service';
 })
 export class ListadoComponent implements OnInit{
 
-  //design!:Design
-  listDesign:any;
 
   constructor(
     private router: Router,
@@ -21,13 +20,20 @@ export class ListadoComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.listDesignDefault();
+    this.designService.designDefault();
+    this.designService.designAfin(JSON.parse(localStorage.getItem('user')!).id);
   }
 
-  listDesignDefault(){
-    this.designService.designDefault().subscribe(resp => {
-      this.listDesign = resp;
-    });
+  get listadoMostrar(){
+    return this.designService.listadoMostrar;
+  }
+
+  listadoAfin(){
+    return this.designService.ordenarListadoAfin();
+  }
+
+  listadoDefault(){
+    return this.designService.ordenarListadoDefault();
   }
 
   letraMayuscula(nombre:string){
@@ -35,5 +41,4 @@ export class ListadoComponent implements OnInit{
     let palabra = nombre.slice(1);
     return firstLetra.toUpperCase() + palabra;
   }
-
 }
