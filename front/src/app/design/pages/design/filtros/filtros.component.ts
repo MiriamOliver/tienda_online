@@ -39,7 +39,22 @@ export class FiltrosComponent implements OnInit{
     }
     console.log(this.data);
     this.designService.filtrarDisenos(this.data);
+  }
 
+  limpiarCampos(){
+    this.productos.forEach(e =>{
+      e.checked = false;
+    })
+    this.fecha = '';
+    this.tema = '';
+    this.estilo = '';
+    this.data  = {
+      fecha: this.fecha,
+      estilo:this.estilo,
+      tema:this.tema,
+      productos:this.productos
+    }
+    this.designService.filtrarDisenos(this.data);
   }
 
   letraMayuscula(nombre:string){

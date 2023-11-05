@@ -16,6 +16,8 @@ export class DesignService {
   private favoritos:Design[] = [];
   private listaDisenos:Design[] = [];
   private disenosFiltrados:Design[] = [];
+  private auxListaDisenos:Design[] = [];
+
 
   @Output() listadoDesign: EventEmitter<any> = new EventEmitter();
 
@@ -25,7 +27,12 @@ export class DesignService {
 
   buscarDesign(data:string){
     this.nombreDesign = data;
-    //return this.http.get(`${ this.baseUrl }/buscardesign/${data}`);
+    if(this.nombreDesign != ''){
+      this.auxListaDisenos = this.listaDisenos;
+      this.listaDisenos = this.listaDisenos.filter(diseno => diseno.titulo.toLowerCase().includes(this.nombreDesign.toLowerCase()));
+    }else{
+      this.listaDisenos = this.auxListaDisenos;
+    }
   }
 
   get listadoMostrar(){
@@ -80,7 +87,7 @@ export class DesignService {
   }
 
   filtrarDisenos(data:FiltroDisenos){
-    this.disenosFiltrados = this.listaDisenos;
+    this.disenosFiltrados = this.disenos;
     if(data.estilo != '') { this.disenosFiltrados = this.disenosFiltrados.filter(diseno => diseno.estilo == data.estilo);}
     if(data.tema != ''){ this.disenosFiltrados = this.disenosFiltrados.filter(diseno => diseno.tema == data.tema);}
     data.productos.forEach( producto =>{
@@ -89,15 +96,13 @@ export class DesignService {
       }
     });
       if(data.fecha != '' && data.fecha != 'todo'){ this.disenosFiltrados = this.conseguirFecha(data.fecha, this.disenosFiltrados)}
-    this.listaDisenos = this.disenosFiltrados
+      this.listaDisenos = this.disenosFiltrados;
   }
 
   conseguirFecha(fecha:string, listaFiltrados:Design[]){
-    let diferencia:string;
     switch(fecha){
       case 'esta semana':
-        diferencia = moment().subtract(7,'d').format('DD-MM-YYYY');
-        listaFiltrados = listaFiltrados.filter(diseno => diseno.fecha >= diferencia);
+        listaFiltrados = listaFiltrados.filter(diseno => moment().subtract(7,'d').diff(moment(diseno.fecha.split("-").reverse().join("-"), moment.defaultFormat), 'days') <= 7);
       break;
       case 'este mes':
         listaFiltrados = listaFiltrados.filter(diseno => diseno.fecha.slice(3, 5) == moment().format('MM'));
