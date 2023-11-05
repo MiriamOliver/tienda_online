@@ -1,0 +1,11 @@
+.fondo{
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+h2{
+  font-family: var(--TipoSubtitulo);
+}
+.contenedor{
+  background-color: var(--colorTransparente);
+}

@@ -1,0 +1,17 @@
+.design{
+  background-color: #fff;
+  img{
+    max-width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  span{
+    font-family: var(--TipoSubtitulo);
+    color: var(--colorRosa);
+  }
+  .resaltado{
+    font-size: var(--TamTituloImagen);
+  }label{
+    font-size: var(--TamInfoImagen);
+  }
+}
