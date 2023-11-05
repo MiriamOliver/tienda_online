@@ -1,0 +1,74 @@
+<div class="mt-3">
+  <div class="mb-3 p-4 rounded-1 shadow-sm opcion">
+    <h5>Fecha</h5>
+    <div class="ms-3 mt-3">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="fecha" id="semana" value="esta semana" [(ngModel)]="fecha">
+        <label class="form-check-label" for="semana">Últimos 7 días</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="fecha" id="mes" value="este mes" [(ngModel)]="fecha">
+        <label class="form-check-label" for="mes">Este mes</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="fecha" id="anio" value="este año" [(ngModel)]="fecha">
+        <label class="form-check-label" for="anio">Este año</label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="fecha" id="todos" value="todos" [(ngModel)]="fecha">
+        <label class="form-check-label" for="todos">Mostrar todos</label>
+      </div>
+    </div>
+  </div>
+  <div class="my-3 p-4 rounded-1 shadow-sm opcion">
+    <h5>Estilo</h5>
+    <div class="form-check ms-3 mt-3">
+      <input class="form-check-input" type="radio" name="estilo" id="digital" value="digital" [(ngModel)]="estilo">
+      <label class="form-check-label" for="digital">Digital</label>
+    </div>
+    <div class="form-check ms-3">
+      <input class="form-check-input" type="radio" name="estilo" id="tradicional" value="tradicional" [(ngModel)]="estilo">
+      <label class="form-check-label" for="tradicional">Tradicional</label>
+    </div>
+    <div class="form-check ms-3">
+      <input class="form-check-input" type="radio" name="estilo" id="mixto" value="mixto" [(ngModel)]="estilo">
+      <label class="form-check-label" for="mixto">Mixto</label>
+    </div>
+  </div>
+  <div class="my-3 p-4 rounded-1 shadow-sm opcion">
+    <h5>Tema</h5>
+    <div class="form-check ms-3 mt-3">
+      <input class="form-check-input" type="radio" name="tema" id="videojuegos" value="videojuegos" [(ngModel)]="tema">
+      <label class="form-check-label" for="videojuegos">Videojuego</label>
+    </div>
+    <div class="form-check ms-3">
+      <input class="form-check-input" type="radio" name="tema" id="musica" value="musica" [(ngModel)]="tema">
+      <label class="form-check-label" for="musica">Música</label>
+    </div>
+    <div class="form-check ms-3">
+      <input class="form-check-input" type="radio" name="tema" id="serie" value="series y películas" [(ngModel)]="tema">
+      <label class="form-check-label" for="serie">Series y películas</label>
+    </div>
+    <div class="form-check ms-3">
+      <input class="form-check-input" type="radio" name="tema" id="libros" value="libros" [(ngModel)]="tema">
+      <label class="form-check-label" for="libros">Libros</label>
+    </div>
+    <div class="form-check ms-3">
+      <input class="form-check-input" type="radio" name="tema" id="original" value="arte original" [(ngModel)]="tema">
+      <label class="form-check-label" for="original">Arte original</label>
+    </div>
+  </div>
+  <div class="mt-3 p-4 rounded-1 shadow-sm opcion">
+    <h5>Productos</h5>
+    <div class="ms-3 mt-3">
+      <div class="form-check" *ngFor="let producto of productos">
+        <input class="form-check-input" type="checkbox" id="{{producto.tipo}}" value="{{producto.checked}}" [(ngModel)]="producto.checked">
+        <label class="form-check-label" for="{{producto.tipo}}">{{letraMayuscula(producto.tipo)}}</label>
+      </div>
+    </div>
+  </div>
+  <div class="text-center m-3">
+    <button class="btn rounded-1 boton py-2 m-3 px-3" (click)="limpiarCampos()" type="submit">Limpiar</button>
+    <button class="btn rounded-1 boton py-2 m-3 px-4" (click)="filtrarCampos()" type="submit">Filtrar</button>
+  </div>
+</div>
