@@ -57,11 +57,27 @@ const listadoProductosRecomendados = (req, res = response) => {
         })
 }
 
+const getArtistasAfines = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getArtistasRecomendados(req.params.id)
+        .then( artistas => {
+            artistas.forEach(artista =>{
+                artista.avatar = process.env.URL + process.env.PORT + "/upload/" + artista.avatar;
+            })
+            console.log(artistas);
+            res.status(200).json(artistas); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
 
 
 module.exports = {
     listadoDisenos,
     listadoArtistaAfin,
     listadoProductos,
-    listadoProductosRecomendados
+    listadoProductosRecomendados,
+    getArtistasAfines
 }

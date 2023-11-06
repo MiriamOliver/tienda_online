@@ -12,7 +12,7 @@ router.get('/filtro/productos', controlador.listadoProductos);
 
 router.get('/recomendar/productos/:id', controlador.listadoProductosRecomendados);
 
-router.get('/artistas/afines', controlador.getArtistasAfines);
+router.get('/artistas/afines/:id', controlador.getArtistasAfines);
 
 
 module.exports = router

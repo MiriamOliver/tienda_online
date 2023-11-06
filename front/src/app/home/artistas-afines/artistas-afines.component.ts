@@ -19,6 +19,16 @@ export class ArtistasAfinesComponent implements OnInit{
 
   ngOnInit(): void {
 
+    const fechaCompleta = "YYYY-MM-DD HH:mm:ss";
+    this.homeService.getArtistasRecomendados(JSON.parse(localStorage.getItem('user')!).id).subscribe(resp => {
+      this.artistas = resp;
+    });
+  }
+
+  letraMayuscula(nombre:string){
+    let firstLetra = nombre.charAt(0);
+    let palabra = nombre.slice(1);
+    return firstLetra.toUpperCase() + palabra;
   }
 
 }

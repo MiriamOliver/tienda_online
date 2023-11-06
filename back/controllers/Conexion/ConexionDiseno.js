@@ -83,6 +83,44 @@ class ConexionDiseno extends ConexionSequelize {
         }     
     }
 
+    getArtistasRecomendados = async(id) =>{
+
+        let idArtistas = [];
+        let listaArtistas = [];
+        let favoritos = null;
+        let cont = 5;
+
+        try{
+
+            favoritos = await models.sequelize.query(`select COUNT(disenosartistas.id_diseno) as 'disenos', disenosartistas.id_user as 'artista' from disenosartistas 
+                                                        JOIN favoritos on disenosartistas.id_diseno=favoritos.id_diseno 
+                                                        where favoritos.id_user = ? group by disenosartistas.id_user ORDER BY disenosartistas.id_diseno;`, 
+                                                        { replacements: [id], type: QueryTypes.SELECT });
+            
+            
+                                                        console.log(favoritos);
+
+            favoritos.forEach(artista => {
+                if(cont > 0){
+                    idArtistas.push(artista.artista);
+                    cont --;
+                }
+            });
+                                                
+            listaArtistas = await models.User.findAll({
+                attributes:['id','nombre','avatar'],
+                where: {id:{[Op.in]: idArtistas}}
+            });
+            
+            return listaArtistas;
+
+            
+        }catch (err){
+
+            throw err;
+        }     
+    }
+
 
     ordenarDisenoProductos = (disenos, productos) => {
         disenos.forEach(diseno => {

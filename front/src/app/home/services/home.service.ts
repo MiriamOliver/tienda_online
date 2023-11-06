@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Design } from 'src/app/design/interfaces/design.interface';
 import { environment } from 'src/environments/environment';
+import { Artista } from '../interfaces/home.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,9 @@ export class HomeService {
 
   getDisenosRecomendados(id:number):Observable<Design[]>{
     return  this.http.get<Design[]>(`${ this.baseUrl }/diseno/recomendar/productos/${id}`);
+  }
+
+  getArtistasRecomendados(id:number):Observable<Artista[]>{
+    return  this.http.get<Artista[]>(`${ this.baseUrl }/diseno/artistas/afines/${id}`);
   }
 }

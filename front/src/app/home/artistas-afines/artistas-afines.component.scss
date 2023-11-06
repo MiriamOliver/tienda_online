@@ -1,0 +1,13 @@
+.artista{
+  background-color: #fff;
+  img{
+    max-width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  label{
+    font-size: var(--TamInfoImagen);
+    font-family: var(--TipoSubtitulo);
+    color: var(--colorRosa);
+  }
+}
