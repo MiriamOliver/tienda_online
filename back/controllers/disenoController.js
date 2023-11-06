@@ -64,7 +64,6 @@ const getArtistasAfines = (req, res = response) => {
             artistas.forEach(artista =>{
                 artista.avatar = process.env.URL + process.env.PORT + "/upload/" + artista.avatar;
             })
-            console.log(artistas);
             res.status(200).json(artistas); 
         })
         .catch(err => {
@@ -84,9 +83,9 @@ const getArtistaDestacado = (req, res = response) => {
         })
 }
 
-const getProductosDestacados = (req, res = response) => {
+const getDisenosDestacados = (req, res = response) => {
     const conex = new ConexionSequelize();
-    conex.getArtistasRecomendados()
+    conex.getDisenosDestacados()
         .then( disenos => {
             res.status(200).json(disenos); 
         })
@@ -104,5 +103,5 @@ module.exports = {
     listadoProductosRecomendados,
     getArtistasAfines,
     getArtistaDestacado,
-    getProductosDestacados
+    getDisenosDestacados
 }

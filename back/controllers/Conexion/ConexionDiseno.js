@@ -151,26 +151,27 @@ class ConexionDiseno extends ConexionSequelize {
                                                 JOIN favoritos on disenosartistas.id_diseno=favoritos.id_diseno 
                                                 join users on users.id=disenosartistas.id_user 
                                                 group by disenosartistas.id_user ORDER BY disenosartistas.id_diseno;`,
-                                                { replacements: [id], type: QueryTypes.SELECT })
-    
+                                                { type: QueryTypes.SELECT })
         return artista[0];
     }
 
-    getProductosDestacados = async() => {
+    getDisenosDestacados = async() => {
         let productos = null;
-        let listaProductos = null;
+        let listaProductos = [];
         let cont = 3;
 
         productos = await models.sequelize.query(`select disenos.id, disenos.titulo, disenos.imagen, users.nombre, disenos.createdAt AS 'fecha', COUNT(disenosartistas.id_diseno) as 'disenos' from disenosartistas 
                                                 JOIN favoritos on disenosartistas.id_diseno=favoritos.id_diseno JOIN users on users.id=disenosartistas.id_user 
                                                 JOIN disenos on disenos.id = disenosartistas.id_diseno group by favoritos.id_diseno 
                                                 ORDER BY disenosartistas.id_diseno DESC`,
-                                                { replacements: [id], type: QueryTypes.SELECT })
+                                                { type: QueryTypes.SELECT })
     
+              
         productos.forEach(producto =>{
             if(cont > 0){
                 producto.imagen = process.env.URL + process.env.PORT + "/upload/" + producto.imagen;
                 listaProductos.push(producto);
+                cont--;
             }
         })
 

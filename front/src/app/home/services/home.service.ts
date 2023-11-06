@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Design } from 'src/app/design/interfaces/design.interface';
 import { environment } from 'src/environments/environment';
-import { Artista } from '../interfaces/home.interface';
+import { Artista, ArtistaDestacado, Diseno } from '../interfaces/home.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -29,11 +29,11 @@ export class HomeService {
     return  this.http.get<Artista[]>(`${ this.baseUrl }/diseno/artistas/afines/${id}`);
   }
 
-  getArtistaDestacado():Observable<Artista>{
-    return this.http.get<Artista>(`${ this.baseUrl }/diseno/artista/destacado`);
+  getArtistaDestacado():Observable<ArtistaDestacado>{
+    return this.http.get<ArtistaDestacado>(`${ this.baseUrl }/diseno/artista/destacado`);
   }
 
-  getDisenosDestacado():Observable<Design[]>{
-    return this.http.get<Design[]>(`${ this.baseUrl }/diseno/disenos/destacado`);
+  getDisenosDestacados():Observable<Diseno[]>{
+    return this.http.get<Diseno[]>(`${ this.baseUrl }/diseno/disenos/destacado`);
   }
 }
