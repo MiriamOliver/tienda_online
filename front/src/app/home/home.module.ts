@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { UltimosDisenosComponent } from './ultimos-disenos/ultimos-disenos.component';
 import { ArtistasAfinesComponent } from './artistas-afines/artistas-afines.component';
 import { DisenosRecomendadosComponent } from './disenos-recomendados/disenos-recomendados.component';
+import { RankingComponent } from './ranking/ranking.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { DisenosRecomendadosComponent } from './disenos-recomendados/disenos-rec
     MainInicioComponent,
     UltimosDisenosComponent,
     ArtistasAfinesComponent,
-    DisenosRecomendadosComponent
+    DisenosRecomendadosComponent,
+    RankingComponent
   ],
   imports: [
     CommonModule,

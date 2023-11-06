@@ -28,4 +28,12 @@ export class HomeService {
   getArtistasRecomendados(id:number):Observable<Artista[]>{
     return  this.http.get<Artista[]>(`${ this.baseUrl }/diseno/artistas/afines/${id}`);
   }
+
+  getArtistaDestacado():Observable<Artista>{
+    return this.http.get<Artista>(`${ this.baseUrl }/diseno/artista/destacado`);
+  }
+
+  getDisenosDestacado():Observable<Design[]>{
+    return this.http.get<Design[]>(`${ this.baseUrl }/diseno/disenos/destacado`);
+  }
 }

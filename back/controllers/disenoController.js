@@ -72,6 +72,29 @@ const getArtistasAfines = (req, res = response) => {
         })
 }
 
+const getArtistaDestacado = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getArtistaDestacado()
+        .then( artista => {
+            artista.avatar = process.env.URL + process.env.PORT + "/upload/" + artista.avatar;
+            res.status(200).json(artista); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
+const getProductosDestacados = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getArtistasRecomendados()
+        .then( disenos => {
+            res.status(200).json(disenos); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
 
 
 module.exports = {
@@ -79,5 +102,7 @@ module.exports = {
     listadoArtistaAfin,
     listadoProductos,
     listadoProductosRecomendados,
-    getArtistasAfines
+    getArtistasAfines,
+    getArtistaDestacado,
+    getProductosDestacados
 }

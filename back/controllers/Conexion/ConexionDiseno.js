@@ -97,8 +97,6 @@ class ConexionDiseno extends ConexionSequelize {
                                                         where favoritos.id_user = ? group by disenosartistas.id_user ORDER BY disenosartistas.id_diseno;`, 
                                                         { replacements: [id], type: QueryTypes.SELECT });
             
-            
-                                                        console.log(favoritos);
 
             favoritos.forEach(artista => {
                 if(cont > 0){
@@ -137,13 +135,46 @@ class ConexionDiseno extends ConexionSequelize {
         return disenos;
     }
 
-    getProductos = async () => {
+    getProductos = async() => {
 
         let resultado = await models.Tipo.findAll({
             attributes: ['tipo'],
         })
 
         return resultado;
+    }
+
+    getArtistaDestacado = async() => {
+        let artista = null;
+
+        artista = await models.sequelize.query(`select users.id, users.nombre, users.avatar, COUNT(disenosartistas.id_diseno) as 'disenos' from disenosartistas 
+                                                JOIN favoritos on disenosartistas.id_diseno=favoritos.id_diseno 
+                                                join users on users.id=disenosartistas.id_user 
+                                                group by disenosartistas.id_user ORDER BY disenosartistas.id_diseno;`,
+                                                { replacements: [id], type: QueryTypes.SELECT })
+    
+        return artista[0];
+    }
+
+    getProductosDestacados = async() => {
+        let productos = null;
+        let listaProductos = null;
+        let cont = 3;
+
+        productos = await models.sequelize.query(`select disenos.id, disenos.titulo, disenos.imagen, users.nombre, disenos.createdAt AS 'fecha', COUNT(disenosartistas.id_diseno) as 'disenos' from disenosartistas 
+                                                JOIN favoritos on disenosartistas.id_diseno=favoritos.id_diseno JOIN users on users.id=disenosartistas.id_user 
+                                                JOIN disenos on disenos.id = disenosartistas.id_diseno group by favoritos.id_diseno 
+                                                ORDER BY disenosartistas.id_diseno DESC`,
+                                                { replacements: [id], type: QueryTypes.SELECT })
+    
+        productos.forEach(producto =>{
+            if(cont > 0){
+                producto.imagen = process.env.URL + process.env.PORT + "/upload/" + producto.imagen;
+                listaProductos.push(producto);
+            }
+        })
+
+        return listaProductos;
     }
 }
 

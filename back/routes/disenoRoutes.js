@@ -14,5 +14,9 @@ router.get('/recomendar/productos/:id', controlador.listadoProductosRecomendados
 
 router.get('/artistas/afines/:id', controlador.getArtistasAfines);
 
+router.get('/artista/destacado', controlador.getArtistaDestacado);
+
+router.get('/disenos/destacado', controlador.getDisenosDestacados);
+
 
 module.exports = router
