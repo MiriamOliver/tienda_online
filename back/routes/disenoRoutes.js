@@ -10,5 +10,9 @@ router.get('/listado/afin/:id', controlador.listadoArtistaAfin);
 
 router.get('/filtro/productos', controlador.listadoProductos);
 
+router.get('/recomendar/productos/:id', controlador.listadoProductosRecomendados);
+
+router.get('/artistas/afines', controlador.getArtistasAfines);
+
 
 module.exports = router

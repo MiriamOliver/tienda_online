@@ -36,7 +36,6 @@ class ConexionDiseno extends ConexionSequelize {
     }
 
     getArtistaAfin = async(id) =>{
-        console.log(id);
 
         let favoritos = null;
 
@@ -48,6 +47,35 @@ class ConexionDiseno extends ConexionSequelize {
                                                         { replacements: [id], type: QueryTypes.SELECT });
            
             return favoritos;
+     
+        }catch (err){
+
+            throw err;
+        }     
+    }
+
+    getProductosRecomendados = async(id) => {
+
+        let recomendados = null;
+        let disenosRecomendados = null;
+
+        try{
+
+            recomendados = await models.sequelize.query(`select COUNT(disenos.id) AS 'cantfavoritos', disenos.tema from disenos where disenos.id IN 
+                                                        (select favoritos.id_diseno FROM favoritos WHERE id_user = ?) 
+                                                        group by disenos.tema ORDER BY cantfavoritos DESC;`, 
+                                                        { replacements: [id], type: QueryTypes.SELECT });
+           
+
+            disenosRecomendados = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', users.nombre, 
+                                                                disenos.createdAt AS 'fecha', disenos.estilo, disenos.tema FROM disenos 
+                                                                JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
+                                                                JOIN users on users.id = disenosartistas.id_user
+                                                                WHERE disenos.tema = ?
+                                                                ORDER BY disenos.createdAt DESC;`, 
+                                                                { replacements: [recomendados[0].tema], type: QueryTypes.SELECT });
+    
+            return disenosRecomendados;
      
         }catch (err){
 

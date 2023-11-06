@@ -43,10 +43,25 @@ const listadoProductos = (req, res = response) => {
         })
 }
 
+const listadoProductosRecomendados = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getProductosRecomendados(req.params.id)
+        .then( productos => {
+            productos.forEach(producto =>{
+                producto.imagen = process.env.URL + process.env.PORT + "/upload/" + producto.imagen;
+            })
+            res.status(200).json(productos); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
 
 
 module.exports = {
     listadoDisenos,
     listadoArtistaAfin,
-    listadoProductos
+    listadoProductos,
+    listadoProductosRecomendados
 }

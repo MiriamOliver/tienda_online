@@ -19,4 +19,8 @@ export class HomeService {
   getUltimosDisenios():Observable<Design[]>{
     return this.http.get<Design[]>(`${ this.baseUrl }/diseno/listado`);
   }
+
+  getDisenosRecomendados(id:number):Observable<Design[]>{
+    return  this.http.get<Design[]>(`${ this.baseUrl }/diseno/recomendar/productos/${id}`);
+  }
 }
