@@ -1,0 +1,13 @@
+<div>
+  <h3>Artistas Afines</h3>
+</div>
+<div class="row p-0">
+  <div class="col-lg-2 col-6 p-3" *ngFor="let artista of artistas">
+    <div class="artista p-2 rounded-1 shadow-sm text-center">
+      <img class="img-thumbnail mb-2" src="{{artista.avatar}}">
+      <label class="resaltado my-1"><span>{{letraMayuscula(artista.nombre)}}</span></label>
+    </div>
+  </div>
+</div>
+
+

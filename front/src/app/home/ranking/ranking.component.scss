@@ -1,0 +1,89 @@
+h2,h3{
+  color: #fff;
+  font-family: var(--TipoSubtitulo);
+}
+p{
+  color: #fff;
+}
+
+.design{
+  background-color: #fff;
+  img{
+    max-width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  span{
+    font-family: var(--TipoSubtitulo);
+    color: var(--colorRosa);
+  }
+  .resaltado{
+    font-size: var(--TamTituloImagen);
+  }label{
+    font-size: var(--TamInfoImagen);
+  }
+}
+.artista{
+  background-color: #fff;
+  img{
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  label{
+    font-size: var(--TamTituloImagen);
+    .resaltado{
+      color: var(--colorRosa);
+    }
+  }
+  span{
+    font-family: var(--TipoSubtitulo);
+    i{
+      color: var(--colorRosa);
+      font-size: 18px;
+    }
+  }
+}
+.linea{
+  border-right: 2px dotted var(--colorAmarillo);
+}
+
+.boton {
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 50px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: var(--colorBlanco);
+  color: #000;
+  box-shadow: 5px 5px var(--colorAmarillo);
+  transition: 0.2s
+}
+
+.boton:hover{
+  box-shadow: 0px 0px var(--colorAmarillo);
+  background-color: var(--colorAmarillo);
+}
+
+h2{
+  display: inline;
+  position: relative;
+  z-index: 1;
+    &:before{
+      position: absolute;
+      content: '';
+      display: block;
+      z-index: -1;
+      background: var(--colorAmarillo);
+      width: 0;
+      height: 25px;
+      bottom: var(--BottomOffset);
+      left: calc(var(--LineHeight) / -2);
+      transition: 0.3s cubic-bezier(.03,.3,.4,.96);
+      transform: skew(-10deg);
+      width: calc(100% + var(--LineHeight));
+    }
+  }

@@ -1,0 +1,35 @@
+<div class="text-center m-4">
+  <h2 class="mb-5">DESTACADOS</h2>
+  <p class="mt-3">En este espacio te mostramos el artista y los diseños que más han gustado a la comuniad.<br> ¡No dudes en echar un vistazo!</p>
+</div>
+
+<div class="row px-5 py-4 mt-5">
+  <div class="col-lg-4 ps-5 pe-5 linea text-center">
+    <h3>Artista</h3>
+    <div class="p-2 m-4 rounded-1 shadow-sm artista">
+      <img class="img-thumbnail mb-2" src="{{artista.avatar}}">
+      <div class="d-flex justify-content-between px-3">
+        <label>De <span class="resaltado">{{letraMayuscula(artista.nombre)}}</span></label>
+        <span><i class="fa-solid fa-heart px-2"></i>{{artista.disenos}}</span>
+      </div>
+      <div class="text-center mt-3">
+        <button class="btn rounded-1 boton py-1 m-2 px-3" type="submit">Ver Tienda</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8 pe-5 ps-5 text-center">
+    <h3>Diseños</h3>
+    <div class="row ms-2">
+      <div class="col-lg-4 col-12 p-3" *ngFor="let design of disenos;">
+        <div class="design p-2 rounded-1 shadow-sm">
+          <img class="img-thumbnail mb-2" src="{{design.imagen}}">
+          <label class="resaltado my-1"><span>{{letraMayuscula(design.titulo)}}</span></label>
+          <div class="d-flex justify-content-between">
+            <label>De <span>{{letraMayuscula(design.nombre)}}</span></label>
+            <label>{{design.fecha}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div>
+  <h3>Últimos Diseños</h3>
+</div>
+<div class="row p-0">
+  <div class="col-lg-2 col-6 p-3" *ngFor="let design of ultimosDisenos">
+    <div class="design p-2 rounded-1 shadow-sm">
+      <img class="img-thumbnail mb-2" src="{{design.imagen}}">
+      <label class="resaltado my-1"><span>{{letraMayuscula(design.titulo)}}</span></label>
+      <div class="d-flex justify-content-between">
+        <label>De <span>{{letraMayuscula(design.nombre)}}</span></label>
+        <label>{{design.fecha}}</label>
+      </div>
+    </div>
+  </div>
+</div>

@@ -36,7 +36,6 @@ class ConexionDiseno extends ConexionSequelize {
     }
 
     getArtistaAfin = async(id) =>{
-        console.log(id);
 
         let favoritos = null;
 
@@ -49,6 +48,80 @@ class ConexionDiseno extends ConexionSequelize {
            
             return favoritos;
      
+        }catch (err){
+
+            throw err;
+        }     
+    }
+
+    getProductosRecomendados = async(id) => {
+
+        let recomendados = null;
+        let disenosRecomendados = null;
+        let listaDisenosRecomendados = [];
+        let cont = 6;
+
+        try{
+
+            recomendados = await models.sequelize.query(`select COUNT(disenos.id) AS 'cantfavoritos', disenos.tema from disenos where disenos.id IN 
+                                                        (select favoritos.id_diseno FROM favoritos WHERE id_user = ?) 
+                                                        group by disenos.tema ORDER BY cantfavoritos DESC;`, 
+                                                        { replacements: [id], type: QueryTypes.SELECT });
+           
+
+            disenosRecomendados = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', users.nombre, 
+                                                                disenos.createdAt AS 'fecha', disenos.estilo, disenos.tema FROM disenos 
+                                                                JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
+                                                                JOIN users on users.id = disenosartistas.id_user
+                                                                WHERE disenos.tema = ?
+                                                                ORDER BY disenos.createdAt DESC;`, 
+                                                                { replacements: [recomendados[0].tema], type: QueryTypes.SELECT });
+    
+            disenosRecomendados.forEach(e =>{
+                if(cont > 0){
+                    listaDisenosRecomendados.push(e);
+                    cont --;
+                }
+            })
+            
+            return listaDisenosRecomendados;
+     
+        }catch (err){
+
+            throw err;
+        }     
+    }
+
+    getArtistasRecomendados = async(id) =>{
+
+        let idArtistas = [];
+        let listaArtistas = [];
+        let favoritos = null;
+        let cont = 6;
+
+        try{
+
+            favoritos = await models.sequelize.query(`select COUNT(disenosartistas.id_diseno) as 'disenos', disenosartistas.id_user as 'artista' from disenosartistas 
+                                                        JOIN favoritos on disenosartistas.id_diseno=favoritos.id_diseno 
+                                                        where favoritos.id_user = ? group by disenosartistas.id_user ORDER BY disenosartistas.id_diseno;`, 
+                                                        { replacements: [id], type: QueryTypes.SELECT });
+            
+
+            favoritos.forEach(artista => {
+                if(cont > 0){
+                    idArtistas.push(artista.artista);
+                    cont --;
+                }
+            });
+                                                
+            listaArtistas = await models.User.findAll({
+                attributes:['id','nombre','avatar'],
+                where: {id:{[Op.in]: idArtistas}}
+            });
+            
+            return listaArtistas;
+
+            
         }catch (err){
 
             throw err;
@@ -71,13 +144,47 @@ class ConexionDiseno extends ConexionSequelize {
         return disenos;
     }
 
-    getProductos = async () => {
+    getProductos = async() => {
 
         let resultado = await models.Tipo.findAll({
             attributes: ['tipo'],
         })
 
         return resultado;
+    }
+
+    getArtistaDestacado = async() => {
+        let artista = null;
+
+        artista = await models.sequelize.query(`select users.id, users.nombre, users.avatar, COUNT(disenosartistas.id_diseno) as 'disenos' from disenosartistas 
+                                                JOIN favoritos on disenosartistas.id_diseno=favoritos.id_diseno 
+                                                join users on users.id=disenosartistas.id_user 
+                                                group by disenosartistas.id_user ORDER BY disenosartistas.id_diseno;`,
+                                                { type: QueryTypes.SELECT })
+        return artista[0];
+    }
+
+    getDisenosDestacados = async() => {
+        let productos = null;
+        let listaProductos = [];
+        let cont = 3;
+
+        productos = await models.sequelize.query(`select disenos.id, disenos.titulo, disenos.imagen, users.nombre, disenos.createdAt AS 'fecha', COUNT(disenosartistas.id_diseno) as 'disenos' from disenosartistas 
+                                                JOIN favoritos on disenosartistas.id_diseno=favoritos.id_diseno JOIN users on users.id=disenosartistas.id_user 
+                                                JOIN disenos on disenos.id = disenosartistas.id_diseno group by favoritos.id_diseno 
+                                                ORDER BY disenosartistas.id_diseno DESC`,
+                                                { type: QueryTypes.SELECT })
+    
+              
+        productos.forEach(producto =>{
+            if(cont > 0){
+                producto.imagen = process.env.URL + process.env.PORT + "/upload/" + producto.imagen;
+                listaProductos.push(producto);
+                cont--;
+            }
+        })
+
+        return listaProductos;
     }
 }
 

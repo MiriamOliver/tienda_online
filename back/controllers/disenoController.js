@@ -43,10 +43,65 @@ const listadoProductos = (req, res = response) => {
         })
 }
 
+const listadoProductosRecomendados = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getProductosRecomendados(req.params.id)
+        .then( productos => {
+            productos.forEach(producto =>{
+                producto.imagen = process.env.URL + process.env.PORT + "/upload/" + producto.imagen;
+            })
+            res.status(200).json(productos); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
+const getArtistasAfines = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getArtistasRecomendados(req.params.id)
+        .then( artistas => {
+            artistas.forEach(artista =>{
+                artista.avatar = process.env.URL + process.env.PORT + "/upload/" + artista.avatar;
+            })
+            res.status(200).json(artistas); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
+const getArtistaDestacado = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getArtistaDestacado()
+        .then( artista => {
+            artista.avatar = process.env.URL + process.env.PORT + "/upload/" + artista.avatar;
+            res.status(200).json(artista); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
+const getDisenosDestacados = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getDisenosDestacados()
+        .then( disenos => {
+            res.status(200).json(disenos); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
 
 
 module.exports = {
     listadoDisenos,
     listadoArtistaAfin,
-    listadoProductos
+    listadoProductos,
+    listadoProductosRecomendados,
+    getArtistasAfines,
+    getArtistaDestacado,
+    getDisenosDestacados
 }
