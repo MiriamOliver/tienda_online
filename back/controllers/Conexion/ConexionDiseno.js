@@ -58,6 +58,8 @@ class ConexionDiseno extends ConexionSequelize {
 
         let recomendados = null;
         let disenosRecomendados = null;
+        let listaDisenosRecomendados = [];
+        let cont = 6;
 
         try{
 
@@ -75,7 +77,14 @@ class ConexionDiseno extends ConexionSequelize {
                                                                 ORDER BY disenos.createdAt DESC;`, 
                                                                 { replacements: [recomendados[0].tema], type: QueryTypes.SELECT });
     
-            return disenosRecomendados;
+            disenosRecomendados.forEach(e =>{
+                if(cont > 0){
+                    listaDisenosRecomendados.push(e);
+                    cont --;
+                }
+            })
+            
+            return listaDisenosRecomendados;
      
         }catch (err){
 
@@ -88,7 +97,7 @@ class ConexionDiseno extends ConexionSequelize {
         let idArtistas = [];
         let listaArtistas = [];
         let favoritos = null;
-        let cont = 5;
+        let cont = 6;
 
         try{
 

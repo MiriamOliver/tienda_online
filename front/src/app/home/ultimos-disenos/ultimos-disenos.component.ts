@@ -12,6 +12,7 @@ import { HomeService } from '../services/home.service';
 export class UltimosDisenosComponent implements OnInit{
 
   ultimosDisenos:Design[] = [];
+  cont = 6;
 
   constructor(
     private router: Router,
@@ -23,9 +24,12 @@ export class UltimosDisenosComponent implements OnInit{
     const fechaCompleta = "YYYY-MM-DD HH:mm:ss";
     this.homeService.getUltimosDisenios().subscribe(resp => {
       resp.forEach(item =>{
-        item.fecha = moment(item.fecha, fechaCompleta).format('DD-MM-YYYY');
+        if(this.cont > 0){
+          item.fecha = moment(item.fecha, fechaCompleta).format('DD-MM-YYYY');
+          this.ultimosDisenos.push(item);
+          this.cont --;
+        }
       })
-      this.ultimosDisenos = resp;
     });
   }
 
