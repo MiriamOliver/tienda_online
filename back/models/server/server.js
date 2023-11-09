@@ -10,6 +10,7 @@ class Server {
         this.server = require('http').createServer(this.app);
         this.authPath = '/';
         this.disenoPath = '/diseno';
+        this.pedidoPath = '/pedido';
 
         //Middlewares
         this.middlewares();
@@ -36,6 +37,7 @@ class Server {
     routes(){
         this.app.use(this.authPath , require('../../routes/authRoutes'));
         this.app.use(this.disenoPath, require('../../routes/disenoRoutes'));
+        this.app.use(this.pedidoPath, require('../../routes/pedidoRoutes'));
     }
 
     /* sockets(){
