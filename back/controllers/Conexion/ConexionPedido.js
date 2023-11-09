@@ -15,11 +15,18 @@ class ConexionPedido extends ConexionSequelize {
                                                     { replacements: [id], type: QueryTypes.SELECT })
     
 
-        console.log(beneficios);
-        
-                                                    return beneficios;
+        return beneficios;
+    }
 
+    getBeneficioAnios = async(id) => {
+        let beneficios = null
 
+        beneficios = await models.sequelize.query(`SELECT pedidos.fecha, SUM(pedidos.cantidad * productos.precio) as 'precio' FROM pedidos 
+                                                    JOIN productos ON pedidos.id_producto = productos.id WHERE pedidos.id_cliente = ? 
+                                                    GROUP BY YEAR(pedidos.fecha) ORDER BY pedidos.fecha DESC;`,
+                                                    { replacements: [id], type: QueryTypes.SELECT })
+    
+        return beneficios;
     }
 
 }

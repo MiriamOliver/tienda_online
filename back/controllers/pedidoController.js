@@ -23,6 +23,23 @@ const getBeneficiosMeses = (req, res = response) => {
         })
 }
 
+const getBeneficiosAnios = (req, res = response) => {
+    const fechaCompleta = "YYYY-MM-DD HH:mm:ss";
+    const conex = new ConexionSequelize();
+    conex.getBeneficioAnios(req.params.id)
+        .then( beneficios => {
+            beneficios.forEach(beneficio => {
+                beneficio.fecha = beneficio.fecha = moment(beneficio.fecha, fechaCompleta).format('YYYY');
+                beneficio.precio = Number(beneficio.precio);
+            });
+            res.status(200).json(beneficios); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
 module.exports = {
-    getBeneficiosMeses
+    getBeneficiosMeses,
+    getBeneficiosAnios
 }

@@ -6,4 +6,6 @@ const { validarCampos } = require('../middlewares/validar-campos');
 
 router.get('/beneficios/mes/:id', controlador.getBeneficiosMeses);
 
+router.get('/beneficios/anio/:id', controlador.getBeneficiosAnios);
+
 module.exports = router
