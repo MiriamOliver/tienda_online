@@ -27,12 +27,15 @@ Importar el archivo tienda_online.sql <br>
 
 Cliente
 
-    email: prueba@example.com
+    email: prueba2@example.com          <-----recomendable para notar los cambios
     passwd: 1234
 
     
 Administrador
 
+    email: artista3@example.com
+    passwd: 1234
+    
     email: xlmirulx@gmail.com
     passwd: 1234
 
