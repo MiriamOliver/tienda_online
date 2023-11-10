@@ -10,7 +10,9 @@ class ConexionPedido extends ConexionSequelize {
         let beneficios = null
 
         beneficios = await models.sequelize.query(`SELECT pedidos.fecha, SUM(pedidos.cantidad * productos.precio) as 'precio' FROM pedidos 
-                                                    JOIN productos ON pedidos.id_producto = productos.id WHERE pedidos.id_cliente = ? 
+                                                    JOIN productos ON pedidos.id_producto = productos.id WHERE pedidos.id_producto IN 
+                                                    (SELECT disenoproductos.id_producto FROM disenoproductos where disenoproductos.id_diseno IN 
+                                                    (SELECT disenosartistas.id_diseno from disenosartistas WHERE disenosartistas.id_user = ? )) 
                                                     GROUP BY MONTH(pedidos.fecha), YEAR(pedidos.fecha) ORDER BY pedidos.fecha ASC;`,
                                                     { replacements: [id], type: QueryTypes.SELECT })
     
@@ -22,7 +24,9 @@ class ConexionPedido extends ConexionSequelize {
         let beneficios = null
 
         beneficios = await models.sequelize.query(`SELECT pedidos.fecha, SUM(pedidos.cantidad * productos.precio) as 'precio' FROM pedidos 
-                                                    JOIN productos ON pedidos.id_producto = productos.id WHERE pedidos.id_cliente = ? 
+                                                    JOIN productos ON pedidos.id_producto = productos.id WHERE pedidos.id_producto IN 
+                                                    (SELECT disenoproductos.id_producto FROM disenoproductos where disenoproductos.id_diseno IN 
+                                                    (SELECT disenosartistas.id_diseno from disenosartistas WHERE disenosartistas.id_user = ? )) 
                                                     GROUP BY YEAR(pedidos.fecha) ORDER BY pedidos.fecha DESC;`,
                                                     { replacements: [id], type: QueryTypes.SELECT })
     
