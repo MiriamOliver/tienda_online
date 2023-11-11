@@ -1,10 +1,19 @@
-<div>
-  <h2>Beneficios - {{anio}}</h2>
-  <p>En la siguiente gráfica se muestra los beneficios por meses del año : {{anio}}</p>
-  <canvas id="graficoMeses">{{ graficoMeses }}</canvas>
+<div class="contenedor p-5 shadow-sm rounded-1 mb-5 me-5">
+  <div class="titulo-grafico mb-5 mx-5">
+    <h2>Beneficios - {{anio}}</h2>
+    <p class="mb-4">En la siguiente gráfica se muestra los beneficios por meses del año : {{anio}}</p>
+  </div>
+  <div class="chart-container bar text-center d-flex justify-content-center">
+    <canvas id="graficoMeses">{{graficoMeses}}</canvas>
+  </div>
 </div>
-<div>
-  <h2>Diferencia de Beneficios</h2>
-  <p>En la siguiente gráfica se muestra la diferencia de beneficios de cada año</p>
-  <canvas id="graficoAnios">{{ graficoAnios }}</canvas>
+
+<div class="contenedor p-5 shadow-sm rounded-1 me-5">
+  <div class="titulo-grafico mb-3 mx-5">
+    <h2>Diferencia de Beneficios</h2>
+    <p class="mb-4">En la siguiente gráfica se muestra la diferencia de beneficios de cada año</p>
+  </div>
+  <div class="chart-container radar text-center">
+    <canvas id="graficoAnios">{{graficoAnios}}</canvas>
+  </div>
 </div>

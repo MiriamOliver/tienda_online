@@ -1,0 +1,17 @@
+.contenedor{
+  background-color: #fff;
+  .titulo-grafico{
+    h2{
+      color: var(--colorRosa);
+    }
+    border-bottom: 2px dotted var(--colorRosa);
+  }
+  .radar{
+    width: 50%;
+    margin: auto;
+  }
+  .bar{
+    width: 80%;
+    margin: auto;
+  }
+}
