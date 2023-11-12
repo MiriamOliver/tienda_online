@@ -3,6 +3,7 @@ const models = require('../../models/index.js');
 const moment = require('moment');
 const { Op } = require('sequelize');
 const { QueryTypes } = require('sequelize');
+const { listadoDisenos } = require('../disenoController.js');
 
 class ConexionDiseno extends ConexionSequelize {
 
@@ -185,6 +186,107 @@ class ConexionDiseno extends ConexionSequelize {
         })
 
         return listaProductos;
+    }
+
+    getDisenosArtista = async (id) => {
+
+        let disenos = null;
+        let listaDisenos = [];
+        let idDiseno = null;
+
+        try{
+
+            disenos = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, disenos.tema, disenos.estilo,
+                                                    SUM(pedidos.cantidad * productos.precio) as 'precio', 
+                                                    SUM(pedidos.cantidad) as 'cantidad' FROM disenos 
+                                                    JOIN disenoproductos ON disenos.id = disenoproductos.id_diseno 
+                                                    JOIN productos ON productos.id=disenoproductos.id_producto 
+                                                    JOIN pedidos ON pedidos.id_producto=productos.id 
+                                                    JOIN disenosartistas ON disenosartistas.id_diseno = disenos.id 
+                                                    WHERE disenos.id IN (SELECT disenosartistas.id_diseno FROM disenosartistas 
+                                                    WHERE disenosartistas.id_user = ?) GROUP BY disenosartistas.id_diseno;`, 
+                                                    { replacements: [id], type: QueryTypes.SELECT });
+            
+
+           listaDisenos = await this.ordenarDisenos(disenos);
+
+           idDiseno = await this.conseguirIdDiseno(disenos);
+
+           return await this.getVentaProductos(idDiseno, listaDisenos); 
+            
+        }catch (err){
+
+            throw err;
+        }     
+    }
+
+    ordenarDisenos = async(disenos) => {
+
+        let listaDisenos = [];
+
+        disenos.forEach( d => {
+            listaDisenos.push({
+                id: d.id,
+                titulo: d.titulo,
+                imagen: process.env.URL + process.env.PORT + "/upload/" + d.imagen,
+                tema: d.tema,
+                estilo: d.estilo,
+                cantidad: d.cantidad,
+                precio: d.precio,
+                productos: []
+            })
+        })
+
+        return listaDisenos;
+    }
+
+    conseguirIdDiseno = async(disenos) =>{
+
+        let idDiseno = [];
+
+        disenos.forEach( d => {
+            idDiseno.push(d.id);
+        });
+
+        return idDiseno;
+    }
+
+
+    getVentaProductos = async (idDiseno, listaDisenos) => {
+
+        let productos = null;
+
+        
+        
+        try{
+
+            productos = await models.sequelize.query(`SELECT disenoproductos.id_diseno as 'id_diseno', productos.id as 'id_producto', productos.titulo, 
+                                                        productos.imagen, pedidos.cantidad, tipos.tipo, productos.activado, productos.estado, 
+                                                        SUM(pedidos.cantidad * productos.precio) as 'precio' FROM pedidos 
+                                                        JOIN productos ON pedidos.id_producto = productos.id 
+                                                        JOIN tipos ON tipos.id=productos.id_tipo 
+                                                        JOIN disenoproductos ON productos.id = disenoproductos.id_producto 
+                                                        WHERE productos.id IN (SELECT disenoproductos.id_producto FROM disenoproductos 
+                                                        WHERE disenoproductos.id_diseno IN (?)) 
+                                                        GROUP BY productos.id;`, 
+                                                    { replacements: [idDiseno], type: QueryTypes.SELECT });
+                                            
+            productos.forEach(p =>{
+                p.imagen = process.env.URL + process.env.PORT + "/upload/" + p.imagen;
+                console.log(p);
+                listaDisenos.forEach(d=>{
+                    if(d.id == p.id_diseno){
+                        d.productos.push(p);
+                    }
+                })
+            })
+
+            return listaDisenos;
+            
+        }catch (err){
+
+            throw err;
+        }   
     }
 }
 

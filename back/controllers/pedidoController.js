@@ -41,5 +41,5 @@ const getBeneficiosAnios = (req, res = response) => {
 
 module.exports = {
     getBeneficiosMeses,
-    getBeneficiosAnios
+    getBeneficiosAnios,
 }

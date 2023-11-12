@@ -18,5 +18,7 @@ router.get('/artista/destacado', controlador.getArtistaDestacado);
 
 router.get('/disenos/destacado', controlador.getDisenosDestacados);
 
+router.get('/listado/:id', controlador.getDisenosArtista);
+
 
 module.exports = router
