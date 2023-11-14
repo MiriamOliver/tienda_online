@@ -1,0 +1,47 @@
+<div class="me-5 pe-3">
+  <div class="row p-0 m-0 text-center p-2 py-3 pe-4 tabla-header rounded-top">
+    <div class="col-1">DISEÑO</div>
+    <div class="col-3">TITULO</div>
+    <div class="col-3">TEMA</div>
+    <div class="col-2">ESTILO</div>
+    <div class="col-1">CANT</div>
+    <div class="col-2">PRECIO</div>
+  </div>
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item rounded-0" *ngFor="let diseno of listaDisenos">
+      <div class="accordion-header">
+        <div class="accordion-button p-2 rounded-0" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+ diseno.id" aria-expanded="false" [attr.aria-controls]="'collapse'+ diseno.id">
+          <ul class="row p-0 m-0 text-center disenos d-flex align-items-center">
+            <li class="col-1 list-group-item"><img class="rounded-1 shadow-sm" src="{{diseno.imagen}}"></li>
+            <li class="col-3 list-group-item p-2">{{diseno.titulo}}</li>
+            <li class="col-3 list-group-item p-2">{{diseno.tema}}</li>
+            <li class="col-2 list-group-item p-2">{{diseno.estilo}}</li>
+            <li class="col-1 list-group-item p-2">{{diseno.cantidad}}</li>
+            <li class="col-2 list-group-item p-2">{{diseno.precio}}€</li>
+          </ul>
+        </div>
+      </div>
+      <div id="collapse{{diseno.id}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+        <div class="accordion-body p-0">
+          <ul class="border-0 row lista-header m-0 d-flex align-items-center text-center">
+            <li class="col-1 list-group-item py-3 border-0">PRODUCTO</li>
+            <li class="col-3 list-group-item py-3 border-0">TITULO</li>
+            <li class="col-3 list-group-item py-3 border-0">TIPO</li>
+            <li class="col-2 list-group-item py-3 border-0">ESTADO</li>
+            <li class="col-1 list-group-item py-3 border-0">CANT</li>
+            <li class="col-2 list-group-item py-3 border-0">PRECIO</li>
+          </ul>
+          <ul class=" row border-top lista m-0 d-flex align-items-center text-center" *ngFor="let producto of diseno.productos">
+            <li class="col-1 list-group-item p-2 border-0"><img src="{{producto.imagen}}"></li>
+            <li class="col-3 list-group-item p-2 border-0">{{producto.titulo}}</li>
+            <li class="col-3 list-group-item p-2 border-0">{{producto.tipo}}</li>
+            <li class="col-2 list-group-item p-2 border-0">{{producto.estado}}</li>
+            <li class="col-1 list-group-item p-2 border-0">{{producto.cantidad}}</li>
+            <li class="col-2 list-group-item p-2 border-0">{{producto.precio}}€</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

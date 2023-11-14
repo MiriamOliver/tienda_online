@@ -1,0 +1,23 @@
+.fondo{
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+.contenedor{
+  background-color: var(--colorTransparente);
+}
+.sidebar{
+  background-color: #fff;
+  h5{
+    color: var(--colorRosa);
+    border-bottom: 2px dotted var(--colorRosa);
+  }
+  .opcion{
+    color: var(--colorRosa);
+    cursor: pointer;
+  }
+  .info-texto{
+    font-size: 12px;
+  }
+}
+

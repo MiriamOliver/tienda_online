@@ -94,6 +94,18 @@ const getDisenosDestacados = (req, res = response) => {
         })
 }
 
+const getDisenosArtista = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getDisenosArtista(req.params.id)
+        .then( disenos => {
+            console.log(disenos);
+            res.status(200).json(disenos); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
 
 
 module.exports = {
@@ -103,5 +115,6 @@ module.exports = {
     listadoProductosRecomendados,
     getArtistasAfines,
     getArtistaDestacado,
-    getDisenosDestacados
+    getDisenosDestacados,
+    getDisenosArtista
 }

@@ -27,7 +27,6 @@ import { EstadisticaModule } from './estadistica/estadistica.module';
     SharedModule,
     HomeModule,
     DesignRoutingModule,
-    HomeModule,
     EstadisticaModule
   ],
   providers: [],
