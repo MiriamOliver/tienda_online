@@ -269,11 +269,15 @@ class ConexionDiseno extends ConexionSequelize {
                                                         WHERE productos.id IN (SELECT disenoproductos.id_producto FROM disenoproductos 
                                                         WHERE disenoproductos.id_diseno IN (?)) 
                                                         GROUP BY productos.id;`, 
-                                                    { replacements: [idDiseno], type: QueryTypes.SELECT });
+                                                        { replacements: [idDiseno], type: QueryTypes.SELECT });
                                             
             productos.forEach(p =>{
                 p.imagen = process.env.URL + process.env.PORT + "/upload/" + p.imagen;
-                console.log(p);
+                if(p.activado == 1 ){
+                    p.activado = 'activado';
+                }else{
+                    p.activado = 'desactivado';
+                }
                 listaDisenos.forEach(d=>{
                     if(d.id == p.id_diseno){
                         d.productos.push(p);

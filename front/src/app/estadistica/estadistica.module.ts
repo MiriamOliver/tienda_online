@@ -6,6 +6,7 @@ import { TablaProductosComponent } from './tabla-productos/tabla-productos.compo
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { EstadisticaRoutingModule } from './estadistica-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -18,7 +19,7 @@ import { EstadisticaRoutingModule } from './estadistica-routing.module';
   imports: [
     CommonModule,
     SharedModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [
     MainEstadisticasComponent,

@@ -1,0 +1,33 @@
+.accordion-button{
+  &:not(.collapsed){
+    background-color: #d6e6ff;
+  }
+}
+.tabla-header{
+  background-color: var(--colorRosa);
+  font-family: var(--TipoSubtitulo);
+  color: #fff;
+}
+.disenos{
+  width: 100%;
+  img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+  }
+}
+.lista-header{
+  background-color: #ffa8ba7d;
+  font-family: var(--TipoSubtitulo);
+  color: #fff;
+}
+.lista{
+  width: 100%;
+  background-color: #fafafa;
+  img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+}
+
