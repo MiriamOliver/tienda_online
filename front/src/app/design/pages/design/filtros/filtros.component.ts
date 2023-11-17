@@ -37,7 +37,6 @@ export class FiltrosComponent implements OnInit{
       tema:this.tema,
       productos:this.productos
     }
-    console.log(this.data);
     this.designService.filtrarDisenos(this.data);
   }
 

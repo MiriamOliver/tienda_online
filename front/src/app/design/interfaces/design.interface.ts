@@ -10,9 +10,9 @@ export interface Design {
   productos:any
 }
 
-export interface contFavorito{
-  disenos:number,
-  artista:number
+export interface listaDisenos{
+  todos:Design[]
+  afines:Design[]
 }
 
 export interface TipoProducto{

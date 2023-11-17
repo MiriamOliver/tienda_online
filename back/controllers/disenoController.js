@@ -2,26 +2,31 @@ const { Sequelize } = require("sequelize");
 const ConexionSequelize = require('./Conexion/ConexionDiseno');
 
 
-const listadoDisenos = (req, res = response) => {
+const listadoDisenos = async (req, res = response) => {
+    let disenos;
+    let favoritos = [];
     const conex = new ConexionSequelize();
-    conex.getDisenos()
-        .then( disenos => {
-            res.status(200).json(disenos); 
-        })
-        .catch(err => {
-            res.status(203).json({'msg':'No se han encontrado registros'});
-        })
-}
+    try{
+        disenos = await conex.getDisenos()       
+        if(disenos){
+            conex.getArtistaAfin(req.params.id)
+            .then(resp => {
+                resp.forEach(e => {
+                    disenos.forEach(d => {
+                    if(e.artista == d.id_artista){
+                        favoritos.push(d);
+                    }
+                    })
+                })
+                let data = {todos: disenos, afines:favoritos}
+                res.status(200).json(data); 
 
-const listadoArtistaAfin = (req, res = response) => {
-    const conex = new ConexionSequelize();
-    conex.getArtistaAfin(req.params.id)
-        .then( disenos => {
-            res.status(200).json(disenos); 
-        })
-        .catch(err => {
-            res.status(203).json({'msg':'No se han encontrado registros'});
-        })
+            })
+        }
+            
+    }catch(err){
+        res.status(203).json({'msg':'No se han encontrado registros'});
+    }
 }
 
 const listadoProductos = (req, res = response) => {
@@ -110,7 +115,7 @@ const getDisenosArtista = (req, res = response) => {
 
 module.exports = {
     listadoDisenos,
-    listadoArtistaAfin,
+    //listadoArtistaAfin,
     listadoProductos,
     listadoProductosRecomendados,
     getArtistasAfines,

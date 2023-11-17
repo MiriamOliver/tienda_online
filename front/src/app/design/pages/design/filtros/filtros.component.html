@@ -3,10 +3,6 @@
     <h5>Fecha</h5>
     <div class="ms-3 mt-3">
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="fecha" id="semana" value="esta semana" [(ngModel)]="fecha">
-        <label class="form-check-label" for="semana">Últimos 7 días</label>
-      </div>
-      <div class="form-check">
         <input class="form-check-input" type="radio" name="fecha" id="mes" value="este mes" [(ngModel)]="fecha">
         <label class="form-check-label" for="mes">Este mes</label>
       </div>
@@ -46,15 +42,15 @@
       <label class="form-check-label" for="musica">Música</label>
     </div>
     <div class="form-check ms-3">
-      <input class="form-check-input" type="radio" name="tema" id="serie" value="series y películas" [(ngModel)]="tema">
+      <input class="form-check-input" type="radio" name="tema" id="serie" value="serie" [(ngModel)]="tema">
       <label class="form-check-label" for="serie">Series y películas</label>
     </div>
     <div class="form-check ms-3">
-      <input class="form-check-input" type="radio" name="tema" id="libros" value="libros" [(ngModel)]="tema">
+      <input class="form-check-input" type="radio" name="tema" id="libros" value="libro" [(ngModel)]="tema">
       <label class="form-check-label" for="libros">Libros</label>
     </div>
     <div class="form-check ms-3">
-      <input class="form-check-input" type="radio" name="tema" id="original" value="arte original" [(ngModel)]="tema">
+      <input class="form-check-input" type="radio" name="tema" id="original" value="arteoriginal" [(ngModel)]="tema">
       <label class="form-check-label" for="original">Arte original</label>
     </div>
   </div>
