@@ -11,6 +11,7 @@ import { DesignService } from 'src/app/design/services/design.service';
 })
 export class ListadoComponent implements OnInit{
 
+  private busqueda:string = 'todo';
 
   constructor(
     private router: Router,
@@ -20,8 +21,8 @@ export class ListadoComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.designService.designDefault();
-    this.designService.designAfin(JSON.parse(localStorage.getItem('user')!).id);
+    this.designService.designDefault(JSON.parse(localStorage.getItem('user')!).id);
+    //this.designService.designAfin(JSON.parse(localStorage.getItem('user')!).id);
   }
 
   get listadoMostrar(){
@@ -29,11 +30,11 @@ export class ListadoComponent implements OnInit{
   }
 
   listadoAfin(){
-    return this.designService.ordenarListadoAfin();
+    return this.designService.ordenarListadoAfin(this.busqueda);
   }
 
   listadoDefault(){
-    return this.designService.ordenarListadoDefault();
+    return this.designService.ordenarListadoDefault(this.busqueda);
   }
 
   letraMayuscula(nombre:string){

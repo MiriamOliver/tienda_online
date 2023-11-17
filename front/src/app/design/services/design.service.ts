@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { environment } from './../../../environments/environment';
 import { Observable, tap } from 'rxjs';
-import { Design, contFavorito, TipoProducto, FiltroDisenos } from '../interfaces/design.interface';
+import { Design, listaDisenos, TipoProducto, FiltroDisenos } from '../interfaces/design.interface';
 import * as moment from 'moment';
 
 @Injectable({
@@ -12,11 +12,13 @@ export class DesignService {
 
   private baseUrl: string = environment.baseUrl;
   private nombreDesign:string = '';
+  private tipoBusqueda:string = 'todo';
   private disenos:Design[] = [];
   private favoritos:Design[] = [];
   private listaDisenos:Design[] = [];
   private disenosFiltrados:Design[] = [];
   private auxListaDisenos:Design[] = [];
+  private listaDisenosAnterior:Design[] = [];
 
 
   @Output() listadoDesign: EventEmitter<any> = new EventEmitter();
@@ -28,33 +30,44 @@ export class DesignService {
   buscarDesign(data:string){
     this.nombreDesign = data;
     if(this.nombreDesign != ''){
-      this.auxListaDisenos = this.listaDisenos;
+      this.listaDisenos = this.auxListaDisenos;
       this.listaDisenos = this.listaDisenos.filter(diseno => diseno.titulo.toLowerCase().includes(this.nombreDesign.toLowerCase()));
     }else{
       this.listaDisenos = this.auxListaDisenos;
     }
+    this.listaDisenosAnterior = [];
   }
 
   get listadoMostrar(){
     return this.listaDisenos;
   }
 
-  ordenarListadoDefault(){
+  ordenarListadoDefault(busqueda:string){
     this.listaDisenos = this.disenos;
+    this.tipoBusqueda = busqueda;
+    this.auxListaDisenos = this.disenos;
+    this.listaDisenosAnterior = [];
   }
 
-  ordenarListadoAfin(){
+  ordenarListadoAfin(busqueda:string){
     this.listaDisenos = this.favoritos;
+    this.tipoBusqueda = busqueda;
+    this.auxListaDisenos = this.favoritos;
+    this.listaDisenosAnterior = [];
   }
 
-  designDefault(){
+  designDefault(id:number){
     const fechaCompleta = "YYYY-MM-DD HH:mm:ss";
-    this.http.get<Design[]>(`${ this.baseUrl }/diseno/listado`)
+    this.http.get<listaDisenos>(`${ this.baseUrl }/diseno/listado/${id}`)
     .subscribe(resp => {
-      resp.forEach(item =>{
+      this.disenos = resp.todos;
+      this.favoritos = resp.afines;
+      this.disenos.forEach(item =>{
         item.fecha = moment(item.fecha, fechaCompleta).format('DD-MM-YYYY');
       })
-      this.disenos = resp;
+      this.favoritos.forEach(item =>{
+        item.fecha = moment(item.fecha, fechaCompleta).format('DD-MM-YYYY');
+      })
       this.listaDisenos = this.disenos;
     });
   }
@@ -69,25 +82,15 @@ export class DesignService {
     return this.favoritos;
   }
 
-  designAfin(id:number){
-    this.http.get<contFavorito[]>(`${ this.baseUrl }/diseno/listado/afin/${id}`)
-    .subscribe(resp => {
-      resp.forEach(element => {
-        this.disenos.forEach(diseno => {
-          if(element.artista == diseno.id_artista){
-            this.favoritos.push(diseno);
-          }
-        })
-      });
-    });
-  }
-
   getProductos():Observable<TipoProducto[]>{
     return this.http.get<TipoProducto[]>(`${ this.baseUrl }/diseno/filtro/productos`);
   }
 
   filtrarDisenos(data:FiltroDisenos){
-    this.disenosFiltrados = this.disenos;
+    if(this.listaDisenosAnterior.length > 0 ){
+      this.listaDisenos = this.listaDisenosAnterior;
+    }
+    this.disenosFiltrados = this.listaDisenos;
     if(data.estilo != '') { this.disenosFiltrados = this.disenosFiltrados.filter(diseno => diseno.estilo == data.estilo);}
     if(data.tema != ''){ this.disenosFiltrados = this.disenosFiltrados.filter(diseno => diseno.tema == data.tema);}
     data.productos.forEach( producto =>{
@@ -95,15 +98,15 @@ export class DesignService {
         this.disenosFiltrados = this.disenosFiltrados.filter(diseno => diseno.productos.includes(producto.tipo));
       }
     });
-      if(data.fecha != '' && data.fecha != 'todo'){ this.disenosFiltrados = this.conseguirFecha(data.fecha, this.disenosFiltrados)}
+      if(data.fecha != '' && data.fecha != 'todo'){
+        this.disenosFiltrados = this.conseguirFecha(data.fecha, this.disenosFiltrados)
+      }
+      this.listaDisenosAnterior = this.listaDisenos;
       this.listaDisenos = this.disenosFiltrados;
   }
 
   conseguirFecha(fecha:string, listaFiltrados:Design[]){
     switch(fecha){
-      case 'esta semana':
-        listaFiltrados = listaFiltrados.filter(diseno => moment().subtract(7,'d').diff(moment(diseno.fecha.split("-").reverse().join("-"), moment.defaultFormat), 'days') <= 7);
-      break;
       case 'este mes':
         listaFiltrados = listaFiltrados.filter(diseno => diseno.fecha.slice(3, 5) == moment().format('MM'));
       break;

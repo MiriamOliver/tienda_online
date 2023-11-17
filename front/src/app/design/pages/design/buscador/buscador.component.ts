@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DesignService } from 'src/app/design/services/design.service';
 
@@ -7,17 +7,18 @@ import { DesignService } from 'src/app/design/services/design.service';
   templateUrl: './buscador.component.html',
   styleUrls: ['./buscador.component.scss']
 })
-export class BuscadorComponent {
+export class BuscadorComponent implements OnInit{
 
-  public input_search:any = '';
+  input_search:string = "";
 
   constructor(
     private designService: DesignService,
-    private activatedRoute: ActivatedRoute,
     private router:Router
   ) {}
 
-  sendData = () =>{
+  ngOnInit(): void { }
+
+  sendData(){
     this.designService.buscarDesign(this.input_search);
   }
 }
