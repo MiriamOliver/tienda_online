@@ -292,6 +292,40 @@ class ConexionDiseno extends ConexionSequelize {
             throw err;
         }   
     }
+
+    getInfoMisDisenos = async(id) => {
+     
+        let idDiseno = null;
+
+        try{
+
+            let disenos = await models.sequelize.query(`SELECT COUNT(favoritos.id_diseno) as 'favoritos', disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', 
+                                                users.nombre, disenos.createdAt AS 'fecha', disenos.tema,disenos.estilo FROM disenos 
+                                                JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
+                                                JOIN users on users.id = disenosartistas.id_user 
+                                                LEFT JOIN favoritos ON favoritos.id_diseno = disenos.id 
+                                                WHERE disenosartistas.id_user = ? 
+                                                GROUP BY disenosartistas.id_diseno 
+                                                ORDER BY fecha ASC;`, 
+                                                { replacements: [id], type: QueryTypes.SELECT });
+
+            idDiseno = await this.conseguirIdDiseno(disenos);
+
+            let productos = await models.sequelize.query(`SELECT tipos.tipo as tipo, disenoproductos.id_diseno as id_diseno FROM tipos 
+                                                        JOIN productos ON productos.id_tipo=tipos.id 
+                                                        JOIN disenoproductos ON disenoproductos.id_producto=productos.id 
+                                                        WHERE disenoproductos.id_diseno IN (?)
+                                                        ORDER BY disenoproductos.id_diseno ASC;`, 
+                                                        { replacements: [idDiseno], type: QueryTypes.SELECT });
+            
+            return this.ordenarDisenoProductos(disenos, productos); 
+
+        }catch (err){
+
+            throw err;
+        } 
+    
+    }
 }
 
 module.exports = ConexionDiseno;

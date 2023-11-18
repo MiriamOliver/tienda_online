@@ -111,11 +111,23 @@ const getDisenosArtista = (req, res = response) => {
         })
 }
 
+const listadoMisDisenos = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getInfoMisDisenos(req.params.id)
+        .then( disenos => {
+            console.log(disenos);
+            res.status(200).json(disenos); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
 
 
 module.exports = {
     listadoDisenos,
-    //listadoArtistaAfin,
+    listadoMisDisenos,
     listadoProductos,
     listadoProductosRecomendados,
     getArtistasAfines,

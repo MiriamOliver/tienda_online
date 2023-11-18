@@ -1,0 +1,20 @@
+.fondo{
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+.contenedor{
+  background-color: var(--colorTransparente);
+  .buscador{
+    margin: auto;
+    z-index: 1;
+    input{
+      border: 3px solid var(--colorRosa);
+    }
+    button{
+      background-color: var(--colorRosa);
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+}
