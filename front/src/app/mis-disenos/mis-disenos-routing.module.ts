@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       { path: '', component: ListadoDisenosComponent },
       { path: 'crear', component: SubirDisenosComponent},
-      { path: 'modificar', component: ModificarDisenosComponent},
+      { path: 'editar', component: ModificarDisenosComponent},
     ]
   }
 ];

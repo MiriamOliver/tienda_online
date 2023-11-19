@@ -154,6 +154,25 @@ class ConexionDiseno extends ConexionSequelize {
         return resultado;
     }
 
+    getDisenosUltimos = async() => {
+        let disenos = null;
+
+        try{
+
+            disenos = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', users.nombre, 
+                                                        disenos.createdAt AS 'fecha', disenos.tema,disenos.estilo FROM disenos 
+                                                        JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
+                                                        JOIN users on users.id = disenosartistas.id_user ORDER BY disenos.createdAt DESC;`, 
+                                                        { type: QueryTypes.SELECT });
+          
+            return disenos;
+            
+        }catch (err){
+
+            throw err;
+        }     
+    }
+
     getArtistaDestacado = async() => {
         let artista = null;
 
@@ -324,7 +343,25 @@ class ConexionDiseno extends ConexionSequelize {
 
             throw err;
         } 
-    
+    }
+
+    getInfoUsuario = async(id) => {
+
+        try{
+
+            let disenos = await models.sequelize.query(`SELECT COUNT(favoritos.id_diseno) as 'favoritos', COUNT(disenosartistas.id_diseno) as 'disenos', 
+                                                        users.id, users.nombre, users.avatar, users.createdAt as 'fecha' FROM users 
+                                                        JOIN disenosartistas ON disenosartistas.id_user=users.id 
+                                                        LEFT JOIN favoritos ON disenosartistas.id_diseno=favoritos.id_diseno 
+                                                        WHERE users.id = ?;`, 
+                                                        { replacements: [id], type: QueryTypes.SELECT });
+
+            return disenos;
+                                                    
+        }catch (err){
+
+            throw err;
+        } 
     }
 }
 

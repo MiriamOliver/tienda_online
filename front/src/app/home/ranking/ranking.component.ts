@@ -17,7 +17,14 @@ export class RankingComponent implements OnInit{
   constructor(
     private router: Router,
     private homeService: HomeService,
-  ) {}
+  ) {
+    this.artista = {
+      id:0,
+      nombre:'',
+      avatar:'',
+      disenos:0,
+    }
+  }
 
   ngOnInit(): void {
     const fechaCompleta = "YYYY-MM-DD HH:mm:ss";
@@ -25,6 +32,7 @@ export class RankingComponent implements OnInit{
     this.homeService.getArtistaDestacado()
     .subscribe(resp =>{
       this.artista = resp;
+      console.log(this.artista);
     });
 
     this.homeService.getDisenosDestacados()

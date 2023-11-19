@@ -6,6 +6,8 @@ const { validarCampos } = require('../middlewares/validar-campos');
 
 router.get('/listado/:id', controlador.listadoDisenos);
 
+router.get('/ultimos/listado', controlador.listadoUltimosDisenos);
+
 router.get('/filtro/productos', controlador.listadoProductos);
 
 router.get('/recomendar/productos/:id', controlador.listadoProductosRecomendados);
@@ -19,6 +21,8 @@ router.get('/disenos/destacado', controlador.getDisenosDestacados);
 router.get('/listado/estadisticas/:id', controlador.getDisenosArtista);
 
 router.get('/listado/misdisenos/:id', controlador.listadoMisDisenos);
+
+router.get('/misdisenos/usuario/:id', controlador.getDatosUsuario);
 
 
 module.exports = router

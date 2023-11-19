@@ -1,6 +1,6 @@
 <app-menu></app-menu>
 <div>
-  <img class="banner">
+  <img src="../../../../assets/imgs/banner3.jpg" class="d-block w-100" alt="...">
 </div>
 <div class="fondo contenedor">
   <svg id="visual" viewBox="0 0 1920 1800" width="1920" height="1800" xmlns="http://www.w3.org/2000/svg"
@@ -18,25 +18,43 @@
 </div>
 <div class="contenedor">
   <div class="py-5"></div>
-  <div class="row p-4">
-    <div class="col-lg-3 pe-2">
-      <div class="mb-3 buscador">
-        <input
-            [(ngModel)]="input_search"
-            (keyup.enter)="sendData()"
-            type="text"
-            class="col-10 p-2 rounded-start"
-            placeholder="Search..."/>
-        <button type="button" class="col-2 p-2 rounded-end border-0" (click)="sendData()">
-          <i class="fas fa-search"></i>
+  <div class="text-center info-user pb-4 pt-5">
+    <img class="shadow-sm mb-3" src="{{usuario.avatar}}">
+    <h5>{{letraMayuscula(usuario.nombre)}}</h5>
+    <div class="d-flex justify-content-center mt-4">
+      <label><b>{{usuario.disenos}}</b> - Diseños </label>
+      <label class="mx-3" style="color: var(--colorRosa);">&nbsp;&#8226;&nbsp;</label>
+      <label>Desde : <b>{{usuario.fecha}}</b></label>
+      <label class="mx-3" style="color: var(--colorRosa);">&nbsp;&#8226;&nbsp;</label>
+      <label> <b>{{usuario.favoritos}}</b> - Me gusta</label>
+    </div>
+  </div>
+  <div class="row p-5">
+    <div class="col-lg-3 pe-4">
+      <div class="mt-3 crear text-center rounded-1 shadow-sm p-4">
+        <button type="button" class="col-2 p-4 rounded-1 border-0 crear shadow-sm" (click)="crearDiseno()">
+          <i class="fa-solid fa-plus"></i>Nuevo
         </button>
       </div>
-      <div *ngIf="infoDiseno == 1" class="info p-2 text-center rounded-1 ms-5">
-        <h5>Detalles Diseño</h5>
-        <div>
-          <img class="" src="{{design.imagen}}">
+      <div class="my-3 buscador rounded-1 shadow-sm p-4">
+        <div class="shadow-sm rounded-1">
+          <input
+          [(ngModel)]="input_search"
+          (keyup.enter)="sendData()"
+          type="text"
+          class="col-10 p-2 rounded-start"
+          placeholder="Search..."/>
+          <button type="button" class="col-2 p-2 rounded-end busqueda" (click)="sendData()">
+            <i class="fas fa-search"></i>
+          </button>
         </div>
-        <div class="recuadros row">
+      </div>
+      <div *ngIf="infoDiseno == 1" class="info p-2 text-center rounded-1 p-4">
+        <h5 class="mb-3">Detalles Diseño</h5>
+        <div class="mb-3">
+          <img class="rounded-1 shadow-sm" src="{{design.imagen}}">
+        </div>
+        <div class="recuadros row mb-2">
           <div class="col pe-1">
             <p class="recuadro p-2 m-0 rounded-top">Favoritos</p>
             <p class="datos p-2 m-0 rounded-bottom">{{design.favoritos}}</p>
@@ -46,7 +64,7 @@
             <p class="datos p-2 m-0 rounded-bottom">{{design.fecha}}</p>
           </div>
         </div>
-        <div class="recuadros row">
+        <div class="recuadros row mb-2">
           <div class="col pe-1">
             <p class="recuadro p-2 m-0 rounded-top">Tema</p>
             <p class="datos p-2 m-0 rounded-bottom">{{design.tema}}</p>
@@ -58,13 +76,31 @@
         </div>
         <div class="mb-2">
           <p class="recuadro p-2 m-0 rounded-top">Productos</p>
-          <ul class="datos p-2 m-0 rounded-bottom">
-            <li class="opciones" *ngFor="let producto of diseno.productos">{{producto}}</li>
+          <ul class="datos p-2 m-0 rounded-bottom list-unstyled">
+            <li class="opciones" *ngFor="let producto of design.productos">{{producto}}</li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="col-lg-9 ps-2">lista diseños</div>
+    <div class="col-lg-9 ps-4">
+      <div class="row p-0">
+        <div class="col-lg-3 col-6 p-3" *ngFor="let diseno of listadoMostrar">
+          <div class="design p-2 rounded-1 shadow-sm">
+            <img class="img-thumbnail mb-2" src="{{diseno.imagen}}">
+            <label class="resaltado my-1"><span>{{letraMayuscula(diseno.titulo)}}</span></label>
+            <div class="d-flex justify-content-between">
+              <label>De <span>{{letraMayuscula(diseno.nombre)}}</span></label>
+              <label>{{diseno.fecha}}</label>
+            </div>
+            <div class="d-flex justify-content-center gap-2 align-items-center mt-3">
+              <button type="button" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="mostrarDiseno(diseno.id)"><i class="fa-solid fa-info circle px-2 m-0"></i></button>
+              <button type="button" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="modificarDiseno(diseno.id)"><i class="fa-solid fa-pen circle m-0"></i></button>
+              <button type="button" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="borrarDiseno(diseno.id)"><i class="fa-solid fa-trash circle m-0"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>
