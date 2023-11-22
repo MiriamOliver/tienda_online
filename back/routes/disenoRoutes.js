@@ -24,5 +24,7 @@ router.get('/listado/misdisenos/:id', controlador.listadoMisDisenos);
 
 router.get('/misdisenos/usuario/:id', controlador.getDatosUsuario);
 
+router.get('/misdisenos/crear', controlador.registrarDiseno);
+
 
 module.exports = router

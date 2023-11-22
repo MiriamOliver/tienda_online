@@ -18,8 +18,102 @@
 </div>
 <div class="contenedor">
   <div class="py-5"></div>
-  <div>
+  <div class="row px-5">
+    <div class="col-lg-5 card-body p-5 ">
+      <div class="info p-5 ms-5 me-2 rounded-1 shadow-sm">
+        <h5>Subir Diseño</h5>
+        <p>Rellena los datos para registrar tu diseño.
+        Posteriormente podrás subir los productos pertenecientes a este diseño, pulsando en el botón de crear producto.</p>
+      </div>
+      <div class="info p-5 ms-5 me-2 mt-4 rounded-1 shadow-sm">
+        <h5>Previsualización</h5>
+        <img [src]="previsualizacion">
+      </div>
+    </div>
+    <div class="card-body p-5 text-black text-center col-lg-7">
+      <form #regForm="ngForm" [formGroup]="disenoForm" (ngSubmit)="subirDiseno()" class="p-5 ms-2 me-5 rounded-1 shadow-sm">
+        <div class="mb-4 border-bottom border-3">
+          <h5 class="fw-bold mb-0 mb-3 pb-1">SUBIR DISEÑO</h5>
+        </div>
 
+        <div class="mb-4 text-start">
+          <label for="formFile" class="form-label">Imagen</label>
+          <input class="form-control"
+            formControlName="imagen"
+            [ngClass]="{'is-invalid' : form['imagen'].invalid && form['imagen'].touched}"
+            type="file" id="formFile"
+            (change)="onFileSelected($event)"/>
+          <div *ngIf="form['imagen'].invalid" class="invalid-feedback">
+            <div *ngIf="form['imagen'].errors?.['required']" class="error alert alert-danger mt-2">Elige una imagen de perfil</div>
+          </div>
+        </div>
+
+        <div class="form-outline mb-4 text-start">
+          <label class="form-label">Título</label>
+
+          <input type="text"
+            formControlName="titulo"
+            [ngClass]="{'is-invalid' : form['titulo'].invalid && form['titulo'].dirty}"
+            class="form-control"/>
+
+          <div *ngIf="form['titulo'].invalid" class="invalid-feedback">
+            <div *ngIf="form['titulo'].errors?.['required']" class="error alert alert-danger mt-2">Escribe un título para tu diseño</div>
+          </div>
+        </div>
+
+        <div class="form-outline mb-4 text-start">
+          <label class="form-label">Estilo</label>
+
+          <select class="form-select form-control"
+                  formControlName="estilo"
+                  [(ngModel)]="estilo"
+                  [ngClass]="{'is-invalid' : form['estilo'].invalid && form['estilo'].touched}">
+            <option value="" disabled selected hidden></option>
+            <option value="tradicional">Tradicional</option>
+            <option value="digital">Digital</option>
+            <option value="mixto">Mixto</option>
+          </select>
+          <div *ngIf="form['estilo'].invalid" class="invalid-feedback">
+            <div *ngIf="form['estilo'].errors?.['required']" class="error alert alert-danger mt-2">Elige un estilo de diseño</div>
+          </div>
+        </div>
+
+        <div class="form-outline mb-4 text-start">
+          <label class="form-label">Tema</label>
+
+          <select class="form-select form-control"
+                  formControlName="tema"
+                  [(ngModel)]="tema"
+                  [ngClass]="{'is-invalid' : form['tema'].invalid && form['tema'].touched}">
+            <option value="" disabled selected hidden></option>
+            <option value="videojuego">Videojuego</option>
+            <option value="libro">Libro</option>
+            <option value="serie">Serie y películas</option>
+            <option value="musica">Música</option>
+            <option value="original">Arte original</option>
+          </select>
+          <div *ngIf="form['tema'].invalid" class="invalid-feedback">
+            <div *ngIf="form['tema'].errors?.['required']" class="error alert alert-danger mt-2">Elige un tema para el diseño</div>
+          </div>
+        </div>
+
+        <div class="form-outline mb-4 text-start">
+          <label class="form-label">Descripción</label>
+
+          <textarea class="form-control" placeholder="Escribe una descripción del diseño" id="floatingTextarea"
+            formControlName="descripcion"
+            [ngClass]="{'is-invalid' : form['descripcion'].invalid && form['descripcion'].dirty}"></textarea>
+
+          <div *ngIf="form['descripcion'].invalid" class="invalid-feedback">
+            <div *ngIf="form['descripcion'].errors?.['required']" class="error alert alert-danger mt-2">Escribe una descripción para tu diseño</div>
+          </div>
+        </div>
+
+        <div class="pt-1 mb-2 mt-4">
+          <button class="btn rounded-1 boton py-2 px-4" [disabled]="disenoForm.invalid" type="submit">Crear</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 

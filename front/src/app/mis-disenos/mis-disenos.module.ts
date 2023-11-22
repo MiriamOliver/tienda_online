@@ -4,7 +4,7 @@ import { ListadoDisenosComponent } from './pages/listado-disenos/listado-disenos
 import { SubirDisenosComponent } from './pages/subir-disenos/subir-disenos.component';
 import { ModificarDisenosComponent } from './pages/modificar-disenos/modificar-disenos.component';
 import { SharedModule } from '../shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MisDisenosRoutingModule } from './mis-disenos-routing.module';
 
 
@@ -18,7 +18,8 @@ import { MisDisenosRoutingModule } from './mis-disenos-routing.module';
   imports: [
     CommonModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     ListadoDisenosComponent,

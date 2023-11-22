@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Design, InfoUsuario } from '../interfaces/mis-disenos';
+import { Design, InfoUsuario, crearDiseno } from '../interfaces/mis-disenos';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
@@ -52,5 +52,17 @@ export class MisDisenosService {
 
   getInfoUsuario(id:number):Observable<InfoUsuario>{
     return this.http.get<InfoUsuario>(`${ this.baseUrl }/diseno/misdisenos/usuario/${id}`)
+  }
+
+  registrarDiseno(diseno:crearDiseno):Observable<any>{
+    const formReg = new FormData();
+    formReg.append('archivo', diseno.imagen);
+    formReg.append('titulo', diseno.titulo);
+    formReg.append('tema',  diseno.tema);
+    formReg.append('estilo', diseno.estilo);
+    formReg.append('descripcion', diseno.descripcion);
+    formReg.append('id_artista', diseno.id_artista);
+
+    return this.http.post<any>(`${ this.baseUrl }/diseno/misdisenos/crear`, formReg);
   }
 }

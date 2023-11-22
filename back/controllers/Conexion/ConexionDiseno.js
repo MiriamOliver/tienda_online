@@ -363,6 +363,34 @@ class ConexionDiseno extends ConexionSequelize {
             throw err;
         } 
     }
-}
+
+    crearDiseno = async(req) => {
+        try{
+
+            const archivo = await File.subirArchivo(req.files, undefined, 'imgs' );
+
+            const diseno = await models.Diseno.create({
+                titulo: req.body.titulo,
+                imagen: archivo,
+                tema: req.body.tema,
+                estilo: req.body.estilo,
+                descripcion: req.body.descripcion
+            });
+
+            if(diseno){
+                await models.DisenosArtistas.create({
+                    id_user: req.body.id_artista,
+                    id_diseno: diseno.dataValues.id
+                })              
+            }
+
+            return diseno.dataValues.id;
+            
+        }catch (err){
+
+            throw err;
+        }
+    }
+} 
 
 module.exports = ConexionDiseno;

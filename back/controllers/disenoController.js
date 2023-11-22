@@ -151,7 +151,16 @@ const getDatosUsuario = (req, res = response) => {
             res.status(203).json({'msg':'No se han encontrado registros'});
         })
 }
-
+const registrarDiseno = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.crearDiseno(req)
+        .then( id => {        
+            res.status(200).json(id); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se pudo registrar'});
+        })
+    }
 
 
 module.exports = {
@@ -164,5 +173,6 @@ module.exports = {
     getArtistaDestacado,
     getDisenosDestacados,
     getDisenosArtista,
-    getDatosUsuario
+    getDatosUsuario,
+    registrarDiseno
 }

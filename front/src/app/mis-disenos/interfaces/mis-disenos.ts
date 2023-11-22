@@ -11,6 +11,15 @@ export interface Design {
   productos:any
 }
 
+export interface crearDiseno {
+  titulo:string,
+  imagen:string,
+  tema:string,
+  estilo:string,
+  descripcion:string,
+  id_artista:any,
+}
+
 export interface InfoUsuario {
   id:number,
   nombre:string,
