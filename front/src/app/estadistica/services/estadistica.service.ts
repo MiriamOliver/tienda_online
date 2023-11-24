@@ -24,6 +24,6 @@ export class EstadisticaService {
   }
 
   getListadoDisenio(id:number):Observable<ListadoDisenios[]>{
-    return this.http.get<ListadoDisenios[]>(`${ this.baseUrl }/diseno/listado/${id}`)
+    return this.http.get<ListadoDisenios[]>(`${ this.baseUrl }/diseno/listado/estadisticas/${id}`)
   }
 }

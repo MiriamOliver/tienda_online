@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'DisenosArtistas',
     tableName: 'disenosartistas',
+    timestamps: false
   });
 
   DisenosArtistas.removeAttribute('id');

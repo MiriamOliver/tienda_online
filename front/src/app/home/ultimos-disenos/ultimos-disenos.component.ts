@@ -23,6 +23,7 @@ export class UltimosDisenosComponent implements OnInit{
 
     const fechaCompleta = "YYYY-MM-DD HH:mm:ss";
     this.homeService.getUltimosDisenios().subscribe(resp => {
+      console.log(resp);
       resp.forEach(item =>{
         if(this.cont > 0){
           item.fecha = moment(item.fecha, fechaCompleta).format('DD-MM-YYYY');

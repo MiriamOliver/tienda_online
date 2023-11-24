@@ -4,6 +4,7 @@ const moment = require('moment');
 const { Op } = require('sequelize');
 const { QueryTypes } = require('sequelize');
 const { listadoDisenos } = require('../disenoController.js');
+const File = require('../../helpers/file-upload');
 
 class ConexionDiseno extends ConexionSequelize {
 
@@ -154,6 +155,25 @@ class ConexionDiseno extends ConexionSequelize {
         return resultado;
     }
 
+    getDisenosUltimos = async() => {
+        let disenos = null;
+
+        try{
+
+            disenos = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', users.nombre, 
+                                                        disenos.createdAt AS 'fecha', disenos.tema,disenos.estilo FROM disenos 
+                                                        JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
+                                                        JOIN users on users.id = disenosartistas.id_user ORDER BY disenos.createdAt DESC;`, 
+                                                        { type: QueryTypes.SELECT });
+          
+            return disenos;
+            
+        }catch (err){
+
+            throw err;
+        }     
+    }
+
     getArtistaDestacado = async() => {
         let artista = null;
 
@@ -292,6 +312,87 @@ class ConexionDiseno extends ConexionSequelize {
             throw err;
         }   
     }
-}
+
+    getInfoMisDisenos = async(id) => {
+     
+        let idDiseno = null;
+
+        try{
+
+            let disenos = await models.sequelize.query(`SELECT COUNT(favoritos.id_diseno) as 'favoritos', disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', 
+                                                users.nombre, disenos.createdAt AS 'fecha', disenos.tema,disenos.estilo FROM disenos 
+                                                JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
+                                                JOIN users on users.id = disenosartistas.id_user 
+                                                LEFT JOIN favoritos ON favoritos.id_diseno = disenos.id 
+                                                WHERE disenosartistas.id_user = ? 
+                                                GROUP BY disenosartistas.id_diseno 
+                                                ORDER BY fecha ASC;`, 
+                                                { replacements: [id], type: QueryTypes.SELECT });
+
+            idDiseno = await this.conseguirIdDiseno(disenos);
+
+            let productos = await models.sequelize.query(`SELECT tipos.tipo as tipo, disenoproductos.id_diseno as id_diseno FROM tipos 
+                                                        JOIN productos ON productos.id_tipo=tipos.id 
+                                                        JOIN disenoproductos ON disenoproductos.id_producto=productos.id 
+                                                        WHERE disenoproductos.id_diseno IN (?)
+                                                        ORDER BY disenoproductos.id_diseno ASC;`, 
+                                                        { replacements: [idDiseno], type: QueryTypes.SELECT });
+            
+            return this.ordenarDisenoProductos(disenos, productos); 
+
+        }catch (err){
+
+            throw err;
+        } 
+    }
+
+    getInfoUsuario = async(id) => {
+
+        try{
+
+            let disenos = await models.sequelize.query(`SELECT COUNT(favoritos.id_diseno) as 'favoritos', COUNT(disenosartistas.id_diseno) as 'disenos', 
+                                                        users.id, users.nombre, users.avatar, users.createdAt as 'fecha' FROM users 
+                                                        JOIN disenosartistas ON disenosartistas.id_user=users.id 
+                                                        LEFT JOIN favoritos ON disenosartistas.id_diseno=favoritos.id_diseno 
+                                                        WHERE users.id = ?;`, 
+                                                        { replacements: [id], type: QueryTypes.SELECT });
+
+            return disenos;
+                                                    
+        }catch (err){
+
+            throw err;
+        } 
+    }
+
+    crearDiseno = async(req) => {
+
+        try{
+
+            const archivo = await File.subirArchivo(req.files, undefined, 'imgs' );
+
+            const diseno = await models.Diseno.create({
+                titulo: req.body.titulo,
+                imagen: archivo,
+                tema: req.body.tema,
+                estilo: req.body.estilo,
+                descripcion: req.body.descripcion
+            });
+
+            if(diseno){
+                await models.DisenosArtistas.create({
+                    id_user: Number(req.body.id_artista),
+                    id_diseno: diseno.dataValues.id
+                })              
+            }
+
+            return diseno.dataValues.id;
+            
+        }catch (err){
+
+            throw err;
+        }
+    }
+} 
 
 module.exports = ConexionDiseno;

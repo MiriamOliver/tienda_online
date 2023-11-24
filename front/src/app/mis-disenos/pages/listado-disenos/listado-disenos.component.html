@@ -1,0 +1,106 @@
+<app-menu></app-menu>
+<div>
+  <img src="../../../../assets/imgs/banner3.jpg" class="d-block w-100" alt="...">
+</div>
+<div class="fondo contenedor">
+  <svg id="visual" viewBox="0 0 1920 1800" width="1920" height="1800" xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+    <path
+      d="M0 64L35.5 63.7C71 63.3 142 62.7 213.2 63.5C284.3 64.3 355.7 66.7 426.8 68.8C498 71 569 73 640 74.2C711 75.3 782 75.7 853.2 73.8C924.3 72 995.7 68 1066.8 67C1138 66 1209 68 1280 68.7C1351 69.3 1422 68.7 1493.2 69.5C1564.3 70.3 1635.7 72.7 1706.8 73.2C1778 73.7 1849 72.3 1884.5 71.7L1920 71L1920 0L1884.5 0C1849 0 1778 0 1706.8 0C1635.7 0 1564.3 0 1493.2 0C1422 0 1351 0 1280 0C1209 0 1138 0 1066.8 0C995.7 0 924.3 0 853.2 0C782 0 711 0 640 0C569 0 498 0 426.8 0C355.7 0 284.3 0 213.2 0C142 0 71 0 35.5 0L0 0Z"
+      fill="#ffc4d1"></path>
+    <path
+      d="M0 47L35.5 46.7C71 46.3 142 45.7 213.2 46.5C284.3 47.3 355.7 49.7 426.8 50.8C498 52 569 52 640 52.2C711 52.3 782 52.7 853.2 51.8C924.3 51 995.7 49 1066.8 48.7C1138 48.3 1209 49.7 1280 51.2C1351 52.7 1422 54.3 1493.2 54.8C1564.3 55.3 1635.7 54.7 1706.8 54.5C1778 54.3 1849 54.7 1884.5 54.8L1920 55L1920 0L1884.5 0C1849 0 1778 0 1706.8 0C1635.7 0 1564.3 0 1493.2 0C1422 0 1351 0 1280 0C1209 0 1138 0 1066.8 0C995.7 0 924.3 0 853.2 0C782 0 711 0 640 0C569 0 498 0 426.8 0C355.7 0 284.3 0 213.2 0C142 0 71 0 35.5 0L0 0Z"
+      fill="#ffa8ba"></path>
+    <path
+      d="M0 19L35.5 20.8C71 22.7 142 26.3 213.2 27.5C284.3 28.7 355.7 27.3 426.8 26C498 24.7 569 23.3 640 22.5C711 21.7 782 21.3 853.2 22.8C924.3 24.3 995.7 27.7 1066.8 27.8C1138 28 1209 25 1280 23.5C1351 22 1422 22 1493.2 23.5C1564.3 25 1635.7 28 1706.8 28.8C1778 29.7 1849 28.3 1884.5 27.7L1920 27L1920 0L1884.5 0C1849 0 1778 0 1706.8 0C1635.7 0 1564.3 0 1493.2 0C1422 0 1351 0 1280 0C1209 0 1138 0 1066.8 0C995.7 0 924.3 0 853.2 0C782 0 711 0 640 0C569 0 498 0 426.8 0C355.7 0 284.3 0 213.2 0C142 0 71 0 35.5 0L0 0Z"
+      fill="#ff8ea5"></path>
+  </svg>
+</div>
+<div class="contenedor">
+  <div class="py-5"></div>
+  <div class="text-center info-user pb-4 pt-5">
+    <img class="shadow-sm mb-3" src="{{usuario.avatar}}">
+    <h5>{{letraMayuscula(usuario.nombre)}}</h5>
+    <div class="d-flex justify-content-center mt-4">
+      <label><b>{{usuario.disenos - 1}}</b> - Diseños </label>
+      <label class="mx-3" style="color: var(--colorRosa);">&nbsp;&#8226;&nbsp;</label>
+      <label>Desde : <b>{{usuario.fecha}}</b></label>
+      <label class="mx-3" style="color: var(--colorRosa);">&nbsp;&#8226;&nbsp;</label>
+      <label> <b>{{usuario.favoritos}}</b> - Me gusta</label>
+    </div>
+  </div>
+  <div class="row p-5">
+    <div class="col-lg-3 pe-4">
+      <div class="mt-3 crear text-center rounded-1 shadow-sm p-4">
+        <button type="button" class="col-2 p-4 rounded-1 border-0 crear shadow-sm" (click)="crearDiseno()">
+          <i class="fa-solid fa-plus"></i>Nuevo
+        </button>
+      </div>
+      <div class="my-3 buscador rounded-1 shadow-sm p-4">
+        <div class="shadow-sm rounded-1">
+          <input
+          [(ngModel)]="input_search"
+          (keyup.enter)="sendData()"
+          type="text"
+          class="col-10 p-2 rounded-start"
+          placeholder="Search..."/>
+          <button type="button" class="col-2 p-2 rounded-end busqueda" (click)="sendData()">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+      <div *ngIf="infoDiseno == 1" class="info p-2 text-center rounded-1 p-4">
+        <h5 class="mb-3">Detalles Diseño</h5>
+        <div class="mb-3">
+          <img class="rounded-1 shadow-sm" src="{{design.imagen}}">
+        </div>
+        <div class="recuadros row mb-2">
+          <div class="col pe-1">
+            <p class="recuadro p-2 m-0 rounded-top">Favoritos</p>
+            <p class="datos p-2 m-0 rounded-bottom">{{design.favoritos}}</p>
+          </div>
+          <div class="rounded-1 col ps-1">
+            <p class="recuadro p-2 m-0 rounded-top">Fecha</p>
+            <p class="datos p-2 m-0 rounded-bottom">{{design.fecha}}</p>
+          </div>
+        </div>
+        <div class="recuadros row mb-2">
+          <div class="col pe-1">
+            <p class="recuadro p-2 m-0 rounded-top">Tema</p>
+            <p class="datos p-2 m-0 rounded-bottom">{{design.tema}}</p>
+          </div>
+          <div class="rounded-1 col ps-1">
+            <p class="recuadro p-2 m-0 rounded-top">Estilo</p>
+            <p class="datos p-2 m-0 rounded-bottom">{{design.estilo}}</p>
+          </div>
+        </div>
+        <div class="mb-2">
+          <p class="recuadro p-2 m-0 rounded-top">Productos</p>
+          <ul class="datos p-2 m-0 rounded-bottom list-unstyled">
+            <li class="opciones" *ngFor="let producto of design.productos">{{producto}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9 ps-4">
+      <div class="row p-0">
+        <div class="col-lg-3 col-6 p-3" *ngFor="let diseno of listadoMostrar">
+          <div class="design p-2 rounded-1 shadow-sm">
+            <img class="img-thumbnail mb-2" src="{{diseno.imagen}}">
+            <label class="resaltado my-1"><span>{{letraMayuscula(diseno.titulo)}}</span></label>
+            <div class="d-flex justify-content-between">
+              <label>De <span>{{letraMayuscula(diseno.nombre)}}</span></label>
+              <label>{{diseno.fecha}}</label>
+            </div>
+            <div class="d-flex justify-content-center gap-2 align-items-center mt-3">
+              <button type="button" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="mostrarDiseno(diseno.id)"><i class="fa-solid fa-info circle px-2 m-0"></i></button>
+              <button type="button" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="modificarDiseno(diseno.id)"><i class="fa-solid fa-pen circle m-0"></i></button>
+              <button type="button" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="borrarDiseno(diseno.id)"><i class="fa-solid fa-trash circle m-0"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

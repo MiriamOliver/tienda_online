@@ -19,6 +19,11 @@ p{
   }
   .resaltado{
     font-size: var(--TamTituloImagen);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--colorRosa);
+    white-space: nowrap;
+    max-width: 100%;
   }label{
     font-size: var(--TamInfoImagen);
   }

@@ -10,6 +10,8 @@ import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { DesignRoutingModule } from './design/design-routing.module';
 import { EstadisticaModule } from './estadistica/estadistica.module';
+import { MisDisenosModule } from './mis-disenos/mis-disenos.module';
+import { MisDisenosRoutingModule } from './mis-disenos/mis-disenos-routing.module';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { EstadisticaModule } from './estadistica/estadistica.module';
     SharedModule,
     HomeModule,
     DesignRoutingModule,
-    EstadisticaModule
+    EstadisticaModule,
+    MisDisenosModule,
+    MisDisenosRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

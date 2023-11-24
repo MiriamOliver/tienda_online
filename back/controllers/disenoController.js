@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
 const ConexionSequelize = require('./Conexion/ConexionDiseno');
+const moment = require('moment');
 
 
 const listadoDisenos = async (req, res = response) => {
@@ -29,6 +30,8 @@ const listadoDisenos = async (req, res = response) => {
     }
 }
 
+
+
 const listadoProductos = (req, res = response) => {
     let listaProductos = [];
     const conex = new ConexionSequelize();
@@ -46,6 +49,20 @@ const listadoProductos = (req, res = response) => {
         .catch(err => {
             res.status(203).json({'msg':'No se han encontrado registros'});
         })
+}
+
+const listadoUltimosDisenos = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getDisenosUltimos()
+    .then( disenos => {
+        disenos.forEach(diseno =>{
+            diseno.imagen = process.env.URL + process.env.PORT + "/upload/" + diseno.imagen;
+        })
+        res.status(200).json(disenos); 
+    })
+    .catch(err => {
+        res.status(203).json({'msg':'No se han encontrado registros'});
+    })
 }
 
 const listadoProductosRecomendados = (req, res = response) => {
@@ -111,15 +128,51 @@ const getDisenosArtista = (req, res = response) => {
         })
 }
 
+const listadoMisDisenos = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getInfoMisDisenos(req.params.id)
+        .then( disenos => {
+            res.status(200).json(disenos); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+
+const getDatosUsuario = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.getInfoUsuario(req.params.id)
+        .then( usuario => {
+            usuario[0].avatar = process.env.URL + process.env.PORT + "/upload/" + usuario[0].avatar; 
+            usuario[0].fecha = moment(usuario[0].fecha).format("DD-MM-YYYY")           
+            res.status(200).json(usuario[0]); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se han encontrado registros'});
+        })
+}
+const registrarDiseno = (req, res = response) => {
+    const conex = new ConexionSequelize();
+    conex.crearDiseno(req)
+        .then( id => {        
+            res.status(200).json(id); 
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se pudo registrar'});
+        })
+    }
 
 
 module.exports = {
     listadoDisenos,
-    //listadoArtistaAfin,
+    listadoMisDisenos,
     listadoProductos,
+    listadoUltimosDisenos,
     listadoProductosRecomendados,
     getArtistasAfines,
     getArtistaDestacado,
     getDisenosDestacados,
-    getDisenosArtista
+    getDisenosArtista,
+    getDatosUsuario,
+    registrarDiseno
 }
