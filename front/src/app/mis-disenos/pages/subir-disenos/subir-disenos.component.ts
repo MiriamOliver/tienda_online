@@ -14,12 +14,13 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class SubirDisenosComponent implements OnInit{
 
+  timer: number | undefined;
   selectedFile: string = "";
   creacionCorrecta: number = -1;
   submitted: boolean = false;
   disenoForm!: FormGroup;
   diseno!:crearDiseno;
-  errorRegistrarDiseno:number = 0;
+  errorRegistrarDiseno:number = -1;
   estilo:string = '';
   tema:string = '';
   previsualizacion = '';
@@ -31,7 +32,14 @@ export class SubirDisenosComponent implements OnInit{
     private sanitizer: DomSanitizer,
     private misDisenosService:MisDisenosService
   ) {
-
+    this.diseno = {
+      titulo:'',
+      imagen:'',
+      tema:'',
+      estilo:'',
+      descripcion:'',
+      id_artista:0,
+    }
   }
 
   ngOnInit(): void {
@@ -92,9 +100,11 @@ export class SubirDisenosComponent implements OnInit{
 
     this.misDisenosService.registrarDiseno(this.diseno).subscribe(resp => {
       if (resp) {
-        [['misdisenos/diseno'+resp.id]]
+        this.router.navigate(['misdisenos']);
       }else{
         this.errorRegistrarDiseno = 1;
+        clearTimeout(this.timer);
+        this.timer = window.setTimeout(() => {this.errorRegistrarDiseno = -1;}, 3000);
       }
     });
   }

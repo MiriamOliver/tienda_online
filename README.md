@@ -33,7 +33,7 @@ Cliente
     
 Administrador
 
-    email: artista3@example.com
+    email: artista3@example.com         <-----recomendable para notar los cambios
     passwd: 1234
     
     email: xlmirulx@gmail.com

@@ -8,9 +8,10 @@ h5{
 }
 .contenedor{
   background-color: var(--colorTransparente);
-  form, .info{
+  .formulario, .info{
     background-color: #fff;
     img{
+      border-top: 3px dotted var(--colorRosa);
       width: 100%;
     }
     textarea{

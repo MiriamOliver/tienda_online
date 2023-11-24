@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Favorito',
-    tableName: 'favoritos'
+    tableName: 'favoritos',
+    timestamps: false
   });
 
   Favorito.removeAttribute('id');

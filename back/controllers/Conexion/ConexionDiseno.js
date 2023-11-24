@@ -4,6 +4,7 @@ const moment = require('moment');
 const { Op } = require('sequelize');
 const { QueryTypes } = require('sequelize');
 const { listadoDisenos } = require('../disenoController.js');
+const File = require('../../helpers/file-upload');
 
 class ConexionDiseno extends ConexionSequelize {
 
@@ -365,6 +366,7 @@ class ConexionDiseno extends ConexionSequelize {
     }
 
     crearDiseno = async(req) => {
+
         try{
 
             const archivo = await File.subirArchivo(req.files, undefined, 'imgs' );
@@ -379,7 +381,7 @@ class ConexionDiseno extends ConexionSequelize {
 
             if(diseno){
                 await models.DisenosArtistas.create({
-                    id_user: req.body.id_artista,
+                    id_user: Number(req.body.id_artista),
                     id_diseno: diseno.dataValues.id
                 })              
             }

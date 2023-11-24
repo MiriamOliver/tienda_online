@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Tipo',
-    tableName: 'tipos'
+    tableName: 'tipos',
+    timestamps: false
   });
   return Tipo;
 };
