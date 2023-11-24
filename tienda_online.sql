@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-11-2023 a las 17:20:19
+-- Tiempo de generación: 24-11-2023 a las 15:58:31
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -45,9 +45,7 @@ INSERT INTO `disenoproductos` (`id_diseno`, `id_producto`) VALUES
 (5, 6),
 (5, 8),
 (5, 9),
-(4, 7),
 (4, 10),
-(4, 7),
 (6, 11),
 (7, 12),
 (8, 13),
@@ -61,7 +59,8 @@ INSERT INTO `disenoproductos` (`id_diseno`, `id_producto`) VALUES
 (12, 15),
 (13, 22),
 (13, 23),
-(13, 24);
+(13, 24),
+(4, 7);
 
 -- --------------------------------------------------------
 
@@ -75,6 +74,7 @@ CREATE TABLE `disenos` (
   `imagen` varchar(255) DEFAULT NULL,
   `tema` varchar(255) DEFAULT NULL,
   `estilo` varchar(255) DEFAULT NULL,
+  `descripcion` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -83,20 +83,24 @@ CREATE TABLE `disenos` (
 -- Volcado de datos para la tabla `disenos`
 --
 
-INSERT INTO `disenos` (`id`, `titulo`, `imagen`, `tema`, `estilo`, `createdAt`, `updatedAt`) VALUES
-(1, 'rainbow six siege', 'bbc3aaad-88f5-4c85-8025-21dc441c635c.jpg', 'videojuegos', 'digital', '2023-10-29 19:51:08', '2023-10-29 19:51:08'),
-(2, 'six siege', '3593bf43-7fa5-4fbe-a8fd-aad6547b1188.jpg', 'videojuegos', 'mixto', '2023-10-30 20:51:36', '2023-10-30 20:51:36'),
-(3, 'siege', 'b9e4c77c-3505-46eb-be95-e800d3819e0e.jpg', 'libro', 'mixto', '2023-11-02 21:40:13', '2023-10-30 21:40:13'),
-(4, 'pulpo - Animal Crossing', '0ac258d5-e4a9-4426-86e4-1b6b2a361ebe.png', 'serie', 'digital', '2023-11-08 17:33:43', '2023-11-08 17:33:43'),
-(5, 'pulpo comida - Animal Crossing', '6d2792b9-61f2-4e7b-a6f9-fefc981dd909.jpg', 'serie', 'digital', '2023-11-08 17:33:43', '2023-11-08 17:33:43'),
-(6, 'planta - Genshin', '15c37c73-486c-489d-93d2-7e0f028d8f11.png', 'libro', 'mixto', '2023-11-08 17:35:51', '2023-11-08 17:35:51'),
-(7, 'planta verde - Genshin ', '018b5841-a307-4205-b956-4652990634f1.jpg', 'libro', 'digital', '2023-11-08 17:35:51', '2023-11-08 17:35:51'),
-(8, 'planta flor', '75e04915-bee5-4e2a-8163-fcca954c726f.jpg', 'libro', 'tradicional', '2023-11-08 17:38:28', '2023-11-08 17:38:28'),
-(9, 'conejo - Animal Crossing', '85ef2f8c-adfc-4e1d-a47d-e4ad110cf8cf.png', 'serie', 'digital', '2023-11-08 17:38:28', '2023-11-08 17:38:28'),
-(10, 'planta bigote - Genshin Impact', '94faf177-b29a-49bf-b531-c557f801c8c2.png', 'libro', 'tradicional', '2023-11-08 17:40:39', '2023-11-08 17:40:39'),
-(11, 'planta naranja - Genshin Impact', 'c60a4c61-d1c3-4d62-ad04-a14b97cfc4a3.jpg', 'libro', 'tradicional', '2023-11-08 17:40:39', '2023-11-08 17:40:39'),
-(12, 'planta hoja - Genshin', 'c405b5e8-efe3-41a8-b8d1-1a39e2ebaeae.png', 'libro', 'mixto', '2023-11-08 17:42:29', '2023-11-08 17:42:29'),
-(13, 'ardilla - Animal Crossing', 'e4b84144-0e58-4e27-ad1d-81e06b2e619e.png', 'serie', 'tradicional', '2023-11-08 17:42:29', '2023-11-08 17:42:29');
+INSERT INTO `disenos` (`id`, `titulo`, `imagen`, `tema`, `estilo`, `descripcion`, `createdAt`, `updatedAt`) VALUES
+(1, 'rainbow six siege', 'bbc3aaad-88f5-4c85-8025-21dc441c635c.jpg', 'videojuegos', 'digital', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-10-29 19:51:08', '2023-10-29 19:51:08'),
+(2, 'six siege', '3593bf43-7fa5-4fbe-a8fd-aad6547b1188.jpg', 'videojuegos', 'mixto', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-10-30 20:51:36', '2023-10-30 20:51:36'),
+(3, 'siege', 'b9e4c77c-3505-46eb-be95-e800d3819e0e.jpg', 'libro', 'mixto', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-11-02 21:40:13', '2023-10-30 21:40:13'),
+(4, 'pulpo - Animal Crossing', '0ac258d5-e4a9-4426-86e4-1b6b2a361ebe.png', 'serie', 'digital', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-11-08 17:33:43', '2023-11-08 17:33:43'),
+(5, 'pulpo comida - Animal Crossing', '6d2792b9-61f2-4e7b-a6f9-fefc981dd909.jpg', 'serie', 'digital', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-11-08 17:33:43', '2023-11-08 17:33:43'),
+(6, 'planta - Genshin', '15c37c73-486c-489d-93d2-7e0f028d8f11.png', 'libro', 'mixto', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-11-08 17:35:51', '2023-11-08 17:35:51'),
+(7, 'planta verde - Genshin ', '018b5841-a307-4205-b956-4652990634f1.jpg', 'libro', 'digital', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-11-08 17:35:51', '2023-11-08 17:35:51'),
+(8, 'planta flor', '75e04915-bee5-4e2a-8163-fcca954c726f.jpg', 'libro', 'tradicional', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-11-08 17:38:28', '2023-11-08 17:38:28'),
+(9, 'conejo - Animal Crossing', '85ef2f8c-adfc-4e1d-a47d-e4ad110cf8cf.png', 'serie', 'digital', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-11-08 17:38:28', '2023-11-08 17:38:28'),
+(10, 'planta bigote - Genshin Impact', '94faf177-b29a-49bf-b531-c557f801c8c2.png', 'libro', 'tradicional', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-11-08 17:40:39', '2023-11-08 17:40:39'),
+(11, 'planta naranja - Genshin Impact', 'c60a4c61-d1c3-4d62-ad04-a14b97cfc4a3.jpg', 'libro', 'tradicional', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-11-08 17:40:39', '2023-11-08 17:40:39'),
+(12, 'planta hoja - Genshin', 'c405b5e8-efe3-41a8-b8d1-1a39e2ebaeae.png', 'libro', 'mixto', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-11-08 17:42:29', '2023-11-08 17:42:29'),
+(13, 'ardilla - Animal Crossing', 'e4b84144-0e58-4e27-ad1d-81e06b2e619e.png', 'serie', 'tradicional', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', '2023-11-08 17:42:29', '2023-11-08 17:42:29'),
+(21, 'ori', '6996a02b-1583-4f9d-b73d-123ea0c939a2.jpg', 'videojuego', 'digital', 'aaaaaaaaaaaaaaaaaaaaaaaaa', '2023-11-23 22:49:43', '2023-11-23 22:49:43'),
+(22, 'hibana r6 siege', 'c22db05c-a318-4ef8-987d-566142bbeab1.jpg', 'videojuego', 'mixto', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Amet facilisis magna etiam tempor orci eu lobortis. Sit amet mauris commodo quis imperdiet massa tincidunt nunc. Aenean euismod ele', '2023-11-24 13:13:06', '2023-11-24 13:13:06'),
+(23, 'tyutyu', '01c80cc5-1342-4ab3-b0e8-cc696e0f711f.png', 'libro', 'tradicional', 'tru', '2023-11-24 13:27:10', '2023-11-24 13:27:10'),
+(24, 'plantita', '1c222857-9fe8-4ad2-9d8f-c683b7eb5b74.png', 'original', 'tradicional', 'plantitas plantitas', '2023-11-24 13:29:58', '2023-11-24 13:29:58');
 
 -- --------------------------------------------------------
 
@@ -126,7 +130,11 @@ INSERT INTO `disenosartistas` (`id_user`, `id_diseno`) VALUES
 (18, 12),
 (18, 13),
 (18, 4),
-(18, 5);
+(18, 5),
+(18, 21),
+(18, 22),
+(18, 23),
+(18, 24);
 
 -- --------------------------------------------------------
 
@@ -147,7 +155,11 @@ INSERT INTO `favoritos` (`id_user`, `id_diseno`) VALUES
 (2, 1),
 (2, 2),
 (7, 3),
-(2, 3);
+(2, 3),
+(10, 6),
+(11, 6),
+(3, 8),
+(2, 9);
 
 -- --------------------------------------------------------
 
@@ -208,42 +220,45 @@ INSERT INTO `pedidos` (`id`, `id_cliente`, `id_producto`, `cantidad`, `fecha`, `
 CREATE TABLE `productos` (
   `id` int(11) NOT NULL,
   `titulo` varchar(255) DEFAULT NULL,
+  `imagen` varchar(255) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
   `activado` int(11) DEFAULT NULL,
   `precio` int(11) DEFAULT NULL,
   `estado` varchar(255) NOT NULL DEFAULT 'disponible',
-  `id_tipo` int(3) NOT NULL
+  `id_tipo` int(3) NOT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `titulo`, `descripcion`, `activado`, `precio`, `estado`, `id_tipo`) VALUES
-(1, 'rainbow six siege - camiseta', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', 1, 20, 'disponible', 1),
-(2, 'rainbow six siege - pegatinas\r\n', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\r\n', 1, 5, 'disponible', 2),
-(3, 'rainbow six siege - taza\n', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\r\n', 1, 10, 'disponible', 3),
-(4, 'six siege - bolsa', 'lorem ipsum dolor sit amet', 1, 15, 'disponible', 5),
-(5, 'siege - bolsa', 'lorem ipsum', 1, 15, 'disponible', 5),
-(6, 'pulpito', 'aaaaaaaa', 1, 20, 'disponible', 1),
-(7, 'robot', 'bbbbbbbbbbb', 1, 10, 'disponible', 2),
-(8, 'pulpito - taza', 'dafasdfsadf', 1, 15, 'disponible', 3),
-(9, 'pulpito - bolsa', 'dfafsdfsafasfsdfsd', 1, 15, 'disponible', 5),
-(10, 'robot - poster', 'ssdfsdfsdfas', 1, 10, 'disponible', 4),
-(11, 'planta - camiseta', 'ssdfsdfsdfas', 1, 30, 'disponible', 1),
-(12, 'planta verde - pegatina', 'ssdfsdfsdfas', 1, 10, 'disponible', 2),
-(13, 'planta flor - pegatina', 'ssdfsdfsdfas', 1, 10, 'disponible', 2),
-(14, 'planta flor - poster', 'ssdfsdfsdfas', 1, 20, 'disponible', 4),
-(15, 'planta hoja - taza', 'ssdfsdfsdfas', 1, 25, 'disponible', 3),
-(16, 'planta bigote - taza', 'ssdfsdfsdfas', 1, 10, 'disponible', 3),
-(17, 'planta bigote - bolsa', 'ssdfsdfsdfas', 1, 15, 'disponible', 4),
-(18, 'planta naranja - camiseta', 'ssdfsdfsdfas', 1, 40, 'disponible', 1),
-(19, 'conejo - bolsa', 'ssdfsdfsdfas', 1, 15, 'disponible', 4),
-(20, 'conejo - camiseta', 'ssdfsdfsdfas', 1, 35, 'disponible', 1),
-(21, 'conejo - pegatina', 'ssdfsdfsdfas', 1, 10, 'disponible', 2),
-(22, 'ardilla - bolsa', 'ssdfsdfsdfas', 1, 15, 'disponible', 4),
-(23, 'ardilla - camiseta', 'ssdfsdfsdfas', 1, 35, 'disponible', 1),
-(24, 'ardilla - pegatina', 'ssdfsdfsdfas', 1, 10, 'disponible', 2);
+INSERT INTO `productos` (`id`, `titulo`, `imagen`, `descripcion`, `activado`, `precio`, `estado`, `id_tipo`, `createdAt`, `updatedAt`) VALUES
+(1, 'rainbow six siege - camiseta', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor i', 1, 20, 'disponible', 1, '2023-11-23 00:00:00', '1900-01-23 00:00:00'),
+(2, 'rainbow six siege - pegatinas\r\n', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\r\n', 1, 5, 'disponible', 2, '2023-11-23 00:00:00', '0000-00-00 00:00:00'),
+(3, 'rainbow six siege - taza\n', '', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\r\n', 1, 10, 'disponible', 3, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(4, 'six siege - bolsa', '', 'lorem ipsum dolor sit amet', 1, 15, 'disponible', 5, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(5, 'siege - bolsa', '', 'lorem ipsum', 1, 15, 'disponible', 5, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(6, 'pulpito', '', 'aaaaaaaa', 1, 20, 'disponible', 1, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(7, 'robot', '', 'bbbbbbbbbbb', 1, 10, 'disponible', 2, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(8, 'pulpito - taza', '', 'dafasdfsadf', 1, 15, 'disponible', 3, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(9, 'pulpito - bolsa', '', 'dfafsdfsafasfsdfsd', 1, 15, 'disponible', 5, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(10, 'robot - poster', '', 'ssdfsdfsdfas', 1, 10, 'disponible', 4, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(11, 'planta - camiseta', '', 'ssdfsdfsdfas', 1, 30, 'disponible', 1, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(12, 'planta verde - pegatina', '', 'ssdfsdfsdfas', 1, 10, 'disponible', 2, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(13, 'planta flor - pegatina', '', 'ssdfsdfsdfas', 1, 10, 'disponible', 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(14, 'planta flor - poster', '', 'ssdfsdfsdfas', 1, 20, 'disponible', 4, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(15, 'planta hoja - taza', '', 'ssdfsdfsdfas', 1, 25, 'disponible', 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(16, 'planta bigote - taza', '', 'ssdfsdfsdfas', 1, 10, 'disponible', 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(17, 'planta bigote - bolsa', '', 'ssdfsdfsdfas', 1, 15, 'disponible', 4, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(18, 'planta naranja - camiseta', '', 'ssdfsdfsdfas', 1, 40, 'disponible', 1, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(19, 'conejo - bolsa', '', 'ssdfsdfsdfas', 1, 15, 'disponible', 4, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(20, 'conejo - camiseta', '', 'ssdfsdfsdfas', 1, 35, 'disponible', 1, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(21, 'conejo - pegatina', '', 'ssdfsdfsdfas', 1, 10, 'disponible', 2, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(22, 'ardilla - bolsa', '', 'ssdfsdfsdfas', 1, 15, 'disponible', 4, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(23, 'ardilla - camiseta', '', 'ssdfsdfsdfas', 1, 35, 'disponible', 1, '2023-11-23 00:00:00', '2023-11-23 00:00:00'),
+(24, 'ardilla - pegatina', '', 'ssdfsdfsdfas', 1, 10, 'disponible', 2, '2023-11-23 00:00:00', '2023-11-23 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -371,7 +386,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `nombre`, `email`, `password`, `avatar`, `codigo`, `conectado`, `habilitado`, `verifiedAt`, `createdAt`, `updatedAt`) VALUES
 (1, 'prueba', 'prueba@example.com', '1234', 'f1ea62ac-0374-4608-a1d4-27103f0f854a.jpg', NULL, 0, 1, '2023-10-30 20:57:35', '2023-10-22 16:25:01', '2023-10-31 19:00:34'),
-(2, 'prueba2', 'prueba2@example.com', '1234', 'b9e4c77c-3505-46eb-be95-e800d3819e0e.jpg', NULL, 1, 1, '2023-11-01 20:33:50', '2023-10-22 17:04:24', '2023-11-01 19:34:31'),
+(2, 'prueba2', 'prueba2@example.com', '1234', 'b9e4c77c-3505-46eb-be95-e800d3819e0e.jpg', NULL, 1, 1, '2023-11-01 20:33:50', '2023-10-22 17:04:24', '2023-11-15 18:03:17'),
 (7, 'artista2', 'xlmirulx@gmail.com', '1234', '3fa45e40-ed2a-4b22-8b63-034d2fb77891.jpg', 'bNG8Tut', 0, 1, '2023-10-22 18:31:33', '2023-10-22 18:31:16', '2023-10-31 18:59:52'),
 (8, 'artista1', 'xlmiru95lx@gmail.com', '1234', '3593bf43-7fa5-4fbe-a8fd-aad6547b1188.jpg', NULL, 0, 1, '2023-10-30 19:56:17', '2023-10-30 18:55:59', '2023-11-01 19:34:23'),
 (9, 'cliente3', 'cliente3@example.com', '1234', 'c5ab2f06-672b-4606-919f-6c26d78ffcfa.png', NULL, 0, 1, '2020-11-04 21:32:35', '2023-11-08 15:58:24', '2023-11-09 17:54:23'),
@@ -383,7 +398,7 @@ INSERT INTO `users` (`id`, `nombre`, `email`, `password`, `avatar`, `codigo`, `c
 (15, 'cliente9', 'cliente9@example.com', '1234', '94faf177-b29a-49bf-b531-c557f801c8c2.png', NULL, 0, 1, '2021-01-03 00:00:00', '2023-11-08 16:02:50', '2023-11-08 16:02:50'),
 (16, 'cliente10', 'cliente10@example.com', '1234', '15c37c73-486c-489d-93d2-7e0f028d8f11.png', NULL, 0, 1, '2021-01-27 00:00:00', '2023-11-08 16:03:20', '2023-11-08 16:03:20'),
 (17, 'cliente', 'cliente@example.com', '1234', 'c405b5e8-efe3-41a8-b8d1-1a39e2ebaeae.png', NULL, 0, 1, '2023-11-02 18:55:01', '2023-11-08 16:03:57', '2023-11-08 16:03:57'),
-(18, 'artista3', 'artista3@example.com', '1234', 'e4b84144-0e58-4e27-ad1d-81e06b2e619e.png', NULL, 1, 1, '2019-01-17 18:55:13', '2023-11-08 16:04:35', '2023-11-09 17:58:30'),
+(18, 'artista3', 'artista3@example.com', '1234', 'e4b84144-0e58-4e27-ad1d-81e06b2e619e.png', NULL, 1, 1, '2019-01-17 18:55:13', '2023-11-08 16:04:35', '2023-11-24 12:18:53'),
 (19, 'artista4', 'artista4@example.com', '1234', '85ef2f8c-adfc-4e1d-a47d-e4ad110cf8cf.png', NULL, 0, 1, '2023-11-08 00:00:00', '2023-11-08 16:05:05', '2023-11-08 16:05:05');
 
 --
@@ -441,7 +456,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `disenos`
 --
 ALTER TABLE `disenos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
