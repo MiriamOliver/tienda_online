@@ -185,6 +185,21 @@ const registrarDiseno = (req, res = response) => {
             })
         }
 
+    const getDisenoProductos = (req, res = response) => {
+        const conex = new ConexionSequelize();
+        conex.getDisenoProductos(req.params.id)
+            .then( diseno => {
+                diseno.forEach(d =>{
+                    d.imagen = process.env.URL + process.env.PORT + "/upload/" + d.imagen; 
+                    d.fecha = moment(d.fecha).format("DD-MM-YYYY")
+                });                  
+                res.status(200).json(diseno);
+            })
+            .catch(err => {
+                res.status(203).json({'msg':'No se encontraron registros'});
+            })
+        }
+
 
 module.exports = {
     listadoDisenos,
@@ -199,5 +214,6 @@ module.exports = {
     getDatosUsuario,
     registrarDiseno,
     registrarProducto,
-    getTipos
+    getTipos,
+    getDisenoProductos
 }

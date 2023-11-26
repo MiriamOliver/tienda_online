@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { crearDiseno } from '../../interfaces/mis-disenos';
+import { infoDesign } from '../../interfaces/mis-disenos';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { MisDisenosService } from '../../services/mis-disenos.service';
@@ -11,7 +11,7 @@ import { MisDisenosService } from '../../services/mis-disenos.service';
 })
 export class DisenoProductosComponent implements OnInit{
 
-  diseno:crearDiseno;
+  diseno:infoDesign;
 
   constructor(
     private router: Router,
@@ -20,17 +20,23 @@ export class DisenoProductosComponent implements OnInit{
     private misDisenosService:MisDisenosService
   ) {
     this.diseno = {
+      id:0,
       titulo:'',
       imagen:'',
+      fecha:'',
       tema:'',
       estilo:'',
       descripcion:'',
-      id_artista:0,
+      favoritos:0
     }
   }
 
   ngOnInit(): void {
-    this.misDisenosService.getDiseno(JSON.parse(localStorage.getItem('diseno')!).id)
+    this.misDisenosService.getDisenoProductos(JSON.parse(localStorage.getItem('diseno')!).id)
+    .subscribe(resp => {
+      this.diseno = resp;
+      console.log(this.diseno);
+    })
   }
 
 }
