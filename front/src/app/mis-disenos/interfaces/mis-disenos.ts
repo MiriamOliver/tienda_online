@@ -28,3 +28,13 @@ export interface InfoUsuario {
   favoritos:number,
   disenos:number
 }
+
+export interface crearProducto {
+  titulo:string,
+  imagen:string,
+  tipo:string,
+  precio:any,
+  descripcion:string,
+  id_artista:any,
+  id_diseno:any
+}

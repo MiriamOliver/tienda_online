@@ -6,6 +6,8 @@ import { ModificarDisenosComponent } from './pages/modificar-disenos/modificar-d
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MisDisenosRoutingModule } from './mis-disenos-routing.module';
+import { SubirProductosComponent } from './pages/subir-productos/subir-productos.component';
+import { DisenoProductosComponent } from './pages/diseno-productos/diseno-productos.component';
 
 
 
@@ -13,7 +15,9 @@ import { MisDisenosRoutingModule } from './mis-disenos-routing.module';
   declarations: [
     ListadoDisenosComponent,
     SubirDisenosComponent,
-    ModificarDisenosComponent
+    ModificarDisenosComponent,
+    SubirProductosComponent,
+    DisenoProductosComponent
   ],
   imports: [
     CommonModule,

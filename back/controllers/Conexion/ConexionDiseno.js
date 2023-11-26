@@ -393,6 +393,65 @@ class ConexionDiseno extends ConexionSequelize {
             throw err;
         }
     }
+
+    crearProducto = async(req) => {
+
+        try{
+
+            const archivo = await File.subirArchivo(req.files, undefined, 'imgs' );
+
+            const idTipo = await models.Tipo.findOne({
+                attributes :['id'],
+                where:{tipo: req.body.tipo}
+            })
+            
+            const producto = await models.Producto.create({
+                titulo: req.body.titulo,
+                imagen: archivo,
+                id_tipo: idTipo.dataValues.id,
+                precio: Number(req.body.precio),
+                descripcion: req.body.descripcion
+            });
+
+            if(producto){
+                let prueba = await models.DisenoProducto.create({
+                    id_diseno: Number(req.body.id_diseno),
+                    id_producto: producto.dataValues.id
+                })  
+                console.log(prueba);            
+            }
+
+            
+
+            return producto.dataValues.id;
+            
+        }catch (err){
+
+            throw err;
+        }
+    }
+
+    getTipos = async() => {
+
+        let listaTipos = [];
+
+        try{
+
+            let tipos = await models.Tipo.findAll({
+                attributes: ['tipo']
+            });
+
+            tipos.forEach(t =>{
+                listaTipos.push(t.tipo);
+            })
+
+            return listaTipos;
+
+        }catch (err){
+
+            throw err;
+        }
+    }
 } 
 
 module.exports = ConexionDiseno;

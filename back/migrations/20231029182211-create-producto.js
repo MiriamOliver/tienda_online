@@ -19,10 +19,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       activado: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        default: '1'
       },
       precio: {
-        type: Sequelize.INTEGER
+        type: Sequelize.FLOAT
       },
       estado: {
         default: 'disponible',

@@ -151,6 +151,7 @@ const getDatosUsuario = (req, res = response) => {
             res.status(203).json({'msg':'No se han encontrado registros'});
         })
 }
+
 const registrarDiseno = (req, res = response) => {
     const conex = new ConexionSequelize();
     conex.crearDiseno(req)
@@ -161,6 +162,28 @@ const registrarDiseno = (req, res = response) => {
             res.status(203).json({'msg':'No se pudo registrar'});
         })
     }
+
+    const registrarProducto = (req, res = response) => {
+        const conex = new ConexionSequelize();
+        conex.crearProducto(req)
+            .then( id => {        
+                res.status(200).json({'sucess':true, id:id});
+            })
+            .catch(err => {
+                res.status(203).json({'sucess':false});
+            })
+        }
+
+    const getTipos = (req, res = response) => {
+        const conex = new ConexionSequelize();
+        conex.getTipos()
+            .then( tipos => {        
+                res.status(200).json(tipos);
+            })
+            .catch(err => {
+                res.status(203).json({'msg':'No se encontraron registros'});
+            })
+        }
 
 
 module.exports = {
@@ -174,5 +197,7 @@ module.exports = {
     getDisenosDestacados,
     getDisenosArtista,
     getDatosUsuario,
-    registrarDiseno
+    registrarDiseno,
+    registrarProducto,
+    getTipos
 }

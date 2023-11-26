@@ -91,6 +91,7 @@ export class SubirDisenosComponent implements OnInit{
   })
 
   subirDiseno() {
+    localStorage.removeItem('diseno');
     this.diseno.titulo = this.disenoForm.get('titulo')?.value;
     this.diseno.imagen = this.selectedFile;
     this.diseno.estilo = this.disenoForm.get('estilo')?.value;
@@ -100,7 +101,10 @@ export class SubirDisenosComponent implements OnInit{
 
     this.misDisenosService.registrarDiseno(this.diseno).subscribe(resp => {
       if (resp) {
-        this.router.navigate(['misdisenos']);
+        localStorage.setItem('diseno', JSON.stringify({
+          id: resp,
+        }));
+        this.router.navigate(['misdisenos/diseno/'+resp]);
       }else{
         this.errorRegistrarDiseno = 1;
         clearTimeout(this.timer);
