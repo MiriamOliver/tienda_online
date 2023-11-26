@@ -17,10 +17,12 @@ export class SubirProductosComponent implements OnInit{
   submitted: boolean = false;
   productoForm!: FormGroup;
   producto!:crearProducto;
+  listaTipo:string[] = [];
   tipo:string = '';
   previsualizacion = '';
-  errorAddProducto = -1;
-  mensaje = ''
+  errorAddProducto:number = -1;
+  mensaje = '';
+  abrirCrearProducto:number = -1;
 
   constructor(
     private router: Router,
@@ -36,15 +38,20 @@ export class SubirProductosComponent implements OnInit{
       tipo:'',
       descripcion:'',
       id_artista:0,
+      id_diseno:0
     }
   }
 
   ngOnInit(): void {
 
+    this.misDisenosService.getTipos().subscribe(resp =>{this.listaTipo = resp});
+
     this.productoForm = this.fb.group({
       imagen: ['', Validators.required],
       titulo: ['', Validators.required],
-      precio: ['', Validators.required],
+      precio: ['', Validators.compose([
+              Validators.required,
+              Validators.pattern("[0-9]+(\\.[0-9][0-9]?)?")])],
       tipo: ['', Validators.required],
       descripcion: ['', Validators.required],
     })
@@ -88,32 +95,42 @@ export class SubirProductosComponent implements OnInit{
   })
 
   addProducto() {
-    this.producto.titulo = this.productoForm.get('titulo')?.value;
+    this.producto.titulo = this.productoForm.get('titulo')?.value + ' - ' + this.productoForm.get('tipo')?.value;
     this.producto.imagen = this.selectedFile;
     this.producto.tipo = this.productoForm.get('tipo')?.value;
+    this.producto.precio = Number(this.productoForm.get('precio')?.value);
     this.producto.descripcion = this.productoForm.get('descripcion')?.value;
     this.producto.id_artista = JSON.parse(localStorage.getItem('user')!).id;
+    this.producto.id_diseno = Number(JSON.parse(localStorage.getItem('diseno')!).id);
 
     this.misDisenosService.addProducto(this.producto)
     .subscribe(resp => {
       if(resp.sucess){
         this.mensaje = 'Registrado correctamente';
         this.errorAddProducto = 0;
+        this.limpiarDatosAddProducto();
       }else{
         this.mensaje = 'Error en el registro';
         this.errorAddProducto = 1;
       }
+      console.log(this.mensaje);
       clearTimeout(this.timer);
-      this.timer = window.setTimeout(() => {this.errorAddProducto = -1;}, 3000);
+      this.timer = window.setTimeout(() => {this.errorAddProducto = -1;}, 2000);
     })
 
   }
 
   abrirAddProducto() {
-
+    this.limpiarDatosAddProducto();
+    this.abrirCrearProducto = 0;
   }
 
   cerrarAddProducto() {
+    this.limpiarDatosAddProducto();
+    this.abrirCrearProducto = -1;
+  }
 
+  limpiarDatosAddProducto(){
+    this.productoForm.reset();
   }
 }

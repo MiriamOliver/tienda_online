@@ -71,9 +71,15 @@ export class MisDisenosService {
     formReg.append('archivo', producto.imagen);
     formReg.append('titulo', producto.titulo);
     formReg.append('tipo',  producto.tipo);
+    formReg.append('precio', producto.precio);
     formReg.append('descripcion', producto.descripcion);
     formReg.append('id_artista', producto.id_artista);
+    formReg.append('id_diseno', producto.id_diseno);
 
     return this.http.post<any>(`${ this.baseUrl }/diseno/misdisenos/producto/crear`, formReg);
+  }
+
+  getTipos():Observable<string[]>{
+    return this.http.get<string[]>(`${ this.baseUrl }/diseno/misdisenos/producto/tipo`);
   }
 }
