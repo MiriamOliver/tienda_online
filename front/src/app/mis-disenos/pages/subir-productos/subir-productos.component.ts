@@ -2,28 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MisDisenosService } from '../../services/mis-disenos.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { crearDiseno } from '../../interfaces/mis-disenos';
 import { DomSanitizer } from '@angular/platform-browser';
-
-
+import { crearProducto } from '../../interfaces/mis-disenos';
 
 @Component({
-  selector: 'app-subir-disenos',
-  templateUrl: './subir-disenos.component.html',
-  styleUrls: ['./subir-disenos.component.scss']
+  selector: 'app-subir-productos',
+  templateUrl: './subir-productos.component.html',
+  styleUrls: ['./subir-productos.component.scss']
 })
-export class SubirDisenosComponent implements OnInit{
+export class SubirProductosComponent implements OnInit{
 
   timer: number | undefined;
   selectedFile: string = "";
-  creacionCorrecta: number = -1;
   submitted: boolean = false;
-  disenoForm!: FormGroup;
-  diseno!:crearDiseno;
-  errorRegistrarDiseno:number = -1;
-  estilo:string = '';
-  tema:string = '';
+  productoForm!: FormGroup;
+  producto!:crearProducto;
+  tipo:string = '';
   previsualizacion = '';
+  errorAddProducto = -1;
+  mensaje = ''
 
   constructor(
     private router: Router,
@@ -32,11 +29,11 @@ export class SubirDisenosComponent implements OnInit{
     private sanitizer: DomSanitizer,
     private misDisenosService:MisDisenosService
   ) {
-    this.diseno = {
+    this.producto = {
       titulo:'',
       imagen:'',
-      tema:'',
-      estilo:'',
+      precio:0,
+      tipo:'',
       descripcion:'',
       id_artista:0,
     }
@@ -44,17 +41,17 @@ export class SubirDisenosComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.disenoForm = this.fb.group({
+    this.productoForm = this.fb.group({
       imagen: ['', Validators.required],
       titulo: ['', Validators.required],
-      tema: ['', Validators.required],
-      estilo: ['', Validators.required],
+      precio: ['', Validators.required],
+      tipo: ['', Validators.required],
       descripcion: ['', Validators.required],
     })
   }
 
   get form() {
-    return this.disenoForm.controls;
+    return this.productoForm.controls;
   }
 
   onSubmit() {
@@ -90,26 +87,33 @@ export class SubirDisenosComponent implements OnInit{
     };
   })
 
-  subirDiseno() {
-    localStorage.removeItem('diseno');
-    this.diseno.titulo = this.disenoForm.get('titulo')?.value;
-    this.diseno.imagen = this.selectedFile;
-    this.diseno.estilo = this.disenoForm.get('estilo')?.value;
-    this.diseno.tema = this.disenoForm.get('tema')?.value;
-    this.diseno.descripcion = this.disenoForm.get('descripcion')?.value;
-    this.diseno.id_artista = JSON.parse(localStorage.getItem('user')!).id;
+  addProducto() {
+    this.producto.titulo = this.productoForm.get('titulo')?.value;
+    this.producto.imagen = this.selectedFile;
+    this.producto.tipo = this.productoForm.get('tipo')?.value;
+    this.producto.descripcion = this.productoForm.get('descripcion')?.value;
+    this.producto.id_artista = JSON.parse(localStorage.getItem('user')!).id;
 
-    this.misDisenosService.registrarDiseno(this.diseno).subscribe(resp => {
-      if (resp) {
-        localStorage.setItem('diseno', JSON.stringify({
-          id: resp,
-        }));
-        this.router.navigate(['misdisenos/diseno/'+resp]);
+    this.misDisenosService.addProducto(this.producto)
+    .subscribe(resp => {
+      if(resp.sucess){
+        this.mensaje = 'Registrado correctamente';
+        this.errorAddProducto = 0;
       }else{
-        this.errorRegistrarDiseno = 1;
-        clearTimeout(this.timer);
-        this.timer = window.setTimeout(() => {this.errorRegistrarDiseno = -1;}, 3000);
+        this.mensaje = 'Error en el registro';
+        this.errorAddProducto = 1;
       }
-    });
+      clearTimeout(this.timer);
+      this.timer = window.setTimeout(() => {this.errorAddProducto = -1;}, 3000);
+    })
+
+  }
+
+  abrirAddProducto() {
+
+  }
+
+  cerrarAddProducto() {
+
   }
 }

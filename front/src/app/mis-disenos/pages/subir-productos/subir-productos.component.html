@@ -1,0 +1,82 @@
+<div class="p-5 pb-3 mx-5">
+  <div class="d-flex justify-content-between pt-5 botones-crear">
+    <button class="btn rounded-1 boton py-2 px-4 boton" type="button" (click)="abrirAddProducto()">Subir producto</button>
+    <button class="btn rounded-1 boton py-2 px-4 boton" type="button" (click)="cerrarAddProducto()">Cancelar</button>
+  </div>
+</div>
+
+<div class="px-5 mx-5 mb-3 contenedor-subir">
+  <div class="info p-5 rounded-1 shadow-sm">
+    <div class="row">
+      <div class="col-lg-3">
+        <h5 class="m-0">Previsualización</h5>
+        <img [src]="previsualizacion" class="mt-3 pt-4">
+      </div>
+      <div class="col-lg-9">
+        <h5 class="m-0 mb-4 pb-3 contenedor-datos">Datos</h5>
+        <div class="row">
+          <form #regForm="ngForm" [formGroup]="productoForm" (ngSubmit)="addProducto()"></form>
+          <div class="col-lg-5">
+            <div class="mb-4 text-start">
+              <label for="formFile" class="form-label">Imagen</label>
+              <input class="form-control" formControlName="imagen"
+                [ngClass]="{'is-invalid' : form['imagen'].invalid && form['imagen'].touched}" type="file" id="formFile"
+                (change)="onFileSelected($event)" />
+              <div *ngIf="form['imagen'].invalid" class="invalid-feedback">
+                <div *ngIf="form['imagen'].errors?.['required']" class="error alert alert-danger mt-2">Elige una imagen
+                  de perfil</div>
+              </div>
+            </div>
+
+            <div class="form-outline mb-4 text-start">
+              <label class="form-label">Título</label>
+
+              <input type="text" formControlName="titulo"
+                [ngClass]="{'is-invalid' : form['titulo'].invalid && form['titulo'].dirty}" class="form-control" />
+
+              <div *ngIf="form['titulo'].invalid" class="invalid-feedback">
+                <div *ngIf="form['titulo'].errors?.['required']" class="error alert alert-danger mt-2">Escribe un título
+                  para tu diseño</div>
+              </div>
+            </div>
+
+            <div class="form-outline text-start">
+              <label class="form-label">Tipo</label>
+
+              <select class="form-select form-control" formControlName="tipo" [(ngModel)]="tipo"
+                [ngClass]="{'is-invalid' : form['tipo'].invalid && form['tipo'].touched}">
+                <option value="" disabled selected hidden></option>
+                <option value="tradicional">Tradicional</option>
+                <option value="digital">Digital</option>
+                <option value="mixto">Mixto</option>
+              </select>
+              <div *ngIf="form['estilo'].invalid" class="invalid-feedback">
+                <div *ngIf="form['estilo'].errors?.['required']" class="error alert alert-danger mt-2">Elige un estilo
+                  de diseño</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="form-outline text-start">
+              <label class="form-label">Descripción</label>
+
+              <textarea class="form-control" placeholder="Escribe una descripción del diseño" id="floatingTextarea"
+                formControlName="descripcion"
+                [ngClass]="{'is-invalid' : form['descripcion'].invalid && form['descripcion'].dirty}"></textarea>
+
+              <div *ngIf="form['descripcion'].invalid" class="invalid-feedback">
+                <div *ngIf="form['descripcion'].errors?.['required']" class="error alert alert-danger mt-2">Escribe una
+                  descripción para tu diseño</div>
+              </div>
+            </div>
+
+            <div class="pt-1 mb-2 mt-5 text-end">
+              <button class="btn rounded-1 boton boton-producto py-2 px-4" [disabled]="productoForm.invalid" type="submit" (click)="addProducto()">Añadir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
