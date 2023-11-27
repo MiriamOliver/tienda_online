@@ -193,7 +193,7 @@ const registrarDiseno = (req, res = response) => {
                     d.imagen = process.env.URL + process.env.PORT + "/upload/" + d.imagen; 
                     d.fecha = moment(d.fecha).format("DD-MM-YYYY")
                 });                  
-                res.status(200).json(diseno);
+                res.status(200).json(diseno[0]);
             })
             .catch(err => {
                 res.status(203).json({'msg':'No se encontraron registros'});

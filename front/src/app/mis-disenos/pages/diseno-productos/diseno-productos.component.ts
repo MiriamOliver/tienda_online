@@ -11,12 +11,11 @@ import { MisDisenosService } from '../../services/mis-disenos.service';
 })
 export class DisenoProductosComponent implements OnInit{
 
-  diseno:infoDesign;
+  public diseno!:infoDesign;
+  public usuario:any;
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
     private misDisenosService:MisDisenosService
   ) {
     this.diseno = {
@@ -29,14 +28,28 @@ export class DisenoProductosComponent implements OnInit{
       descripcion:'',
       favoritos:0
     }
+
+    this.usuario = {
+      avatar:JSON.parse(localStorage.getItem('user')!).avatar,
+      nombre:JSON.parse(localStorage.getItem('user')!).nombre,
+    }
   }
 
   ngOnInit(): void {
-    this.misDisenosService.getDisenoProductos(JSON.parse(localStorage.getItem('diseno')!).id)
-    .subscribe(resp => {
-      this.diseno = resp;
-      console.log(this.diseno);
-    })
+    this.getInfoDiseno(JSON.parse(localStorage.getItem('diseno')!).id);
   }
 
+  getInfoDiseno(id:any){
+    this.misDisenosService.getDisenoProductos(id)
+    .subscribe((resp) => {
+      this.diseno = resp;
+      console.log(this.diseno)
+    });
+  }
+
+  letraMayuscula(nombre:string){
+    let firstLetra = nombre.charAt(0);
+    let palabra = nombre.slice(1);
+    return firstLetra.toUpperCase() + palabra;
+  }
 }
