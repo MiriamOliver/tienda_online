@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Design, InfoUsuario, crearDiseno, crearProducto } from '../interfaces/mis-disenos';
+import { Design, InfoUsuario, crearDiseno, crearProducto, infoDesign } from '../interfaces/mis-disenos';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
@@ -81,5 +81,9 @@ export class MisDisenosService {
 
   getTipos():Observable<string[]>{
     return this.http.get<string[]>(`${ this.baseUrl }/diseno/misdisenos/producto/tipo`);
+  }
+
+  getDisenoProductos(id:any):Observable<infoDesign>{
+    return this.http.get<infoDesign>(`${ this.baseUrl }/diseno/misdisenos/diseno/${id}`);
   }
 }

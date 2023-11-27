@@ -30,5 +30,7 @@ router.post('/misdisenos/producto/crear', controlador.registrarProducto);
 
 router.get('/misdisenos/producto/tipo', controlador.getTipos);
 
+router.get('/misdisenos/diseno/:id', controlador.getDisenoProductos)
+
 
 module.exports = router

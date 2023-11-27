@@ -18,6 +18,40 @@
 </div>
 <div class="contenedor-diseno">
   <div class="py-5"></div>
+  <div class="row p-5 m-5 mb-0">
+    <div class="col-lg-4">
+      <div class="p-5 contenedor rounded-1">
+        <img src="{{diseno.imagen}}" class="shadow-sm">
+      </div>
+    </div>
+    <div class="col-lg-7">
+      <div class="p-5 contenedor rounded-1">
+        <div class="mb-5">
+          <h2 class="pb-2 mb-4">{{letraMayuscula(diseno.titulo)}}</h2>
+          <div class="d-flex align-items-center">
+            <img class="avatar shadow-sm" src="{{usuario.avatar}}">
+            <p class="m-0 mx-3">{{letraMayuscula(usuario.nombre)}}</p>
+          </div>
+        </div>
+        <div class="mb-5">
+          <h4 class="mb-3">Información</h4>
+          <label>{{diseno.fecha}}</label>
+          <label class="mx-3" style="color: var(--colorRosa);">&nbsp;&nbsp;&#8226;&nbsp;&nbsp;</label>
+          <label>{{diseno.favoritos}}&nbsp;&nbsp;<i class="fa-solid fa-heart"></i></label>
+          <p class="mt-2">{{letraMayuscula(diseno.descripcion)}}</p>
+        </div>
+        <div class="mb-5 etiquetas">
+          <div class="p-2 px-3 rounded-1 me-4"><label><i class="fa-solid fa-icons"></i>&nbsp;&nbsp;{{letraMayuscula(diseno.tema)}}</label></div>
+          <div class="p-2 px-3 rounded-1"><label><i class="fa-solid fa-palette"></i>&nbsp;&nbsp;{{letraMayuscula(diseno.estilo)}}</label></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-1">
+      <div class="d-flex justify-content-end mt-5">
+        <button type="button" class="border-0 p-0"><i class="fa-solid fa-pen-to-square p-3"></i></button>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="contenedor-productos">
   <app-subir-productos></app-subir-productos>

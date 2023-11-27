@@ -29,7 +29,8 @@ import { DisenoProductosComponent } from './pages/diseno-productos/diseno-produc
     ListadoDisenosComponent,
     SubirDisenosComponent,
     ModificarDisenosComponent,
-    MisDisenosRoutingModule
+    MisDisenosRoutingModule,
+    DisenoProductosComponent
   ]
 })
 export class MisDisenosModule { }

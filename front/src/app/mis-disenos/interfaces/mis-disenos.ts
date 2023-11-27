@@ -38,3 +38,14 @@ export interface crearProducto {
   id_artista:any,
   id_diseno:any
 }
+
+export interface infoDesign {
+  id:number,
+  titulo:string,
+  imagen:string,
+  fecha:string,
+  tema:string,
+  estilo:string,
+  descripcion:string,
+  favoritos:number,
+}
