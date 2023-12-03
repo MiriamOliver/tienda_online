@@ -14,9 +14,8 @@ export class ListarProductosComponent implements OnInit{
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private misDesignService:MisDisenosService) {
+    private misDesignService:MisDisenosService) { }
 
-    }
 
     ngOnInit(): void {
       this.misDesignService.getDisenoListaProductos(JSON.parse(localStorage.getItem('diseno')!).id);
@@ -30,6 +29,23 @@ export class ListarProductosComponent implements OnInit{
       let firstLetra = nombre.charAt(0);
       let palabra = nombre.slice(1);
       return firstLetra.toUpperCase() + palabra;
+    }
+
+    modificarProducto(id:any){
+
+    }
+
+    borrarProducto(id:any){
+
+    }
+
+    activarProducto(id:number, activar:number){
+      this.misDesignService.activarProducto(id, activar)
+      .subscribe(resp => {
+        if(resp.success){
+          window.location.reload();
+        }
+      });
     }
 
 }

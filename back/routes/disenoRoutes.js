@@ -35,5 +35,6 @@ router.get('/misdisenos/diseno/:id', controlador.getDisenoProductos)
 
 router.get('/misdisenos/listado/producto/diseno/:id', controlador.listadoProductosDiseno);
 
+router.put('/misdisenos/producto/activar/:id', controlador.activarProductosDiseno);
 
 module.exports = router

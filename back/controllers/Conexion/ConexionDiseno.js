@@ -483,7 +483,7 @@ class ConexionDiseno extends ConexionSequelize {
                                                             productos.createdAt AS 'fecha', productos.descripcion, productos.activado FROM productos 
                                                             JOIN tipos ON tipos.id = productos.id_tipo 
                                                             JOIN disenoproductos ON disenoproductos.id_producto = productos.id 
-                                                            WHERE disenoproductos.id_diseno = ?`, 
+                                                            WHERE disenoproductos.id_diseno = ? ORDER BY fecha DESC`, 
                                                             { replacements: [id], type: QueryTypes.SELECT });
                
             return productos;
@@ -494,6 +494,23 @@ class ConexionDiseno extends ConexionSequelize {
         }
         
 
+    }
+
+    activarProductos = async(id, activado) => {
+
+        try{
+
+            let producto = await models.Producto.update(
+                {activado:activado},
+                {where:{id:id}}
+            );
+               
+            return producto;
+
+        }catch (err){
+
+            throw err;
+        }
     }
 } 
 

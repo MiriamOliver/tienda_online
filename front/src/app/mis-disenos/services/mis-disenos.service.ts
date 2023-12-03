@@ -98,4 +98,12 @@ export class MisDisenosService {
   get listadoProductos(){
     return this.listaProductos;
   }
+
+  activarProducto(id:number, activar:number):Observable<any>{
+    return this.http.put<any>(`${ this.baseUrl }/diseno/misdisenos/producto/activar/${id}`, {activado:activar});
+  }
+
+  borrarProducto(id:any):Observable<any>{
+    return this.http.delete<any>(`${ this.baseUrl }/diseno/misdisenos/producto/borrar/${id}`);
+  }
 }
