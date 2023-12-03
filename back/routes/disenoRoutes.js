@@ -37,4 +37,6 @@ router.get('/misdisenos/listado/producto/diseno/:id', controlador.listadoProduct
 
 router.put('/misdisenos/producto/activar/:id', controlador.activarProductosDiseno);
 
+router.delete('/misdisenos/producto/borrar/:id', controlador.borrarProductosDiseno);
+
 module.exports = router

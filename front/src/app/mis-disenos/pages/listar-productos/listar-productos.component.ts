@@ -36,7 +36,12 @@ export class ListarProductosComponent implements OnInit{
     }
 
     borrarProducto(id:any){
-
+      this.misDesignService.borrarProducto(id)
+      .subscribe(resp => {
+        if(resp.success){
+          window.location.reload();
+        }
+      });
     }
 
     activarProducto(id:number, activar:number){

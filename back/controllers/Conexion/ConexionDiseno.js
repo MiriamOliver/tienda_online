@@ -512,6 +512,26 @@ class ConexionDiseno extends ConexionSequelize {
             throw err;
         }
     }
+
+    deleteProductos = async(id) => {
+
+        try{
+
+            let producto = await models.Producto.destroy({
+                where:{id:id}
+            })
+
+            await models.DisenoProducto.destroy({
+                where:{id_producto:id}
+            })
+               
+            return producto;
+
+        }catch (err){
+
+            throw err;
+        }
+    }
 } 
 
 module.exports = ConexionDiseno;
