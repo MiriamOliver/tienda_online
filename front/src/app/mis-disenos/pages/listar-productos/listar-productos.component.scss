@@ -1,0 +1,48 @@
+.info{
+  background-color: #fff;
+  img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+  .contenedor-datos{
+    border-bottom: 3px dotted var(--colorRosa);
+  }
+  h4{
+    font-family: var(--TipoSubtitulo);
+    border-bottom: 3px dotted var(--colorRosa);
+  }
+  h4, .resaltado{
+    color: var(--colorRosa);
+  }
+  i{
+    color: var(--colorRosa);
+    font-size: 14px;
+  }
+  .iconos{
+    .desactivado{
+      background-color: var(--colorGris);
+      i{
+        color: var(--colorRosa);
+      }
+    }
+    button{
+      background-color: var(--colorRosa);
+      i{
+        color: #fff;
+      }
+    }
+  }
+  .etiquetas{
+    div{
+      background-color: var(--colorRosa);
+      display: inline;
+      label{
+        color: #fff;
+        i{
+          color: #fff;
+        }
+      }
+    }
+  }
+}

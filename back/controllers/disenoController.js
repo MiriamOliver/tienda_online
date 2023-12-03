@@ -200,6 +200,35 @@ const registrarDiseno = (req, res = response) => {
             })
         }
 
+    const listadoProductosDiseno = (req, res = response) => {
+            const conex = new ConexionSequelize();
+            conex.getListadoProductos(req.params.id)
+            .then((productos) => {
+                productos.forEach(p => {
+                    p.imagen = process.env.URL + process.env.PORT + "/upload/" + p.imagen; 
+                    p.fecha = moment(p.fecha).format("DD-MM-YYYY") 
+                });
+                res.status(200).json(productos);
+        })
+        .catch(err => {
+            res.status(203).json({'msg':'No se encontraron registros'});
+        }) 
+    }
+
+    const activarProductosDiseno = (req, res = response) => {
+        console.log('hola');
+        console.log(req.params);
+        console.log(req.body);
+        const conex = new ConexionSequelize();
+        conex.activarProductos(req.params.id, req.body.activado)
+        .then((resp) => {
+        res.status(200).json({'success':true, 'msg':'Activado con éxito', resp});
+    })
+    .catch(err => {
+        res.status(203).json({'success':false, 'msg':'No se encontraron registros'});
+    }) 
+}
+
 
 module.exports = {
     listadoDisenos,
@@ -215,5 +244,7 @@ module.exports = {
     registrarDiseno,
     registrarProducto,
     getTipos,
-    getDisenoProductos
+    getDisenoProductos,
+    listadoProductosDiseno,
+    activarProductosDiseno
 }

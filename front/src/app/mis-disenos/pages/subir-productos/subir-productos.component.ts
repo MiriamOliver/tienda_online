@@ -29,7 +29,7 @@ export class SubirProductosComponent implements OnInit{
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
-    private misDisenosService:MisDisenosService
+    private misDisenosService:MisDisenosService,
   ) {
     this.producto = {
       titulo:'',
@@ -109,15 +109,15 @@ export class SubirProductosComponent implements OnInit{
         this.mensaje = 'Registrado correctamente';
         this.errorAddProducto = 0;
         this.limpiarDatosAddProducto();
+        this.misDisenosService.getDisenoListaProductos(JSON.parse(localStorage.getItem('diseno')!).id);
+
       }else{
         this.mensaje = 'Error en el registro';
         this.errorAddProducto = 1;
       }
-      console.log(this.mensaje);
       clearTimeout(this.timer);
-      this.timer = window.setTimeout(() => {this.errorAddProducto = -1;}, 2000);
+      this.timer = window.setTimeout(() => {this.errorAddProducto = -1; window.location.reload();}, 2000);
     })
-
   }
 
   abrirAddProducto() {

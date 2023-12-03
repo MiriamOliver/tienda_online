@@ -3,6 +3,7 @@ const router = Router();
 const controlador = require('../controllers/disenoController');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
+const mid = require('./../middlewares/diseno-middlewares');
 
 router.get('/listado/:id', controlador.listadoDisenos);
 
@@ -32,5 +33,8 @@ router.get('/misdisenos/producto/tipo', controlador.getTipos);
 
 router.get('/misdisenos/diseno/:id', controlador.getDisenoProductos)
 
+router.get('/misdisenos/listado/producto/diseno/:id', controlador.listadoProductosDiseno);
+
+router.put('/misdisenos/producto/activar/:id', controlador.activarProductosDiseno);
 
 module.exports = router
