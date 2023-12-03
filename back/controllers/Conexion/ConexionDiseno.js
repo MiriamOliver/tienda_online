@@ -8,6 +8,10 @@ const File = require('../../helpers/file-upload');
 
 class ConexionDiseno extends ConexionSequelize {
 
+    constructor() {
+        super();
+    }
+
     getDisenos = async () => {
         let disenos = null;
         let productos = null;
@@ -469,6 +473,27 @@ class ConexionDiseno extends ConexionSequelize {
 
             throw err;
         }
+    }
+
+    getListadoProductos = async(id) => {
+
+        try{
+
+            let productos = await models.sequelize.query(`SELECT tipos.tipo, productos.id, productos.titulo, productos.imagen, productos.precio, productos.estado, 
+                                                            productos.createdAt AS 'fecha', productos.descripcion, productos.activado FROM productos 
+                                                            JOIN tipos ON tipos.id = productos.id_tipo 
+                                                            JOIN disenoproductos ON disenoproductos.id_producto = productos.id 
+                                                            WHERE disenoproductos.id_diseno = ?`, 
+                                                            { replacements: [id], type: QueryTypes.SELECT });
+               
+            return productos;
+
+        }catch (err){
+
+            throw err;
+        }
+        
+
     }
 } 
 

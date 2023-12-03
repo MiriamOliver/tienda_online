@@ -3,6 +3,7 @@ const cors = require('cors');
 const expfileupload = require("express-fileupload");
 //const socket = require('./server-socket');
 
+
 class Server {
 
     constructor() {
@@ -41,7 +42,7 @@ class Server {
     }
 
     /* sockets(){
-        socket.sockerServer()
+        socket.socketServer()
     } */
 
     listen() {

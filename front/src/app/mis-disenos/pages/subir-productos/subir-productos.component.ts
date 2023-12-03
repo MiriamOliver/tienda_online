@@ -4,7 +4,6 @@ import { MisDisenosService } from '../../services/mis-disenos.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { crearProducto } from '../../interfaces/mis-disenos';
-import { MisDisenosocketService } from '../../services/mis-disenosocket.service';
 
 @Component({
   selector: 'app-subir-productos',
@@ -31,7 +30,6 @@ export class SubirProductosComponent implements OnInit{
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
     private misDisenosService:MisDisenosService,
-    private misDisenosSocketService:MisDisenosocketService
   ) {
     this.producto = {
       titulo:'',
@@ -111,18 +109,15 @@ export class SubirProductosComponent implements OnInit{
         this.mensaje = 'Registrado correctamente';
         this.errorAddProducto = 0;
         this.limpiarDatosAddProducto();
-        this.misDisenosSocketService.listadoProductos('listadoproductos',{})
+        this.misDisenosService.getDisenoListaProductos(JSON.parse(localStorage.getItem('diseno')!).id);
+
       }else{
         this.mensaje = 'Error en el registro';
         this.errorAddProducto = 1;
       }
-      console.log(this.mensaje);
       clearTimeout(this.timer);
-      this.timer = window.setTimeout(() => {this.errorAddProducto = -1;}, 2000);
+      this.timer = window.setTimeout(() => {this.errorAddProducto = -1; window.location.reload();}, 2000);
     })
-
-    this.misDisenosSocketService
-
   }
 
   abrirAddProducto() {

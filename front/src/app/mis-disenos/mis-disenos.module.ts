@@ -9,6 +9,8 @@ import { MisDisenosRoutingModule } from './mis-disenos-routing.module';
 import { SubirProductosComponent } from './pages/subir-productos/subir-productos.component';
 import { DisenoProductosComponent } from './pages/diseno-productos/diseno-productos.component';
 import { ListarProductosComponent } from './pages/listar-productos/listar-productos.component';
+import { VerDisenoComponent } from './pages/ver-diseno/ver-diseno.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -19,20 +21,22 @@ import { ListarProductosComponent } from './pages/listar-productos/listar-produc
     ModificarDisenosComponent,
     SubirProductosComponent,
     DisenoProductosComponent,
-    ListarProductosComponent
+    ListarProductosComponent,
+    VerDisenoComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   exports: [
     ListadoDisenosComponent,
     SubirDisenosComponent,
     ModificarDisenosComponent,
     MisDisenosRoutingModule,
-    DisenoProductosComponent
+    DisenoProductosComponent,
   ]
 })
 export class MisDisenosModule { }

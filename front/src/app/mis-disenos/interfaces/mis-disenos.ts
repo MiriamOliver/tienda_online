@@ -49,3 +49,15 @@ export interface infoDesign {
   descripcion:string,
   favoritos:number,
 }
+
+export interface Productos{
+    tipo:string,
+    id:number,
+    titulo:string,
+    imagen:string,
+    precio:number,
+    estado:string,
+    fecha:string,
+    descripcion:string,
+    activado:number
+}

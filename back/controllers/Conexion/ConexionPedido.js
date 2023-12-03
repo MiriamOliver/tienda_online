@@ -6,6 +6,10 @@ const { QueryTypes } = require('sequelize');
 
 class ConexionPedido extends ConexionSequelize {
 
+    constructor() {
+        super();
+    }
+
     getBeneficioMeses = async(id) => {
         let beneficios = null
 

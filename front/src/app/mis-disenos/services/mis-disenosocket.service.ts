@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+/* import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { environment } from 'src/environments/environment';
+import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +24,10 @@ export class MisDisenosocketService extends Socket{
   }
 
   listadoProductos = (event = 'listadoproductos',payload = {}) => {
+    console.log(payload);
     this.ioSocket.emit('listadoproductos', {
         event,
         payload
     });
   }
-}
+} */
