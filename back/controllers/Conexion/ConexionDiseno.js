@@ -532,6 +532,20 @@ class ConexionDiseno extends ConexionSequelize {
             throw err;
         }
     }
+
+    getInfoDiseno = async(id) => {
+        try{
+            let diseno = await models.Diseno.findOne({
+                attributes:['id','titulo','imagen','tema','estilo','descripcion'],
+                where:{id:id}
+            })
+
+            return diseno.dataValues
+        }catch (err){
+
+            throw err;
+        }
+    }
 } 
 
 module.exports = ConexionDiseno;

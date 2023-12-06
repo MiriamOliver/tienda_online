@@ -27,6 +27,8 @@ router.get('/misdisenos/usuario/:id', controlador.getDatosUsuario);
 
 router.post('/misdisenos/crear', controlador.registrarDiseno);
 
+router.get('/misdisenos/diseno/:id', controlador.getInfoDiseno);
+
 router.post('/misdisenos/producto/crear', controlador.registrarProducto);
 
 router.get('/misdisenos/producto/tipo', controlador.getTipos);

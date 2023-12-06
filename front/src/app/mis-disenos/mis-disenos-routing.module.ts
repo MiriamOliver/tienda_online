@@ -12,7 +12,7 @@ const routes: Routes = [
       { path: '', component: ListadoDisenosComponent },
       { path: 'crear', component: SubirDisenosComponent},
       { path: 'diseno/:id', component: DisenoProductosComponent},
-      { path: 'editar', component: ModificarDisenosComponent},
+      { path: 'editar/:id', component: SubirDisenosComponent},
     ]
   }
 ];

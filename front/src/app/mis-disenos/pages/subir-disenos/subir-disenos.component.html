@@ -62,6 +62,7 @@
               <label class="form-label">Título</label>
 
               <input type="text"
+                [(ngModel)]="titulo"
                 formControlName="titulo"
                 [ngClass]="{'is-invalid' : form['titulo'].invalid && form['titulo'].dirty}"
                 class="form-control"/>
@@ -111,6 +112,7 @@
               <label class="form-label">Descripción</label>
 
               <textarea class="form-control" placeholder="Escribe una descripción del diseño" id="floatingTextarea"
+                [(ngModel)]="descripcion"
                 formControlName="descripcion"
                 [ngClass]="{'is-invalid' : form['descripcion'].invalid && form['descripcion'].dirty}"></textarea>
 
