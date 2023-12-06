@@ -10,6 +10,9 @@ import { MisDisenosService } from '../../services/mis-disenos.service';
 export class ListarProductosComponent implements OnInit{
 
   productos:any;
+  confirmarBorrarProducto = -1;
+  id_producto = 0;
+  contenedor:any = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,8 +38,31 @@ export class ListarProductosComponent implements OnInit{
 
     }
 
-    borrarProducto(id:any){
+    abrirBorrarProducto(id:any){
+      this.confirmarBorrarProducto = 1;
+      this.id_producto = id;
+      this.contenedor = document.getElementById('info'+this.id_producto);
+      this.contenedor.style.position = 'relative';
+      console.log(this.contenedor);
+    }
 
+    cerrarBorrarProducto(){
+      this.confirmarBorrarProducto = -1;
+      this.id_producto = 0;
+      this.contenedor.style.removeProperty("position")
+      this.contenedor = null;
+    }
+
+    borrarProducto(){
+      this.misDesignService.borrarProducto(this.id_producto)
+      .subscribe(resp => {
+        if(resp.success){
+          this.id_producto = 0;
+          this.contenedor.style.removeProperty("position")
+          this.contenedor = null;
+          window.location.reload();
+        }
+      });
     }
 
     activarProducto(id:number, activar:number){
