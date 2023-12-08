@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListadoDisenosComponent } from './pages/listado-disenos/listado-disenos.component';
 import { SubirDisenosComponent } from './pages/subir-disenos/subir-disenos.component';
-import { ModificarDisenosComponent } from './pages/modificar-disenos/modificar-disenos.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MisDisenosRoutingModule } from './mis-disenos-routing.module';
@@ -18,7 +17,6 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     ListadoDisenosComponent,
     SubirDisenosComponent,
-    ModificarDisenosComponent,
     SubirProductosComponent,
     DisenoProductosComponent,
     ListarProductosComponent,
@@ -34,7 +32,6 @@ import { HttpClientModule } from '@angular/common/http';
   exports: [
     ListadoDisenosComponent,
     SubirDisenosComponent,
-    ModificarDisenosComponent,
     MisDisenosRoutingModule,
     DisenoProductosComponent,
   ]

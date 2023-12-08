@@ -67,6 +67,10 @@ export class MisDisenosService {
     return this.http.post<any>(`${ this.baseUrl }/diseno/misdisenos/crear`, formReg);
   }
 
+  activarDiseno(id:number, activar:number):Observable<any>{
+    return this.http.put<any>(`${ this.baseUrl }/diseno/misdisenos/diseno/activar/${id}`, {activado:activar});
+  }
+
   modificarDiseno(diseno:crearDiseno, id:any):Observable<any>{
     const formReg = new FormData();
     formReg.append('archivo', diseno.imagen);

@@ -95,5 +95,14 @@
         padding: 5px;
       }
     }
+    .desactivado{
+      background-color: var(--colorGris);
+      .circle{
+        background-color: var(--colorRosa);
+        color: var(--colorGris);
+        border-radius: 10px;
+        padding: 5px;
+      }
+    }
   }
 }

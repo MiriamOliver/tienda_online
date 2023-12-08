@@ -323,8 +323,8 @@ class ConexionDiseno extends ConexionSequelize {
 
         try{
 
-            let disenos = await models.sequelize.query(`SELECT COUNT(favoritos.id_diseno) as 'favoritos', disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', 
-                                                users.nombre, disenos.createdAt AS 'fecha', disenos.tema,disenos.estilo FROM disenos 
+            let disenos = await models.sequelize.query(`SELECT COUNT(favoritos.id_diseno) as 'favoritos', disenos.id, disenos.activado, disenos.titulo, disenos.imagen, users.id AS 'id_artista', 
+                                                users.nombre, disenos.createdAt AS 'fecha', disenos.tema, disenos.estilo FROM disenos 
                                                 JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
                                                 JOIN users on users.id = disenosartistas.id_user 
                                                 LEFT JOIN favoritos ON favoritos.id_diseno = disenos.id 
