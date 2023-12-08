@@ -52,5 +52,9 @@ export class VerDisenoComponent implements OnInit{
     let palabra = nombre.slice(1);
     return firstLetra.toUpperCase() + palabra;
   }
+
+  editarDiseno(id:any){
+    this.router.navigate(['misdisenos/editar/' + id]);
+  }
 }
 

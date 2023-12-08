@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { switchMap } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MisDisenosService } from '../../services/mis-disenos.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -19,11 +20,15 @@ export class SubirDisenosComponent implements OnInit{
   creacionCorrecta: number = -1;
   submitted: boolean = false;
   disenoForm!: FormGroup;
-  diseno!:crearDiseno;
+  diseno:crearDiseno;
   errorRegistrarDiseno:number = -1;
+  errorEditarDiseno:number = -1;
   estilo:string = '';
   tema:string = '';
+  titulo:string = '';
+  descripcion = '';
   previsualizacion = '';
+  guardado = "editar";
 
   constructor(
     private router: Router,
@@ -44,13 +49,47 @@ export class SubirDisenosComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.disenoForm = this.fb.group({
-      imagen: ['', Validators.required],
-      titulo: ['', Validators.required],
-      tema: ['', Validators.required],
-      estilo: ['', Validators.required],
-      descripcion: ['', Validators.required],
-    })
+    if(!this.router.url.includes('editar'))
+    {
+      this.guardado = 'crear';
+      this.disenoForm = this.fb.group({
+        imagen: ['', Validators.required],
+        titulo: ['', Validators.required],
+        tema: ['', Validators.required],
+        estilo: ['', Validators.required],
+        descripcion: ['', Validators.required],
+      })
+      return;
+    }
+    this.activatedRoute.params
+      .pipe(
+        switchMap(({ id }) => this.misDisenosService.getDatosDiseno(id))
+      )
+      .subscribe(( resp) => {
+        this.diseno = {
+          titulo:resp.titulo,
+          imagen:resp.imagen,
+          tema:resp.tema,
+          estilo:resp.estilo,
+          descripcion: resp.descripcion,
+          id_artista:JSON.parse(localStorage.getItem('user')!).id,
+        }
+
+        this.titulo = this.diseno.titulo;
+        this.previsualizacion =  this.diseno.imagen;
+        this.tema = this.diseno.tema;
+        this.estilo =  this.diseno.estilo;
+        this.descripcion = this.diseno.descripcion;
+
+      });
+      if(this.guardado == 'editar'){
+        this.disenoForm = this.fb.group({
+          titulo: ['', Validators.required],
+          tema: ['', Validators.required],
+          estilo: ['', Validators.required],
+          descripcion: ['', Validators.required],
+        })
+      }
   }
 
   get form() {
@@ -90,6 +129,14 @@ export class SubirDisenosComponent implements OnInit{
     };
   })
 
+  guardarDiseno(){
+    if(this.guardado == 'crear'){
+      this.subirDiseno();
+    }else if(this.guardado =='editar'){
+      this.modificarDiseno();
+    }
+  }
+
   subirDiseno() {
     localStorage.removeItem('diseno');
     this.diseno.titulo = this.disenoForm.get('titulo')?.value;
@@ -111,5 +158,41 @@ export class SubirDisenosComponent implements OnInit{
         this.timer = window.setTimeout(() => {this.errorRegistrarDiseno = -1;}, 3000);
       }
     });
+  }
+
+  modificarDiseno(){
+    localStorage.removeItem('diseno');
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    if(this.selectedFile){
+      this.diseno.imagen = this.selectedFile;
+    }else{
+      this.diseno.imagen = '';
+    }
+    this.diseno.titulo = this.disenoForm.get('titulo')?.value;
+    this.diseno.estilo = this.disenoForm.get('estilo')?.value;
+    this.diseno.tema = this.disenoForm.get('tema')?.value;
+    this.diseno.descripcion = this.disenoForm.get('descripcion')?.value;
+    this.diseno.id_artista = JSON.parse(localStorage.getItem('user')!).id;
+
+    this.misDisenosService.modificarDiseno(this.diseno, id).subscribe(resp => {
+      if (resp) {
+        localStorage.setItem('diseno', JSON.stringify({
+          id: resp,
+        }));
+        this.router.navigate(['misdisenos/diseno/'+resp]);
+      }else{
+        this.errorEditarDiseno = 1;
+        clearTimeout(this.timer);
+        this.timer = window.setTimeout(() => {this.errorEditarDiseno = -1;}, 3000);
+      }
+    });
+  }
+
+  abrirProductos(){
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    localStorage.setItem('diseno', JSON.stringify({
+      id: id,
+    }));
+    this.router.navigate(['misdisenos/diseno/'+id]);
   }
 }

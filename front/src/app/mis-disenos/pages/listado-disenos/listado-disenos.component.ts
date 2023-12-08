@@ -46,6 +46,9 @@ export class ListadoDisenosComponent implements OnInit{
   ngOnInit(): void {
     this.misDesignService.designDefault(JSON.parse(localStorage.getItem('user')!).id);
     this.getInfoUsuario(JSON.parse(localStorage.getItem('user')!).id);
+    if(localStorage.getItem('diseno')){
+      localStorage.removeItem('diseno');
+    }
   }
 
   get listadoMostrar(){
@@ -76,7 +79,7 @@ export class ListadoDisenosComponent implements OnInit{
   }
 
   modificarDiseno(id:number){
-    this.router.navigate(['misdisenos/editar' + id]);
+    this.router.navigate(['misdisenos/editar/' + id]);
   }
 
   crearDiseno(){

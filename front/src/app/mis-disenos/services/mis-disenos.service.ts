@@ -67,6 +67,24 @@ export class MisDisenosService {
     return this.http.post<any>(`${ this.baseUrl }/diseno/misdisenos/crear`, formReg);
   }
 
+  modificarDiseno(diseno:crearDiseno, id:any):Observable<any>{
+    const formReg = new FormData();
+    formReg.append('archivo', diseno.imagen);
+    formReg.append('titulo', diseno.titulo);
+    formReg.append('tema',  diseno.tema);
+    formReg.append('estilo', diseno.estilo);
+    formReg.append('descripcion', diseno.descripcion);
+    formReg.append('id_artista', diseno.id_artista);
+
+    console.log(formReg);
+
+    return this.http.put<any>(`${ this.baseUrl }/diseno/misdisenos/editar/${id}`, formReg);
+  }
+
+  getDatosDiseno(id:any):Observable<crearDiseno>{
+    return this.http.get<crearDiseno>(`${ this.baseUrl }/diseno/misdisenos/diseno/info/${id}`)
+  }
+
   addProducto(producto:crearProducto):Observable<any>{
     const formReg = new FormData();
     formReg.append('archivo', producto.imagen);
