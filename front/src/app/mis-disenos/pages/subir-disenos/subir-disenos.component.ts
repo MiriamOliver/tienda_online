@@ -22,11 +22,13 @@ export class SubirDisenosComponent implements OnInit{
   disenoForm!: FormGroup;
   diseno:crearDiseno;
   errorRegistrarDiseno:number = -1;
+  errorEditarDiseno:number = -1;
   estilo:string = '';
   tema:string = '';
   titulo:string = '';
   descripcion = '';
   previsualizacion = '';
+  guardado = "editar";
 
   constructor(
     private router: Router,
@@ -47,16 +49,16 @@ export class SubirDisenosComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.disenoForm = this.fb.group({
-      imagen: ['', Validators.required],
-      titulo: ['', Validators.required],
-      tema: ['', Validators.required],
-      estilo: ['', Validators.required],
-      descripcion: ['', Validators.required],
-    })
-
     if(!this.router.url.includes('editar'))
     {
+      this.guardado = 'crear';
+      this.disenoForm = this.fb.group({
+        imagen: ['', Validators.required],
+        titulo: ['', Validators.required],
+        tema: ['', Validators.required],
+        estilo: ['', Validators.required],
+        descripcion: ['', Validators.required],
+      })
       return;
     }
     this.activatedRoute.params
@@ -72,12 +74,22 @@ export class SubirDisenosComponent implements OnInit{
           descripcion: resp.descripcion,
           id_artista:JSON.parse(localStorage.getItem('user')!).id,
         }
+
         this.titulo = this.diseno.titulo;
         this.previsualizacion =  this.diseno.imagen;
         this.tema = this.diseno.tema;
         this.estilo =  this.diseno.estilo;
         this.descripcion = this.diseno.descripcion;
+
       });
+      if(this.guardado == 'editar'){
+        this.disenoForm = this.fb.group({
+          titulo: ['', Validators.required],
+          tema: ['', Validators.required],
+          estilo: ['', Validators.required],
+          descripcion: ['', Validators.required],
+        })
+      }
   }
 
   get form() {
@@ -116,6 +128,14 @@ export class SubirDisenosComponent implements OnInit{
       return null;
     };
   })
+
+  guardarDiseno(){
+    if(this.guardado == 'crear'){
+      this.subirDiseno();
+    }else if(this.guardado =='editar'){
+      this.modificarDiseno();
+    }
+  }
 
   subirDiseno() {
     localStorage.removeItem('diseno');
@@ -161,10 +181,18 @@ export class SubirDisenosComponent implements OnInit{
         }));
         this.router.navigate(['misdisenos/diseno/'+resp]);
       }else{
-        this.errorRegistrarDiseno = 1;
+        this.errorEditarDiseno = 1;
         clearTimeout(this.timer);
-        this.timer = window.setTimeout(() => {this.errorRegistrarDiseno = -1;}, 3000);
+        this.timer = window.setTimeout(() => {this.errorEditarDiseno = -1;}, 3000);
       }
     });
+  }
+
+  abrirProductos(){
+    let id = this.activatedRoute.snapshot.paramMap.get('id');
+    localStorage.setItem('diseno', JSON.stringify({
+      id: id,
+    }));
+    this.router.navigate(['misdisenos/diseno/'+id]);
   }
 }

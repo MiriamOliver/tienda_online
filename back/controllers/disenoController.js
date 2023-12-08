@@ -249,6 +249,17 @@ const registrarDiseno = (req, res = response) => {
         }) 
     }
 
+    const modificarDiseno = (req, res = response) => {
+        const conex = new ConexionSequelize();
+        conex.modificarDiseno(req, req.params.id)
+        .then((id) => {
+            res.status(200).json(id);
+        })
+        .catch(err => {
+            res.status(203).json({'success':false, 'msg':'No se encontraron registros'});
+        }) 
+    }
+
 
 module.exports = {
     listadoDisenos,
@@ -268,5 +279,6 @@ module.exports = {
     listadoProductosDiseno,
     activarProductosDiseno,
     borrarProductosDiseno,
-    getInfoDiseno
+    getInfoDiseno,
+    modificarDiseno
 }

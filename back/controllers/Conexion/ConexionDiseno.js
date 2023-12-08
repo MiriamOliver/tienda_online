@@ -422,10 +422,8 @@ class ConexionDiseno extends ConexionSequelize {
                     id_diseno: Number(req.body.id_diseno),
                     id_producto: producto.dataValues.id
                 })  
-                console.log(prueba);            
+          
             }
-
-            
 
             return producto.dataValues.id;
             
@@ -546,6 +544,50 @@ class ConexionDiseno extends ConexionSequelize {
             throw err;
         }
     }
+
+    modificarDiseno = async(req, id) => {
+
+        console.log(id)
+
+        try{
+
+            if(req.files){
+                const nombre = await File.subirArchivo(req.files, undefined, 'imgs' );
+    
+                let prueba = await models.Diseno.update({
+                    titulo:req.body.titulo,
+                    imagen:nombre,
+                    tema:req.body.tema,
+                    estilo:req.body.estilo,
+                    descripcion:req.body.descripcion,
+                    },
+                    {where:{id:id}}
+                );
+            }else{
+                let prueba = await models.Diseno.update({
+                    titulo:req.body.titulo,
+                    tema:req.body.tema,
+                    estilo:req.body.estilo,
+                    descripcion:req.body.descripcion,
+                    },
+                    {where:{id:id}}
+                );
+
+            }
+
+            let diseno = await models.Diseno.findOne({
+                attributes:['id'],
+                where:{id:id}
+            })
+              
+            return diseno.dataValues.id;
+
+        }catch (err){
+
+            throw err;
+        }
+    }
+
 } 
 
 module.exports = ConexionDiseno;

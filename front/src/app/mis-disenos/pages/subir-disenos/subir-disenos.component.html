@@ -18,9 +18,9 @@
 </div>
 <div class="contenedor pb-5">
   <div class="py-5"></div>
-  <form #regForm="ngForm" [formGroup]="disenoForm" (ngSubmit)="subirDiseno()" class="mt-5">
+  <form #regForm="ngForm" [formGroup]="disenoForm" (ngSubmit)="guardarDiseno()" class="mt-5">
     <div class="px-5">
-      <div class="info p-5 ms-5 me-5 rounded-1 shadow-sm row">
+      <div class="info p-5 ms-5 me-5 rounded-1 shadow-sm row" *ngIf="guardado == 'crear'">
         <div class="col-lg-8">
           <h5>Subir Diseño</h5>
           <p>Rellena los datos para registrar tu diseño.
@@ -29,6 +29,20 @@
         <div class="col-lg-4">
           <div class="pt-1 mb-2 mt-4 text-center">
             <button class="btn rounded-1 boton py-2 px-4" [disabled]="disenoForm.invalid" type="submit">Crear</button>
+          </div>
+        </div>
+      </div>
+      <div class="info p-5 ms-5 me-5 rounded-1 shadow-sm row" *ngIf="guardado == 'editar'">
+        <div class="col-lg-8">
+          <h5>Editar Diseño</h5>
+          <p>Modifica los datos para actualizar tu diseño y pulsa el botón de actualizar.
+            También puedes seleccionar el botón de prouctos para ver la lista de productos y añadir, borrar, activar o editarlos.
+          </p>
+        </div>
+        <div class="col-lg-4">
+          <div class="pt-1 mb-2 mt-4 text-center">
+            <button class="btn rounded-1 boton py-2 px-4 me-3" [disabled]="disenoForm.invalid" type="submit">Actualizar</button>
+            <button class="btn rounded-1 boton py-2 px-4 ms-3" (click)="abrirProductos()" type="button">Productos</button>
           </div>
         </div>
       </div>
@@ -46,7 +60,7 @@
               <h5 class="fw-bold mb-0 mb-4 pb-1">SUBIR DISEÑO</h5>
             </div>
 
-            <div class="mb-4 text-start">
+            <div class="mb-4 text-start" *ngIf="guardado == 'crear'">
               <label for="formFile" class="form-label">Imagen</label>
               <input class="form-control"
                 formControlName="imagen"
@@ -58,10 +72,18 @@
               </div>
             </div>
 
+            <div class="mb-4 text-start" *ngIf="guardado == 'editar'">
+              <label class="form-label">Imagen</label>
+              <input class="form-control"
+                type="file" id="formFile"
+                (change)="onFileSelected($event)"/>
+            </div>
+
             <div class="form-outline mb-4 text-start">
               <label class="form-label">Título</label>
 
               <input type="text"
+                value="{{titulo}}"
                 [(ngModel)]="titulo"
                 formControlName="titulo"
                 [ngClass]="{'is-invalid' : form['titulo'].invalid && form['titulo'].dirty}"
@@ -112,6 +134,7 @@
               <label class="form-label">Descripción</label>
 
               <textarea class="form-control" placeholder="Escribe una descripción del diseño" id="floatingTextarea"
+                value="{{descripcion}}"
                 [(ngModel)]="descripcion"
                 formControlName="descripcion"
                 [ngClass]="{'is-invalid' : form['descripcion'].invalid && form['descripcion'].dirty}"></textarea>
@@ -130,6 +153,13 @@
   <div class="card-body text-center p-0 pb-3">
     <div style="background-color: #ffa8ba;" class="p-3 mb-3"><i class="fa-solid fa-triangle-exclamation me-2" style="color:var(--colorBlanco); font-size: var(--TamTitulo);"></i></div>
     <span class="pt-5 m-3">Error en el registro</span>
+  </div>
+</div>
+
+<div class="position-absolute top-50 start-50 translate-middle mensaje card shadow-lg mb-5 bg-body rounded" *ngIf="errorEditarDiseno == 1" style="width: 400px;">
+  <div class="card-body text-center p-0 pb-3">
+    <div style="background-color: #ffa8ba;" class="p-3 mb-3"><i class="fa-solid fa-triangle-exclamation me-2" style="color:var(--colorBlanco); font-size: var(--TamTitulo);"></i></div>
+    <span class="pt-5 m-3">Error en la modificación del diseño</span>
   </div>
 </div>
 
