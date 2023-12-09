@@ -539,6 +539,26 @@ class ConexionDiseno extends ConexionSequelize {
         }
     }
 
+    deleteDiseno = async(id) => {
+
+        try{
+
+            let diseno = await models.Diseno.destroy({
+                where:{id:id}
+            })
+
+            await models.DisenosArtistas.destroy({
+                where:{id_diseno:id}
+            })
+               
+            return diseno;
+
+        }catch (err){
+
+            throw err;
+        }
+    }
+
     getInfoDiseno = async(id) => {
         try{
             let diseno = await models.Diseno.findOne({

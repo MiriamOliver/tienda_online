@@ -15,6 +15,9 @@ export class ListadoDisenosComponent implements OnInit{
   public design!:Design;
   infoDiseno:number = 0;
   public usuario!:InfoUsuario;
+  confirmarBorrarDiseno = -1;
+  id_diseno = 0;
+  contenedor:any = null;
 
 
   constructor(
@@ -87,8 +90,31 @@ export class ListadoDisenosComponent implements OnInit{
     this.router.navigate(['misdisenos/crear']);
   }
 
-  borrarDiseno(id:number){
+  abrirBorrarDiseno(id:any){
+    this.confirmarBorrarDiseno = 1;
+    this.id_diseno = id;
+    this.contenedor = document.getElementById('info'+this.id_diseno);
+    this.contenedor.style.position = 'relative';
+    console.log(this.contenedor);
+  }
 
+  cerrarBorrarDiseno(){
+    this.confirmarBorrarDiseno = -1;
+    this.id_diseno = 0;
+    this.contenedor.style.removeProperty("position")
+    this.contenedor = null;
+  }
+
+  borrarDiseno(){
+    this.misDesignService.borrarDiseno(this.id_diseno)
+    .subscribe(resp => {
+      if(resp.success){
+        this.id_diseno = 0;
+        this.contenedor.style.removeProperty("position")
+        this.contenedor = null;
+        window.location.reload();
+      }
+    });
   }
 
   activarDiseno(id:number, activar:number){

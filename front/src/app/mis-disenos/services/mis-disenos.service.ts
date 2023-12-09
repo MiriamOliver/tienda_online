@@ -133,4 +133,9 @@ export class MisDisenosService {
     let user = JSON.parse(localStorage.getItem('user')!).id;
     return this.http.delete<any>(`${ this.baseUrl }/diseno/misdisenos/producto/borrar/${id}/${user}`);
   }
+
+  borrarDiseno(id:any):Observable<any>{
+    let user = JSON.parse(localStorage.getItem('user')!).id;
+    return this.http.delete<any>(`${ this.baseUrl }/diseno/misdisenos/diseno/borrar/${id}/${user}`);
+  }
 }

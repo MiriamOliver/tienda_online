@@ -260,6 +260,17 @@ const registrarDiseno = (req, res = response) => {
         }) 
     }
 
+    const borrarDiseno = (req, res = response) => {
+        const conex = new ConexionSequelize();
+        conex.deleteDiseno(req.params.id)
+        .then((resp) => {
+            res.status(200).json({'success':true, 'msg':'Borrado con éxito', resp});
+        })
+        .catch(err => {
+            res.status(203).json({'success':false, 'msg':'No se encontraron registros'});
+        }) 
+    }
+
     const activarDiseno = (req, res = response) => {
         const conex = new ConexionSequelize();
         conex.activarDiseno(req.params.id, req.body.activado)
@@ -292,5 +303,6 @@ module.exports = {
     borrarProductosDiseno,
     getInfoDiseno,
     modificarDiseno,
-    activarDiseno
+    activarDiseno,
+    borrarDiseno
 }
