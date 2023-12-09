@@ -83,4 +83,6 @@ router.put('/misdisenos/producto/activar/:id', [mid.esAdminPropietario, midDisen
 
 router.delete('/misdisenos/producto/borrar/:id/:user', [mid.esAdmin, mid.usuarioExiste, midDiseno.productoExiste, midDiseno.propietarioProducto], controlador.borrarProductosDiseno);
 
+router.delete('/misdisenos/diseno/borrar/:id/:user', [mid.esAdmin, mid.usuarioExiste, midDiseno.existeDiseno, midDiseno.propietarioDiseno], controlador.borrarDiseno);
+
 module.exports = router

@@ -84,7 +84,7 @@
     </div>
     <div class="col-lg-9 ps-4">
       <div class="row p-0">
-        <div class="col-lg-3 col-6 p-3" *ngFor="let diseno of listadoMostrar">
+        <div class="col-lg-3 col-6 p-3" *ngFor="let diseno of listadoMostrar" id="info{{diseno.id}}">
           <div class="design p-2 rounded-1 shadow-sm">
             <img class="img-thumbnail mb-2" src="{{diseno.imagen}}">
             <label class="resaltado my-1"><span>{{letraMayuscula(diseno.titulo)}}</span></label>
@@ -97,7 +97,17 @@
               <button type="button" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="modificarDiseno(diseno.id)"><i class="fa-solid fa-pen circle m-0"></i></button>
               <button type="button" *ngIf="diseno.activado == 1" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="activarDiseno(diseno.id, 0)"><i style="font-size: 10px;" class="fa-solid fa-check circle m-0"></i></button>
               <button type="button" *ngIf="diseno.activado == 0" class="d-flex align-items-center border-0 rounded py-1 px-2 desactivado" (click)="activarDiseno(diseno.id, 1)"><i style="font-size: 11px;" class="fa-solid fa-xmark circle m-0"></i></button>
-              <button type="button" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="borrarDiseno(diseno.id)"><i class="fa-solid fa-trash circle m-0"></i></button>
+              <button type="button" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="abrirBorrarDiseno(diseno.id)"><i class="fa-solid fa-trash circle m-0"></i></button>
+            </div>
+          </div>
+          <div class="position-absolute top-50 start-50 translate-middle mensaje card shadow-lg mb-5 bg-body rounded" *ngIf="confirmarBorrarDiseno == 1 && id_diseno == diseno.id" style="width: 400px;">
+            <div class="card-body text-center p-0">
+              <div style="background-color: #ffa8ba;" class="p-3 mb-3"><p class="m-0" style="color:var(--colorBlanco); font-size: var(--TamTitulo);">Confirmar Borrado</p></div>
+              <span class="pt-5 m-3">¿Estás seguro que quieres borrar el diseño?</span><br>
+              <div class="d-flex justify-content-center">
+                <button (click)="borrarDiseno()" class="btn boton btn-light m-4 p-1 px-3">Borrar</button>
+                <button (click)="cerrarBorrarDiseno()" class="btn boton btn-light m-4 p-1 px-3">Cancelar</button>
+              </div>
             </div>
           </div>
         </div>
