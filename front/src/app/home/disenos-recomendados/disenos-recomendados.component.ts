@@ -11,7 +11,8 @@ import { HomeService } from '../services/home.service';
 })
 export class DisenosRecomendadosComponent implements OnInit{
 
-  disenosRecomendados:Design[] = [];
+  disenosRecomendados:any[] = [];
+  mensaje:number = -1;
 
   constructor(
     private router: Router,
@@ -22,10 +23,14 @@ export class DisenosRecomendadosComponent implements OnInit{
 
     const fechaCompleta = "YYYY-MM-DD HH:mm:ss";
     this.homeService.getDisenosRecomendados(JSON.parse(localStorage.getItem('user')!).id).subscribe(resp => {
-      resp.forEach(item =>{
-        item.fecha = moment(item.fecha, fechaCompleta).format('DD-MM-YYYY');
-      })
       this.disenosRecomendados = resp;
+      if(this.disenosRecomendados.length == 0){
+        this.mensaje = 1;
+      }else{
+        resp.forEach(item =>{
+          item.fecha = moment(item.fecha, fechaCompleta).format('DD-MM-YYYY');
+        })
+      }
     });
   }
 

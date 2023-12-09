@@ -13,11 +13,14 @@ export class ListarProductosComponent implements OnInit{
   confirmarBorrarProducto = -1;
   id_producto = 0;
   contenedor:any = null;
+  pag:number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private misDesignService:MisDisenosService) { }
+    private misDesignService:MisDisenosService) {
+      this.pag = 1;
+    }
 
 
     ngOnInit(): void {

@@ -3,7 +3,7 @@
   <button class="btn rounded-1 boton py-1 px-4" (click)="listadoAfin()" type="submit">Afin</button>
 </div>
 <div class="row p-0">
-  <div class="col-lg-3 col-6 p-3" *ngFor="let design of listadoMostrar">
+  <div class="col-lg-3 col-6 p-3" *ngFor="let design of listadoMostrar | paginate: { itemsPerPage: 16, currentPage: pag }">
     <div class="design p-2 rounded-1 shadow-sm">
       <img class="img-thumbnail mb-2" src="{{design.imagen}}">
       <label class="resaltado my-1"><span>{{letraMayuscula(design.titulo)}}</span></label>
@@ -13,4 +13,6 @@
       </div>
     </div>
   </div>
+  <pagination-controls (pageChange)="pag = $event" previousLabel="" nextLabel="" class="text-center mt-4">
+  </pagination-controls>
 </div>

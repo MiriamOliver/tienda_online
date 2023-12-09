@@ -18,6 +18,7 @@ export class ListadoDisenosComponent implements OnInit{
   confirmarBorrarDiseno = -1;
   id_diseno = 0;
   contenedor:any = null;
+  pag:number;
 
 
   constructor(
@@ -45,6 +46,7 @@ export class ListadoDisenosComponent implements OnInit{
       favoritos:0,
       disenos:0
     }
+    this.pag = 1;
   }
 
   ngOnInit(): void {
@@ -61,6 +63,7 @@ export class ListadoDisenosComponent implements OnInit{
 
   sendData(){
     this.misDesignService.buscarDesign(this.input_search);
+    this.pag = 1;
   }
 
   letraMayuscula(nombre:string){

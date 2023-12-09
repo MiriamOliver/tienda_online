@@ -92,14 +92,9 @@
   </div>
 </div>
 
-<div class="position-absolute top-50 start-50 translate-middle mensaje card shadow-lg mb-5 bg-body rounded" *ngIf="errorAddProducto == 1 || errorAddProducto == 0" style="width: 400px;">
+<div class="position-absolute top-50 start-50 translate-middle mensaje card shadow-lg mb-5 bg-body rounded" *ngIf="errorAddProducto == 1" style="width: 400px;">
   <div *ngIf="errorAddProducto == 1" class="card-body text-center p-0 pb-3">
     <div style="background-color: #ffa8ba;" class="p-3 mb-3"><i class="fa-solid fa-triangle-exclamation me-2" style="color:var(--colorBlanco); font-size: var(--TamTitulo);"></i></div>
-    <span class="pt-5 m-3">{{mensaje}}</span>
-  </div>
-
-  <div *ngIf="errorAddProducto == 0" class="card-body text-center p-0 pb-3">
-    <div style="background-color: #ffa8ba;" class="p-3 mb-3"><i class="fa-solid fa-circle-check me-2" style="color:var(--colorBlanco); font-size: var(--TamTitulo);"></i></div>
     <span class="pt-5 m-3">{{mensaje}}</span>
   </div>
 </div>

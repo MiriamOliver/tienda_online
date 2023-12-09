@@ -2,151 +2,153 @@
 <div>
   <img src="../../../../assets/imgs/banner3.jpg" class="d-block w-100" alt="...">
 </div>
-<div class="fondo contenedor">
-  <svg id="visual" viewBox="0 0 1920 1500" width="1920" height="1500" xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
-    <path
-      d="M0 64L35.5 63.7C71 63.3 142 62.7 213.2 63.5C284.3 64.3 355.7 66.7 426.8 68.8C498 71 569 73 640 74.2C711 75.3 782 75.7 853.2 73.8C924.3 72 995.7 68 1066.8 67C1138 66 1209 68 1280 68.7C1351 69.3 1422 68.7 1493.2 69.5C1564.3 70.3 1635.7 72.7 1706.8 73.2C1778 73.7 1849 72.3 1884.5 71.7L1920 71L1920 0L1884.5 0C1849 0 1778 0 1706.8 0C1635.7 0 1564.3 0 1493.2 0C1422 0 1351 0 1280 0C1209 0 1138 0 1066.8 0C995.7 0 924.3 0 853.2 0C782 0 711 0 640 0C569 0 498 0 426.8 0C355.7 0 284.3 0 213.2 0C142 0 71 0 35.5 0L0 0Z"
-      fill="#ffc4d1"></path>
-    <path
-      d="M0 47L35.5 46.7C71 46.3 142 45.7 213.2 46.5C284.3 47.3 355.7 49.7 426.8 50.8C498 52 569 52 640 52.2C711 52.3 782 52.7 853.2 51.8C924.3 51 995.7 49 1066.8 48.7C1138 48.3 1209 49.7 1280 51.2C1351 52.7 1422 54.3 1493.2 54.8C1564.3 55.3 1635.7 54.7 1706.8 54.5C1778 54.3 1849 54.7 1884.5 54.8L1920 55L1920 0L1884.5 0C1849 0 1778 0 1706.8 0C1635.7 0 1564.3 0 1493.2 0C1422 0 1351 0 1280 0C1209 0 1138 0 1066.8 0C995.7 0 924.3 0 853.2 0C782 0 711 0 640 0C569 0 498 0 426.8 0C355.7 0 284.3 0 213.2 0C142 0 71 0 35.5 0L0 0Z"
-      fill="#ffa8ba"></path>
-    <path
-      d="M0 19L35.5 20.8C71 22.7 142 26.3 213.2 27.5C284.3 28.7 355.7 27.3 426.8 26C498 24.7 569 23.3 640 22.5C711 21.7 782 21.3 853.2 22.8C924.3 24.3 995.7 27.7 1066.8 27.8C1138 28 1209 25 1280 23.5C1351 22 1422 22 1493.2 23.5C1564.3 25 1635.7 28 1706.8 28.8C1778 29.7 1849 28.3 1884.5 27.7L1920 27L1920 0L1884.5 0C1849 0 1778 0 1706.8 0C1635.7 0 1564.3 0 1493.2 0C1422 0 1351 0 1280 0C1209 0 1138 0 1066.8 0C995.7 0 924.3 0 853.2 0C782 0 711 0 640 0C569 0 498 0 426.8 0C355.7 0 284.3 0 213.2 0C142 0 71 0 35.5 0L0 0Z"
-      fill="#ff8ea5"></path>
-  </svg>
-</div>
-<div class="contenedor pb-5">
-  <div class="py-5"></div>
-  <form #regForm="ngForm" [formGroup]="disenoForm" (ngSubmit)="guardarDiseno()" class="mt-5">
-    <div class="px-5">
-      <div class="info p-5 ms-5 me-5 rounded-1 shadow-sm row" *ngIf="guardado == 'crear'">
-        <div class="col-lg-8">
-          <h5>Subir Diseño</h5>
-          <p>Rellena los datos para registrar tu diseño.
-          Posteriormente podrás subir los productos pertenecientes a este diseño, pulsando en el botón de crear producto.</p>
+<div class="contenedor">
+  <div class="fondo">
+    <svg id="visual" viewBox="0 0 1920 1500" width="1920" height="1500" xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+      <path
+        d="M0 64L35.5 63.7C71 63.3 142 62.7 213.2 63.5C284.3 64.3 355.7 66.7 426.8 68.8C498 71 569 73 640 74.2C711 75.3 782 75.7 853.2 73.8C924.3 72 995.7 68 1066.8 67C1138 66 1209 68 1280 68.7C1351 69.3 1422 68.7 1493.2 69.5C1564.3 70.3 1635.7 72.7 1706.8 73.2C1778 73.7 1849 72.3 1884.5 71.7L1920 71L1920 0L1884.5 0C1849 0 1778 0 1706.8 0C1635.7 0 1564.3 0 1493.2 0C1422 0 1351 0 1280 0C1209 0 1138 0 1066.8 0C995.7 0 924.3 0 853.2 0C782 0 711 0 640 0C569 0 498 0 426.8 0C355.7 0 284.3 0 213.2 0C142 0 71 0 35.5 0L0 0Z"
+        fill="#ffc4d1"></path>
+      <path
+        d="M0 47L35.5 46.7C71 46.3 142 45.7 213.2 46.5C284.3 47.3 355.7 49.7 426.8 50.8C498 52 569 52 640 52.2C711 52.3 782 52.7 853.2 51.8C924.3 51 995.7 49 1066.8 48.7C1138 48.3 1209 49.7 1280 51.2C1351 52.7 1422 54.3 1493.2 54.8C1564.3 55.3 1635.7 54.7 1706.8 54.5C1778 54.3 1849 54.7 1884.5 54.8L1920 55L1920 0L1884.5 0C1849 0 1778 0 1706.8 0C1635.7 0 1564.3 0 1493.2 0C1422 0 1351 0 1280 0C1209 0 1138 0 1066.8 0C995.7 0 924.3 0 853.2 0C782 0 711 0 640 0C569 0 498 0 426.8 0C355.7 0 284.3 0 213.2 0C142 0 71 0 35.5 0L0 0Z"
+        fill="#ffa8ba"></path>
+      <path
+        d="M0 19L35.5 20.8C71 22.7 142 26.3 213.2 27.5C284.3 28.7 355.7 27.3 426.8 26C498 24.7 569 23.3 640 22.5C711 21.7 782 21.3 853.2 22.8C924.3 24.3 995.7 27.7 1066.8 27.8C1138 28 1209 25 1280 23.5C1351 22 1422 22 1493.2 23.5C1564.3 25 1635.7 28 1706.8 28.8C1778 29.7 1849 28.3 1884.5 27.7L1920 27L1920 0L1884.5 0C1849 0 1778 0 1706.8 0C1635.7 0 1564.3 0 1493.2 0C1422 0 1351 0 1280 0C1209 0 1138 0 1066.8 0C995.7 0 924.3 0 853.2 0C782 0 711 0 640 0C569 0 498 0 426.8 0C355.7 0 284.3 0 213.2 0C142 0 71 0 35.5 0L0 0Z"
+        fill="#ff8ea5"></path>
+    </svg>
+  </div>
+  <div class="pb-5">
+    <div class="py-5"></div>
+    <form #regForm="ngForm" [formGroup]="disenoForm" (ngSubmit)="guardarDiseno()" class="mt-5">
+      <div class="px-5">
+        <div class="info p-5 ms-5 me-5 rounded-1 shadow-sm row" *ngIf="guardado == 'crear'">
+          <div class="col-lg-8">
+            <h5>Subir Diseño</h5>
+            <p>Rellena los datos para registrar tu diseño.
+            Posteriormente podrás subir los productos pertenecientes a este diseño, pulsando en el botón de crear producto.</p>
+          </div>
+          <div class="col-lg-4">
+            <div class="pt-1 mb-2 mt-4 text-center">
+              <button class="btn rounded-1 boton py-2 px-4" [disabled]="disenoForm.invalid" type="submit">Crear</button>
+            </div>
+          </div>
         </div>
-        <div class="col-lg-4">
-          <div class="pt-1 mb-2 mt-4 text-center">
-            <button class="btn rounded-1 boton py-2 px-4" [disabled]="disenoForm.invalid" type="submit">Crear</button>
+        <div class="info p-5 ms-5 me-5 rounded-1 shadow-sm row" *ngIf="guardado == 'editar'">
+          <div class="col-lg-8">
+            <h5>Editar Diseño</h5>
+            <p>Modifica los datos para actualizar tu diseño y pulsa el botón de actualizar.
+              También puedes seleccionar el botón de prouctos para ver la lista de productos y añadir, borrar, activar o editarlos.
+            </p>
+          </div>
+          <div class="col-lg-4">
+            <div class="pt-1 mb-2 mt-4 text-center">
+              <button class="btn rounded-1 boton py-2 px-4 me-3" [disabled]="disenoForm.invalid" type="submit">Actualizar</button>
+              <button class="btn rounded-1 boton py-2 px-4 ms-3" (click)="abrirProductos()" type="button">Productos</button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="info p-5 ms-5 me-5 rounded-1 shadow-sm row" *ngIf="guardado == 'editar'">
-        <div class="col-lg-8">
-          <h5>Editar Diseño</h5>
-          <p>Modifica los datos para actualizar tu diseño y pulsa el botón de actualizar.
-            También puedes seleccionar el botón de prouctos para ver la lista de productos y añadir, borrar, activar o editarlos.
-          </p>
+      <div class="row px-5">
+        <div class="col-lg-5 card-body p-5 pe-3">
+          <div class="info ms-3 p-5 rounded-1 shadow-sm">
+            <h5>Previsualización</h5>
+            <img [src]="previsualizacion" class="pt-5 mt-2">
+          </div>
         </div>
-        <div class="col-lg-4">
-          <div class="pt-1 mb-2 mt-4 text-center">
-            <button class="btn rounded-1 boton py-2 px-4 me-3" [disabled]="disenoForm.invalid" type="submit">Actualizar</button>
-            <button class="btn rounded-1 boton py-2 px-4 ms-3" (click)="abrirProductos()" type="button">Productos</button>
+        <div class="card-body p-5 text-black text-center col-lg-7">
+          <div class="formulario p-5 ms-2 me-3 rounded-1 shadow-sm">
+              <div class="mb-5 border-bottom border-3">
+                <h5 class="fw-bold mb-0 mb-4 pb-1">SUBIR DISEÑO</h5>
+              </div>
+
+              <div class="mb-4 text-start" *ngIf="guardado == 'crear'">
+                <label for="formFile" class="form-label">Imagen</label>
+                <input class="form-control"
+                  formControlName="imagen"
+                  [ngClass]="{'is-invalid' : form['imagen'].invalid && form['imagen'].touched}"
+                  type="file" id="formFile"
+                  (change)="onFileSelected($event)"/>
+                <div *ngIf="form['imagen'].invalid" class="invalid-feedback">
+                  <div *ngIf="form['imagen'].errors?.['required']" class="error alert alert-danger mt-2">Elige una imagen de perfil</div>
+                </div>
+              </div>
+
+              <div class="mb-4 text-start" *ngIf="guardado == 'editar'">
+                <label class="form-label">Imagen</label>
+                <input class="form-control"
+                  type="file" id="formFile"
+                  (change)="onFileSelected($event)"/>
+              </div>
+
+              <div class="form-outline mb-4 text-start">
+                <label class="form-label">Título</label>
+
+                <input type="text"
+                  value="{{titulo}}"
+                  [(ngModel)]="titulo"
+                  formControlName="titulo"
+                  [ngClass]="{'is-invalid' : form['titulo'].invalid && form['titulo'].dirty}"
+                  class="form-control"/>
+
+                <div *ngIf="form['titulo'].invalid" class="invalid-feedback">
+                  <div *ngIf="form['titulo'].errors?.['required']" class="error alert alert-danger mt-2">Escribe un título para tu diseño</div>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4 text-start">
+                <label class="form-label">Estilo</label>
+
+                <select class="form-select form-control"
+                        formControlName="estilo"
+                        [(ngModel)]="estilo"
+                        [ngClass]="{'is-invalid' : form['estilo'].invalid && form['estilo'].touched}">
+                  <option value="" disabled selected hidden></option>
+                  <option value="tradicional">Tradicional</option>
+                  <option value="digital">Digital</option>
+                  <option value="mixto">Mixto</option>
+                </select>
+                <div *ngIf="form['estilo'].invalid" class="invalid-feedback">
+                  <div *ngIf="form['estilo'].errors?.['required']" class="error alert alert-danger mt-2">Elige un estilo de diseño</div>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4 text-start">
+                <label class="form-label">Tema</label>
+
+                <select class="form-select form-control"
+                        formControlName="tema"
+                        [(ngModel)]="tema"
+                        [ngClass]="{'is-invalid' : form['tema'].invalid && form['tema'].touched}">
+                  <option value="" disabled selected hidden></option>
+                  <option value="videojuego">Videojuego</option>
+                  <option value="libro">Libro</option>
+                  <option value="serie">Serie y películas</option>
+                  <option value="musica">Música</option>
+                  <option value="original">Arte original</option>
+                </select>
+                <div *ngIf="form['tema'].invalid" class="invalid-feedback">
+                  <div *ngIf="form['tema'].errors?.['required']" class="error alert alert-danger mt-2">Elige un tema para el diseño</div>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4 text-start">
+                <label class="form-label">Descripción</label>
+
+                <textarea class="form-control" placeholder="Escribe una descripción del diseño" id="floatingTextarea"
+                  value="{{descripcion}}"
+                  [(ngModel)]="descripcion"
+                  formControlName="descripcion"
+                  [ngClass]="{'is-invalid' : form['descripcion'].invalid && form['descripcion'].dirty}"></textarea>
+
+                <div *ngIf="form['descripcion'].invalid" class="invalid-feedback">
+                  <div *ngIf="form['descripcion'].errors?.['required']" class="error alert alert-danger mt-2">Escribe una descripción para tu diseño</div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row px-5">
-      <div class="col-lg-5 card-body p-5 pe-3">
-        <div class="info ms-3 p-5 rounded-1 shadow-sm">
-          <h5>Previsualización</h5>
-          <img [src]="previsualizacion" class="pt-5 mt-2">
-        </div>
-      </div>
-      <div class="card-body p-5 text-black text-center col-lg-7">
-        <div class="formulario p-5 ms-2 me-3 rounded-1 shadow-sm">
-            <div class="mb-5 border-bottom border-3">
-              <h5 class="fw-bold mb-0 mb-4 pb-1">SUBIR DISEÑO</h5>
-            </div>
-
-            <div class="mb-4 text-start" *ngIf="guardado == 'crear'">
-              <label for="formFile" class="form-label">Imagen</label>
-              <input class="form-control"
-                formControlName="imagen"
-                [ngClass]="{'is-invalid' : form['imagen'].invalid && form['imagen'].touched}"
-                type="file" id="formFile"
-                (change)="onFileSelected($event)"/>
-              <div *ngIf="form['imagen'].invalid" class="invalid-feedback">
-                <div *ngIf="form['imagen'].errors?.['required']" class="error alert alert-danger mt-2">Elige una imagen de perfil</div>
-              </div>
-            </div>
-
-            <div class="mb-4 text-start" *ngIf="guardado == 'editar'">
-              <label class="form-label">Imagen</label>
-              <input class="form-control"
-                type="file" id="formFile"
-                (change)="onFileSelected($event)"/>
-            </div>
-
-            <div class="form-outline mb-4 text-start">
-              <label class="form-label">Título</label>
-
-              <input type="text"
-                value="{{titulo}}"
-                [(ngModel)]="titulo"
-                formControlName="titulo"
-                [ngClass]="{'is-invalid' : form['titulo'].invalid && form['titulo'].dirty}"
-                class="form-control"/>
-
-              <div *ngIf="form['titulo'].invalid" class="invalid-feedback">
-                <div *ngIf="form['titulo'].errors?.['required']" class="error alert alert-danger mt-2">Escribe un título para tu diseño</div>
-              </div>
-            </div>
-
-            <div class="form-outline mb-4 text-start">
-              <label class="form-label">Estilo</label>
-
-              <select class="form-select form-control"
-                      formControlName="estilo"
-                      [(ngModel)]="estilo"
-                      [ngClass]="{'is-invalid' : form['estilo'].invalid && form['estilo'].touched}">
-                <option value="" disabled selected hidden></option>
-                <option value="tradicional">Tradicional</option>
-                <option value="digital">Digital</option>
-                <option value="mixto">Mixto</option>
-              </select>
-              <div *ngIf="form['estilo'].invalid" class="invalid-feedback">
-                <div *ngIf="form['estilo'].errors?.['required']" class="error alert alert-danger mt-2">Elige un estilo de diseño</div>
-              </div>
-            </div>
-
-            <div class="form-outline mb-4 text-start">
-              <label class="form-label">Tema</label>
-
-              <select class="form-select form-control"
-                      formControlName="tema"
-                      [(ngModel)]="tema"
-                      [ngClass]="{'is-invalid' : form['tema'].invalid && form['tema'].touched}">
-                <option value="" disabled selected hidden></option>
-                <option value="videojuego">Videojuego</option>
-                <option value="libro">Libro</option>
-                <option value="serie">Serie y películas</option>
-                <option value="musica">Música</option>
-                <option value="original">Arte original</option>
-              </select>
-              <div *ngIf="form['tema'].invalid" class="invalid-feedback">
-                <div *ngIf="form['tema'].errors?.['required']" class="error alert alert-danger mt-2">Elige un tema para el diseño</div>
-              </div>
-            </div>
-
-            <div class="form-outline mb-4 text-start">
-              <label class="form-label">Descripción</label>
-
-              <textarea class="form-control" placeholder="Escribe una descripción del diseño" id="floatingTextarea"
-                value="{{descripcion}}"
-                [(ngModel)]="descripcion"
-                formControlName="descripcion"
-                [ngClass]="{'is-invalid' : form['descripcion'].invalid && form['descripcion'].dirty}"></textarea>
-
-              <div *ngIf="form['descripcion'].invalid" class="invalid-feedback">
-                <div *ngIf="form['descripcion'].errors?.['required']" class="error alert alert-danger mt-2">Escribe una descripción para tu diseño</div>
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
 
 <div class="position-absolute top-50 start-50 translate-middle mensaje card shadow-lg mb-5 bg-body rounded" *ngIf="errorRegistrarDiseno == 1" style="width: 400px;">

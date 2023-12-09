@@ -10,6 +10,7 @@ import { DisenoProductosComponent } from './pages/diseno-productos/diseno-produc
 import { ListarProductosComponent } from './pages/listar-productos/listar-productos.component';
 import { VerDisenoComponent } from './pages/ver-diseno/ver-diseno.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -27,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   exports: [
     ListadoDisenosComponent,

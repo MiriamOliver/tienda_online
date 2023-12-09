@@ -75,9 +75,10 @@ class ConexionDiseno extends ConexionSequelize {
                                                         (select favoritos.id_diseno FROM favoritos WHERE id_user = ?) 
                                                         group by disenos.tema ORDER BY cantfavoritos DESC;`, 
                                                         { replacements: [id], type: QueryTypes.SELECT });
-           
 
-            disenosRecomendados = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', users.nombre, 
+            if(recomendados.length != 0){
+
+                disenosRecomendados = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', users.nombre, 
                                                                 disenos.createdAt AS 'fecha', disenos.estilo, disenos.tema FROM disenos 
                                                                 JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
                                                                 JOIN users on users.id = disenosartistas.id_user
@@ -85,14 +86,19 @@ class ConexionDiseno extends ConexionSequelize {
                                                                 ORDER BY disenos.createdAt DESC;`, 
                                                                 { replacements: [recomendados[0].tema], type: QueryTypes.SELECT });
     
-            disenosRecomendados.forEach(e =>{
-                if(cont > 0){
-                    listaDisenosRecomendados.push(e);
-                    cont --;
-                }
-            })
-            
-            return listaDisenosRecomendados;
+                disenosRecomendados.forEach(e =>{
+                    if(cont > 0){
+                        listaDisenosRecomendados.push(e);
+                        cont --;
+                    }
+                })
+
+                return listaDisenosRecomendados
+
+            }else{
+
+                return 0
+            }
      
         }catch (err){
 
@@ -114,22 +120,25 @@ class ConexionDiseno extends ConexionSequelize {
                                                         where favoritos.id_user = ? group by disenosartistas.id_user ORDER BY disenosartistas.id_diseno;`, 
                                                         { replacements: [id], type: QueryTypes.SELECT });
             
+            if(favoritos.length != 0){
+                favoritos.forEach(artista => {
+                    if(cont > 0){
+                        idArtistas.push(artista.artista);
+                        cont --;
+                    }
+                });
+                                                    
+                listaArtistas = await models.User.findAll({
+                    attributes:['id','nombre','avatar'],
+                    where: {id:{[Op.in]: idArtistas}}
+                });
+                
+                return listaArtistas;
+            }else{
 
-            favoritos.forEach(artista => {
-                if(cont > 0){
-                    idArtistas.push(artista.artista);
-                    cont --;
-                }
-            });
-                                                
-            listaArtistas = await models.User.findAll({
-                attributes:['id','nombre','avatar'],
-                where: {id:{[Op.in]: idArtistas}}
-            });
-            
-            return listaArtistas;
-
-            
+                return 0
+            }
+              
         }catch (err){
 
             throw err;
