@@ -31,6 +31,7 @@ export class ListadoDisenosComponent implements OnInit{
       tema:'',
       estilo:'',
       favoritos:0,
+      activado:1,
       productos:[]
     }
     this.usuario = {
@@ -88,6 +89,15 @@ export class ListadoDisenosComponent implements OnInit{
 
   borrarDiseno(id:number){
 
+  }
+
+  activarDiseno(id:number, activar:number){
+    this.misDesignService.activarDiseno(id, activar)
+      .subscribe(resp => {
+        if(resp.success){
+          window.location.reload();
+        }
+      });
   }
 
 }

@@ -95,6 +95,8 @@
             <div class="d-flex justify-content-center gap-2 align-items-center mt-3">
               <button type="button" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="mostrarDiseno(diseno.id)"><i class="fa-solid fa-info circle px-2 m-0"></i></button>
               <button type="button" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="modificarDiseno(diseno.id)"><i class="fa-solid fa-pen circle m-0"></i></button>
+              <button type="button" *ngIf="diseno.activado == 1" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="activarDiseno(diseno.id, 0)"><i style="font-size: 10px;" class="fa-solid fa-check circle m-0"></i></button>
+              <button type="button" *ngIf="diseno.activado == 0" class="d-flex align-items-center border-0 rounded py-1 px-2 desactivado" (click)="activarDiseno(diseno.id, 1)"><i style="font-size: 11px;" class="fa-solid fa-xmark circle m-0"></i></button>
               <button type="button" class="d-flex align-items-center border-0 rounded py-1 px-2" (click)="borrarDiseno(diseno.id)"><i class="fa-solid fa-trash circle m-0"></i></button>
             </div>
           </div>

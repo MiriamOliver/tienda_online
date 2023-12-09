@@ -67,6 +67,11 @@ export class MisDisenosService {
     return this.http.post<any>(`${ this.baseUrl }/diseno/misdisenos/crear`, formReg);
   }
 
+  activarDiseno(id:number, activar:number):Observable<any>{
+    let user = JSON.parse(localStorage.getItem('user')!).id;
+    return this.http.put<any>(`${ this.baseUrl }/diseno/misdisenos/diseno/activar/${id}`, {id_artista:user, activado:activar});
+  }
+
   modificarDiseno(diseno:crearDiseno, id:any):Observable<any>{
     const formReg = new FormData();
     formReg.append('archivo', diseno.imagen);
@@ -103,11 +108,13 @@ export class MisDisenosService {
   }
 
   getDisenoProductos(id:any):Observable<infoDesign>{
-    return this.http.get<infoDesign>(`${ this.baseUrl }/diseno/misdisenos/diseno/${id}`);
+    let user = JSON.parse(localStorage.getItem('user')!).id;
+    return this.http.get<infoDesign>(`${ this.baseUrl }/diseno/misdisenos/diseno/${id}/${user}`);
   }
 
   getDisenoListaProductos(id:any){
-    this.http.get<Productos[]>(`${ this.baseUrl }/diseno/misdisenos/listado/producto/diseno/${id}`)
+    let user = JSON.parse(localStorage.getItem('user')!).id;
+    this.http.get<Productos[]>(`${ this.baseUrl }/diseno/misdisenos/listado/producto/diseno/${id}/${user}`)
     .subscribe(resp => {
       this.listaProductos = resp;
     });
@@ -118,10 +125,12 @@ export class MisDisenosService {
   }
 
   activarProducto(id:number, activar:number):Observable<any>{
-    return this.http.put<any>(`${ this.baseUrl }/diseno/misdisenos/producto/activar/${id}`, {activado:activar});
+    let user = JSON.parse(localStorage.getItem('user')!).id;
+    return this.http.put<any>(`${ this.baseUrl }/diseno/misdisenos/producto/activar/${id}`, {id_artista:user, activado:activar});
   }
 
   borrarProducto(id:any):Observable<any>{
-    return this.http.delete<any>(`${ this.baseUrl }/diseno/misdisenos/producto/borrar/${id}`);
+    let user = JSON.parse(localStorage.getItem('user')!).id;
+    return this.http.delete<any>(`${ this.baseUrl }/diseno/misdisenos/producto/borrar/${id}/${user}`);
   }
 }

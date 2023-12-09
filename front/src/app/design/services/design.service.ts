@@ -69,6 +69,7 @@ export class DesignService {
         item.fecha = moment(item.fecha, fechaCompleta).format('DD-MM-YYYY');
       })
       this.listaDisenos = this.disenos;
+      this.auxListaDisenos = this.disenos;
     });
   }
 

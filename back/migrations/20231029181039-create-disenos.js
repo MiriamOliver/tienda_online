@@ -24,6 +24,10 @@ module.exports = {
       descripcion: {
         type: Sequelize.STRING
       },
+      activado: {
+        type: Sequelize.INTEGER,
+        default: 1
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

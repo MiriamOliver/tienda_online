@@ -8,7 +8,8 @@ export interface Design {
   tema:string,
   estilo:string,
   favoritos:number,
-  productos:any
+  productos:any,
+  activado:number
 }
 
 export interface crearDiseno {
