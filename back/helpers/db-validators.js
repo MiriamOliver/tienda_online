@@ -39,11 +39,49 @@ const emailVerificado = async( email ) => {
         throw new Error(`Correo no verificado. Revisa tu correo para verificar tu cuenta`);
     }
 }
+const usuarioExiste = async( id_artista ) => {
+    const usuario = await models.User.findOne({
+        where: {id: id_artista}
+    })
+    if (!usuario) {
+        throw new Error(`Usuario no existe`);
+    }
+}
+
+const esAdministrador = async( id_artista ) => {
+    const idRol = await models.Rol.findOne({
+        attribute:['id'],
+        where:{rol: 'administrador'}
+    });
+
+    const admin = await models.RolesAsignados.findOne({
+        where:{id_user:id_artista,
+               id_rol: idRol.dataValues.id}
+    })
+    if (!admin) {
+        throw new Error(`El usuario no es administrador`);
+    }
+}
+
+const disenoExiste = async( id_diseno ) => {
+      
+    const diseno = models.Diseno.findOne({
+            where:{id:id_diseno}
+        })
+
+    if(!diseno){
+        
+        throw new Error(`El diseno no existe`);
+    }
+}
 
 
 module.exports = {
     emailExiste,
     nombreExiste,
     emailDesconocido,
-    emailVerificado
+    emailVerificado,
+    usuarioExiste,
+    esAdministrador,
+    disenoExiste,
 }

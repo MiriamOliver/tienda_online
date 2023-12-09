@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MisDisenosocketService } from './mis-disenosocket.service';
+//import { MisDisenosocketService } from './mis-disenosocket.service';
 
 describe('MisDisenosocketService', () => {
   let service: MisDisenosocketService;

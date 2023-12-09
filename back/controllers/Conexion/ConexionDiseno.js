@@ -21,7 +21,9 @@ class ConexionDiseno extends ConexionSequelize {
             disenos = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', users.nombre, 
                                                         disenos.createdAt AS 'fecha', disenos.tema,disenos.estilo FROM disenos 
                                                         JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
-                                                        JOIN users on users.id = disenosartistas.id_user ORDER BY disenos.createdAt DESC;`, 
+                                                        JOIN users on users.id = disenosartistas.id_user 
+                                                        WHERE disenos.activado = 1
+                                                        ORDER BY disenos.createdAt DESC;`, 
                                                         { type: QueryTypes.SELECT });
 
 
@@ -79,7 +81,7 @@ class ConexionDiseno extends ConexionSequelize {
                                                                 disenos.createdAt AS 'fecha', disenos.estilo, disenos.tema FROM disenos 
                                                                 JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
                                                                 JOIN users on users.id = disenosartistas.id_user
-                                                                WHERE disenos.tema = ?
+                                                                WHERE disenos.tema = ?  AND disenos.activado = 1
                                                                 ORDER BY disenos.createdAt DESC;`, 
                                                                 { replacements: [recomendados[0].tema], type: QueryTypes.SELECT });
     
@@ -167,7 +169,9 @@ class ConexionDiseno extends ConexionSequelize {
             disenos = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, users.id AS 'id_artista', users.nombre, 
                                                         disenos.createdAt AS 'fecha', disenos.tema,disenos.estilo FROM disenos 
                                                         JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
-                                                        JOIN users on users.id = disenosartistas.id_user ORDER BY disenos.createdAt DESC;`, 
+                                                        JOIN users on users.id = disenosartistas.id_user 
+                                                        WHERE disenos.activado = 1
+                                                        ORDER BY disenos.createdAt DESC;`, 
                                                         { type: QueryTypes.SELECT });
           
             return disenos;
@@ -184,7 +188,7 @@ class ConexionDiseno extends ConexionSequelize {
         artista = await models.sequelize.query(`select users.id, users.nombre, users.avatar, COUNT(disenosartistas.id_diseno) as 'disenos' from disenosartistas 
                                                 JOIN favoritos on disenosartistas.id_diseno=favoritos.id_diseno 
                                                 join users on users.id=disenosartistas.id_user 
-                                                group by disenosartistas.id_user ORDER BY disenosartistas.id_diseno;`,
+                                                group by disenosartistas.id_user ORDER BY disenos DESC;`,
                                                 { type: QueryTypes.SELECT })
         return artista[0];
     }
@@ -194,11 +198,15 @@ class ConexionDiseno extends ConexionSequelize {
         let listaProductos = [];
         let cont = 3;
 
-        productos = await models.sequelize.query(`select disenos.id, disenos.titulo, disenos.imagen, users.nombre, disenos.createdAt AS 'fecha', COUNT(disenosartistas.id_diseno) as 'disenos' from disenosartistas 
-                                                JOIN favoritos on disenosartistas.id_diseno=favoritos.id_diseno JOIN users on users.id=disenosartistas.id_user 
-                                                JOIN disenos on disenos.id = disenosartistas.id_diseno group by favoritos.id_diseno 
-                                                ORDER BY disenosartistas.id_diseno DESC`,
-                                                { type: QueryTypes.SELECT })
+        productos = await models.sequelize.query(`select favoritos.id_diseno, disenos.titulo, disenos.imagen, users.nombre, disenos.createdAt AS 'fecha', 
+                                                    COUNT(favoritos.id_diseno) as 'disenos' from favoritos 
+                                                    JOIN disenos on disenos.id=favoritos.id_diseno 
+                                                    JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
+                                                    JOIN users on users.id=disenosartistas.id_user 
+                                                    WHERE disenos.activado = 1 
+                                                    group by favoritos.id_diseno 
+                                                    ORDER BY disenos DESC`,
+                                                    { type: QueryTypes.SELECT })
     
               
         productos.forEach(producto =>{
@@ -586,6 +594,71 @@ class ConexionDiseno extends ConexionSequelize {
 
             throw err;
         }
+    }
+
+    activarDiseno = async(id, activado) => {
+
+        try{
+
+            let diseno = await models.Diseno.update(
+                {activado:activado},
+                {where:{id:id}}
+            );
+               
+            return diseno;
+
+        }catch (err){
+
+            throw err;
+        }
+    }
+
+    getDiseno = async(id) =>{
+        const diseno = models.Diseno.findOne({
+            where:{id:id}
+        })
+
+        return diseno;
+    }
+
+    getProducto = async(id) =>{
+        const producto = models.Producto.findOne({
+            where:{id:id}
+        })
+
+        return producto;
+    }
+
+    getPropietarioProducto = async(id, user) => {
+
+        const producto = await models.DisenoProducto.findOne({
+            attributes:['id_diseno'],
+            where:{id_producto:id}
+        })
+
+        const propietario = await models.DisenosArtistas.findOne({
+            attributes:['id_user'],
+            where:{id_diseno:producto.dataValues.id_diseno}
+        })
+
+        if(propietario.dataValues.id_user == user){
+
+            return propietario;
+        }
+    }
+
+    getPropietarioDiseno = async(id, user) => {
+
+        const propietario = await models.DisenosArtistas.findOne({
+            attributes:['id_user'],
+            where:{id_diseno:id}
+        })
+
+        if(propietario.dataValues.id_user == user){
+            
+            return propietario;
+        }
+
     }
 
 } 

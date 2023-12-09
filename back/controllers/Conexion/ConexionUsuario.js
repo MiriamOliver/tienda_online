@@ -167,6 +167,27 @@ class ConexionUsuario extends ConexionSequelize {
             throw err;
         }
     }
+
+    getUsuarioExiste = async(id) => {
+        const usuario = models.User.findOne({
+            where:{id:id}
+        })
+
+        return usuario;
+    }
+
+    usuarioRol = async(id, rol) => {
+        const idRol = await models.Rol.findOne({
+            attribute:['id'],
+            where:{rol: rol}
+        });
+        const admin = await models.RolesAsignados.findOne({
+            where:{id_user:id,
+                   id_rol: idRol.dataValues.id}
+        })
+
+        return admin
+    }
 }
 
 module.exports = ConexionUsuario;
