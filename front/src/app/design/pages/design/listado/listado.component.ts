@@ -12,12 +12,14 @@ import { DesignService } from 'src/app/design/services/design.service';
 export class ListadoComponent implements OnInit{
 
   private busqueda:string = 'todo';
+  pag:number;
+
 
   constructor(
     private router: Router,
     private designService: DesignService,
   ) {
-
+    this.pag = 0;
   }
 
   ngOnInit(): void {

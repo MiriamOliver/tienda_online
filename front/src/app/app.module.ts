@@ -12,6 +12,7 @@ import { DesignRoutingModule } from './design/design-routing.module';
 import { EstadisticaModule } from './estadistica/estadistica.module';
 import { MisDisenosModule } from './mis-disenos/mis-disenos.module';
 import { MisDisenosRoutingModule } from './mis-disenos/mis-disenos-routing.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { MisDisenosRoutingModule } from './mis-disenos/mis-disenos-routing.modul
     DesignRoutingModule,
     EstadisticaModule,
     MisDisenosModule,
-    MisDisenosRoutingModule
+    MisDisenosRoutingModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

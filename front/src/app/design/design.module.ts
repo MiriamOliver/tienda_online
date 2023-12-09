@@ -8,6 +8,7 @@ import { FiltrosComponent } from './pages/design/filtros/filtros.component';
 import { BuscadorComponent } from './pages/design/buscador/buscador.component';
 import { ListadoComponent } from './pages/design/listado/listado.component';
 import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -22,7 +23,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   exports: [
     MainDesignComponent,

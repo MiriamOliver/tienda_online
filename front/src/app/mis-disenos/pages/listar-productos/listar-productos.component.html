@@ -1,5 +1,5 @@
 <div class="px-5 mx-5 mb-3 contenedor-subir">
-  <div class="info mb-4 p-5 rounded-1 shadow-sm" *ngFor="let producto of listadoProductos" id="info{{producto.id}}">
+  <div class="info mb-4 p-5 rounded-1 shadow-sm" *ngFor="let producto of listadoProductos | paginate: { itemsPerPage: 4, currentPage: pag }" id="info{{producto.id}}">
     <div class="row">
       <div class="col-lg-3">
         <img src="{{producto.imagen}}" class="rounded-1 shadow-sm">
@@ -41,6 +41,8 @@
       </div>
     </div>
   </div>
+  <pagination-controls (pageChange)="pag = $event" previousLabel="" nextLabel="" class="text-center mt-4">
+  </pagination-controls>
 </div>
 
 

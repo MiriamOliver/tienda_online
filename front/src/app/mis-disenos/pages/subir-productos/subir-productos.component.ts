@@ -106,17 +106,16 @@ export class SubirProductosComponent implements OnInit{
     this.misDisenosService.addProducto(this.producto)
     .subscribe(resp => {
       if(resp.sucess){
-        this.mensaje = 'Registrado correctamente';
-        this.errorAddProducto = 0;
         this.limpiarDatosAddProducto();
         this.misDisenosService.getDisenoListaProductos(JSON.parse(localStorage.getItem('diseno')!).id);
+        window.location.reload();
 
       }else{
         this.mensaje = 'Error en el registro';
         this.errorAddProducto = 1;
+        clearTimeout(this.timer);
+        this.timer = window.setTimeout(() => {this.errorAddProducto = -1; window.location.reload();}, 3000);
       }
-      clearTimeout(this.timer);
-      this.timer = window.setTimeout(() => {this.errorAddProducto = -1; window.location.reload();}, 2000);
     })
   }
 
