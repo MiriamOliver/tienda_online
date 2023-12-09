@@ -69,10 +69,16 @@ const listadoProductosRecomendados = (req, res = response) => {
     const conex = new ConexionSequelize();
     conex.getProductosRecomendados(req.params.id)
         .then( productos => {
-            productos.forEach(producto =>{
-                producto.imagen = process.env.URL + process.env.PORT + "/upload/" + producto.imagen;
-            })
-            res.status(200).json(productos); 
+            if(productos == 0){
+
+                res.status(200).json([])
+            }else{
+
+                productos.forEach(producto =>{
+                    producto.imagen = process.env.URL + process.env.PORT + "/upload/" + producto.imagen;
+                })
+                res.status(200).json(productos); 
+            }
         })
         .catch(err => {
             res.status(203).json({'msg':'No se han encontrado registros'});
@@ -83,10 +89,15 @@ const getArtistasAfines = (req, res = response) => {
     const conex = new ConexionSequelize();
     conex.getArtistasRecomendados(req.params.id)
         .then( artistas => {
-            artistas.forEach(artista =>{
-                artista.avatar = process.env.URL + process.env.PORT + "/upload/" + artista.avatar;
-            })
-            res.status(200).json(artistas); 
+            if(artistas == 0){
+
+                res.status(200).json([])
+            }else{
+                artistas.forEach(artista =>{
+                    artista.avatar = process.env.URL + process.env.PORT + "/upload/" + artista.avatar;
+                })
+                res.status(200).json(artistas); 
+            }  
         })
         .catch(err => {
             res.status(203).json({'msg':'No se han encontrado registros'});

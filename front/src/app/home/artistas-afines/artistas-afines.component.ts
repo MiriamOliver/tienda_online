@@ -11,6 +11,7 @@ import { Artista } from '../interfaces/home.interface';
 export class ArtistasAfinesComponent implements OnInit{
 
   artistas:Artista[] = [];
+  mensaje:number = -1;
 
   constructor(
     private router: Router,
@@ -22,6 +23,9 @@ export class ArtistasAfinesComponent implements OnInit{
     const fechaCompleta = "YYYY-MM-DD HH:mm:ss";
     this.homeService.getArtistasRecomendados(JSON.parse(localStorage.getItem('user')!).id).subscribe(resp => {
       this.artistas = resp;
+      if(this.artistas.length == 0){
+        this.mensaje = 1;
+      }
     });
   }
 
