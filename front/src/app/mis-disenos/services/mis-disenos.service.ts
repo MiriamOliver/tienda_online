@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Design, InfoUsuario, crearDiseno, crearProducto, infoDesign, Productos } from '../interfaces/mis-disenos';
+import { Design, InfoUsuario, crearDiseno, crearProducto, infoDesign, Productos, infoProducto } from '../interfaces/mis-disenos';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
@@ -137,5 +137,24 @@ export class MisDisenosService {
   borrarDiseno(id:any):Observable<any>{
     let user = JSON.parse(localStorage.getItem('user')!).id;
     return this.http.delete<any>(`${ this.baseUrl }/diseno/misdisenos/diseno/borrar/${id}/${user}`);
+  }
+
+  obtenerProducto(id:any){
+    let producto = this.listaProductos.filter(producto => producto.id == id);
+    return producto[0];
+  }
+
+  modificarProducto(producto:infoProducto):Observable<any>{
+    const formReg = new FormData();
+    formReg.append('archivo', producto.imagen);
+    formReg.append('titulo', producto.titulo);
+    formReg.append('tipo',  producto.tipo);
+    formReg.append('precio', producto.precio);
+    formReg.append('estado', producto.estado);
+    formReg.append('descripcion', producto.descripcion);
+    formReg.append('id_artista', producto.id_artista);
+    formReg.append('id_diseno', producto.id_diseno);
+
+    return this.http.put<any>(`${ this.baseUrl }/diseno/misdisenos/producto/editar/${producto.id}`, formReg);
   }
 }

@@ -85,4 +85,18 @@ router.delete('/misdisenos/producto/borrar/:id/:user', [mid.esAdmin, mid.usuario
 
 router.delete('/misdisenos/diseno/borrar/:id/:user', [mid.esAdmin, mid.usuarioExiste, midDiseno.existeDiseno, midDiseno.propietarioDiseno], controlador.borrarDiseno);
 
+router.put('/misdisenos/producto/editar/:id', 
+[
+    check('titulo').not().isEmpty(),
+    check('descripcion').not().isEmpty(),
+    check('precio').not().isEmpty(),
+    check('tipo').not().isEmpty(),
+    check('estado', 'Valor no válido').isIn(['disponible','agotado','pocas existencias']),
+    check('id_artista', 'El usuario no existe').custom(usuarioExiste),
+    check('id_artista', 'El usuario no tiene permisos de administrador').custom(esAdministrador),
+    check('id_diseno', 'El diseño no existe').custom(disenoExiste),
+],
+[midDiseno.productoExiste, midDiseno.existePropietarioProducto],
+controlador.modificarProducto);
+
 module.exports = router
