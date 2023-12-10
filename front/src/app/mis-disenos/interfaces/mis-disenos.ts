@@ -68,6 +68,7 @@ export interface infoProducto {
   titulo:string,
   imagen:string,
   tipo:string,
+  estado:string,
   precio:any,
   descripcion:string,
   id_artista:any,

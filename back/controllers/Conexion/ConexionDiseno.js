@@ -706,6 +706,7 @@ class ConexionDiseno extends ConexionSequelize {
                     id_tipo:idTipo.dataValues.id,
                     precio: Number(req.body.precio),
                     descripcion:req.body.descripcion,
+                    estado:req.body.estado,
                     },
                     {where:{id:id}}
                 );
@@ -715,6 +716,7 @@ class ConexionDiseno extends ConexionSequelize {
                     id_tipo:idTipo.dataValues.id,
                     precio:Number(req.body.precio),
                     descripcion:req.body.descripcion,
+                    estado:req.body.estado,
                     },
                     {where:{id:id}}
                 ); 

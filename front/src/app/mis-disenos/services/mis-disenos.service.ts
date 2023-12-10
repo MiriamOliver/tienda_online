@@ -150,6 +150,7 @@ export class MisDisenosService {
     formReg.append('titulo', producto.titulo);
     formReg.append('tipo',  producto.tipo);
     formReg.append('precio', producto.precio);
+    formReg.append('estado', producto.estado);
     formReg.append('descripcion', producto.descripcion);
     formReg.append('id_artista', producto.id_artista);
     formReg.append('id_diseno', producto.id_diseno);

@@ -98,6 +98,24 @@
             </div>
 
             <div class="col-lg-7">
+              <div class="form-outline text-start mb-4">
+                <label class="form-label">Estado</label>
+
+                <select class="form-select form-control"
+                  formControlName="estado"
+                  [(ngModel)]="estado"
+                  [ngClass]="{'is-invalid' : form['estado'].invalid && form['estado'].touched}">
+                  <option value="" disabled selected hidden></option>
+                  <option value="disponible">Disponible</option>
+                  <option value="pocas existencias">Pocas existencias</option>
+                  <option value="agotado">Agotado</option>
+                </select>
+                <div *ngIf="form['estado'].invalid" class="invalid-feedback">
+                  <div *ngIf="form['estado'].errors?.['required']" class="error alert alert-danger mt-2">Elige un estilo
+                    de diseño</div>
+                </div>
+              </div>
+
               <div class="form-outline text-start">
                 <label class="form-label">Descripción</label>
 

@@ -22,6 +22,7 @@ export class ListarProductosComponent implements OnInit{
   contenedorEditar:string = '';
   tipo:string = '';
   titulo:string = '';
+  estado:string = '';
   descripcion:string = '';
   precio:number = 0.00;
   previsualizacion:any = '';
@@ -48,6 +49,7 @@ export class ListarProductosComponent implements OnInit{
         tipo:'',
         precio:0.00,
         descripcion:'',
+        estado:'',
         id_artista:0,
         id_diseno:0,
       }
@@ -109,9 +111,11 @@ export class ListarProductosComponent implements OnInit{
     modificarProducto(id:any){
       this.id_editar = id;
       let result = this.misDesignService.obtenerProducto(id);
+      console.log(result);
       this.previsualizacion = result.imagen;
       this.titulo = result.titulo;
       this.precio = result.precio;
+      this.estado = result.estado;
       this.tipo = result.tipo;
       this.descripcion = result.descripcion;
       if(this.id_editar != 0){
@@ -120,6 +124,7 @@ export class ListarProductosComponent implements OnInit{
           this.productoForm = this.fb.group({
             titulo: ['', Validators.required],
             tipo: ['', Validators.required],
+            estado:['', Validators.required],
             precio: ['', Validators.compose([
               Validators.required,
               Validators.pattern("[0-9]+(\\.[0-9][0-9]?)?")])],
@@ -135,6 +140,7 @@ export class ListarProductosComponent implements OnInit{
       this.previsualizacion = '';
       this.titulo = '';
       this.precio = 0.00;
+      this.estado = '';
       this.tipo = '';
       this.descripcion = '';
     }
@@ -149,6 +155,7 @@ export class ListarProductosComponent implements OnInit{
       this.producto.titulo = this.productoForm.get('titulo')?.value;
       this.producto.precio = this.productoForm.get('precio')?.value;
       this.producto.tipo = this.productoForm.get('tipo')?.value;
+      this.producto.estado = this.productoForm.get('estado')?.value;
       this.producto.descripcion = this.productoForm.get('descripcion')?.value;
       this.producto.id_artista = JSON.parse(localStorage.getItem('user')!).id;
       this.producto.id_diseno = JSON.parse(localStorage.getItem('diseno')!).id;
