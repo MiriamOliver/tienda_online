@@ -56,7 +56,13 @@ export class InfoDisenoComponent implements OnInit{
           favoritos:resp.favoritos,
           cant_productos:resp.cant_productos,
         }
-        console.log(this.diseno);
       })
-    }
+  }
+
+  letraMayuscula(nombre:string){
+    let firstLetra = nombre.charAt(0);
+    let palabra = nombre.slice(1);
+    return firstLetra.toUpperCase() + palabra;
+  }
+
 }
