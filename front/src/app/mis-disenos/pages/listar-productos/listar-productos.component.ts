@@ -140,7 +140,6 @@ export class ListarProductosComponent implements OnInit{
     }
 
     confirmarModificarProducto(){
-      console.log('holita')
       if(this.selectedFile){
         this.producto.imagen = this.selectedFile;
       }else{
@@ -155,8 +154,7 @@ export class ListarProductosComponent implements OnInit{
       this.producto.id_diseno = JSON.parse(localStorage.getItem('diseno')!).id;
 
       this.misDesignService.modificarProducto(this.producto).subscribe(resp => {
-        if (resp) {
-          this.cerrarModificar();
+        if (resp.success) {
           window.location.reload();
         }else{
           this.errorModificarProducto = 1;
@@ -166,7 +164,7 @@ export class ListarProductosComponent implements OnInit{
           this.timer = window.setTimeout(() => {this.errorModificarProducto = -1;
                                                   this.contenedorEditarId.style.removeProperty("position")
                                                   this.contenedorEditarId = null;
-                                                }, 3000);
+                                                }, 2000);
         }
       });
 

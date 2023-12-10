@@ -131,7 +131,6 @@ const getDisenosArtista = (req, res = response) => {
     const conex = new ConexionSequelize();
     conex.getDisenosArtista(req.params.id)
         .then( disenos => {
-            console.log(disenos);
             res.status(200).json(disenos); 
         })
         .catch(err => {
@@ -293,6 +292,17 @@ const registrarDiseno = (req, res = response) => {
         }) 
     }
 
+    const modificarProducto = (req, res = response) => {
+        const conex = new ConexionSequelize();
+        conex.modificarProducto(req.params.id, req)
+        .then(resp => {
+            res.status(200).json({'success':true, 'msg':'Modificado con éxito', resp});
+        })
+        .catch(err => {
+            res.status(203).json({'success':false, 'msg':'No se encontraron registros'});
+        })
+    } 
+
 
 module.exports = {
     listadoDisenos,
@@ -315,5 +325,6 @@ module.exports = {
     getInfoDiseno,
     modificarDiseno,
     activarDiseno,
-    borrarDiseno
+    borrarDiseno,
+    modificarProducto
 }

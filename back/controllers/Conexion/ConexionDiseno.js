@@ -584,14 +584,12 @@ class ConexionDiseno extends ConexionSequelize {
 
     modificarDiseno = async(req, id) => {
 
-        console.log(id)
-
         try{
 
             if(req.files){
                 const nombre = await File.subirArchivo(req.files, undefined, 'imgs' );
     
-                let prueba = await models.Diseno.update({
+                await models.Diseno.update({
                     titulo:req.body.titulo,
                     imagen:nombre,
                     tema:req.body.tema,
@@ -601,7 +599,7 @@ class ConexionDiseno extends ConexionSequelize {
                     {where:{id:id}}
                 );
             }else{
-                let prueba = await models.Diseno.update({
+                await models.Diseno.update({
                     titulo:req.body.titulo,
                     tema:req.body.tema,
                     estilo:req.body.estilo,
@@ -688,6 +686,52 @@ class ConexionDiseno extends ConexionSequelize {
             return propietario;
         }
 
+    }
+
+    modificarProducto = async(id, req) => {
+
+        try{
+
+            let idTipo = await models.Tipo.findOne({
+                attributes:['id'],
+                where:{tipo:req.body.tipo}
+            })
+
+            if(req.files){
+                const nombre = await File.subirArchivo(req.files, undefined, 'imgs' );
+    
+                await models.Producto.update({
+                    titulo:req.body.titulo,
+                    imagen:nombre,
+                    id_tipo:idTipo.dataValues.id,
+                    precio: Number(req.body.precio),
+                    descripcion:req.body.descripcion,
+                    },
+                    {where:{id:id}}
+                );
+            }else{
+                await models.Producto.update({
+                    titulo:req.body.titulo,
+                    id_tipo:idTipo.dataValues.id,
+                    precio:Number(req.body.precio),
+                    descripcion:req.body.descripcion,
+                    },
+                    {where:{id:id}}
+                ); 
+
+            }
+
+            let producto = await models.Producto.findOne({
+                attributes:['id'],
+                where:{id:id}
+            })
+              
+            return producto.dataValues.id;
+
+        }catch (err){
+
+            throw err;
+        }
     }
 
 } 

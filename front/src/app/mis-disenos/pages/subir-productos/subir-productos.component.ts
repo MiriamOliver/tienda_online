@@ -95,7 +95,7 @@ export class SubirProductosComponent implements OnInit{
   })
 
   addProducto() {
-    this.producto.titulo = this.productoForm.get('titulo')?.value + ' - ' + this.productoForm.get('tipo')?.value;
+    this.producto.titulo = this.productoForm.get('titulo')?.value;
     this.producto.imagen = this.selectedFile;
     this.producto.tipo = this.productoForm.get('tipo')?.value;
     this.producto.precio = Number(this.productoForm.get('precio')?.value);

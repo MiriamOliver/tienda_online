@@ -154,6 +154,6 @@ export class MisDisenosService {
     formReg.append('id_artista', producto.id_artista);
     formReg.append('id_diseno', producto.id_diseno);
 
-    return this.http.post<any>(`${ this.baseUrl }/diseno/misdisenos/producto/editar/${producto.id}`, formReg);
+    return this.http.put<any>(`${ this.baseUrl }/diseno/misdisenos/producto/editar/${producto.id}`, formReg);
   }
 }
