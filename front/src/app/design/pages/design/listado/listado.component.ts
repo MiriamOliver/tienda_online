@@ -44,4 +44,8 @@ export class ListadoComponent implements OnInit{
     let palabra = nombre.slice(1);
     return firstLetra.toUpperCase() + palabra;
   }
+
+  verDiseno(id:any){
+    this.router.navigate(['infodiseno/' + id]);
+  }
 }

@@ -32,7 +32,6 @@ export class RankingComponent implements OnInit{
     this.homeService.getArtistaDestacado()
     .subscribe(resp =>{
       this.artista = resp;
-      console.log(this.artista);
     });
 
     this.homeService.getDisenosDestacados()
@@ -41,7 +40,12 @@ export class RankingComponent implements OnInit{
         item.fecha = moment(item.fecha, fechaCompleta).format('DD-MM-YYYY');
       })
       this.disenos = resp;
+      console.log(this.disenos);
     });
+  }
+
+  verDiseno(id:any){
+    this.router.navigate(['infodiseno/' + id]);
   }
 
   letraMayuscula(nombre:string){

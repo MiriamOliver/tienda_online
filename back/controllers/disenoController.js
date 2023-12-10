@@ -317,6 +317,21 @@ const registrarDiseno = (req, res = response) => {
         })
     } 
 
+    const conseguirListaProductos = (req, res = response) => {
+        const conex = new ConexionSequelize();
+        conex.conseguirProductos(req.params.id)
+        .then(resp => {
+            resp.forEach(p =>{
+                p.fecha = moment(resp.fecha).format("DD-MM-YYYY") 
+                p.imagen = process.env.URL + process.env.PORT + "/upload/" + p.imagen;
+            })
+            res.status(200).json(resp);
+        })
+        .catch(err => {
+            res.status(203).json({'success':false, 'msg':'No se encontraron registros'});
+        })
+    }
+
 
 module.exports = {
     listadoDisenos,
@@ -341,5 +356,6 @@ module.exports = {
     activarDiseno,
     borrarDiseno,
     modificarProducto,
-    conseguirDiseno
+    conseguirDiseno,
+    conseguirListaProductos
 }

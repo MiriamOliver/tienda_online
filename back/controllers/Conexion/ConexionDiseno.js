@@ -207,7 +207,7 @@ class ConexionDiseno extends ConexionSequelize {
         let listaProductos = [];
         let cont = 3;
 
-        productos = await models.sequelize.query(`select favoritos.id_diseno, disenos.titulo, disenos.imagen, users.nombre, disenos.createdAt AS 'fecha', 
+        productos = await models.sequelize.query(`select favoritos.id_diseno as 'id', disenos.titulo, disenos.imagen, users.nombre, disenos.createdAt AS 'fecha', 
                                                     COUNT(favoritos.id_diseno) as 'disenos' from favoritos 
                                                     JOIN disenos on disenos.id=favoritos.id_diseno 
                                                     JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
@@ -751,6 +751,26 @@ class ConexionDiseno extends ConexionSequelize {
                                                         { replacements: [id], type: QueryTypes.SELECT });
 
             return diseno[0]
+            
+        }catch (err){
+
+            throw err;
+        }
+    }
+
+    conseguirProductos = async(id) => {
+
+        try{
+
+            let productos = await models.sequelize.query(`SELECT productos.id, productos.titulo, productos.imagen, productos.descripcion, productos.activado, productos.precio, 
+                                                            productos.estado, productos.createdAt as 'fecha', tipos.tipo FROM productos 
+                                                            JOIN tipos ON tipos.id = productos.id_tipo 
+                                                            JOIN disenoproductos ON disenoproductos.id_producto = productos.id 
+                                                            WHERE disenoproductos.id_diseno = ? AND productos.activado = 1 
+                                                            ORDER BY fecha DESC`, 
+                                                            { replacements: [id], type: QueryTypes.SELECT });
+
+            return productos
             
         }catch (err){
 

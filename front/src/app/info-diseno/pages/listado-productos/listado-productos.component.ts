@@ -12,12 +12,28 @@ import { switchMap } from 'rxjs';
 export class ListadoProductosComponent implements OnInit{
 
   productos:ListaProductos[] = [];
+  producto:ListaProductos;
+  contenedorProducto:number = 0;
+  pag:number;
 
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private infoDisenoService:InfoDisenoService
-  ) {}
+  ) {
+    this.pag = 1;
+    this.producto = {
+      id:0,
+      titulo:'',
+      imagen:'',
+      tipo:'',
+      precio:0,
+      estado:'',
+      descripcion:'',
+      fecha:'',
+      activado:0,
+    }
+  }
 
   ngOnInit(): void {
 
@@ -28,6 +44,12 @@ export class ListadoProductosComponent implements OnInit{
       .subscribe(( resp) => {
         this.productos = resp;
       })
+  }
+
+  mostrarProducto(id:any){
+    let infoProducto = this.productos.filter(producto => producto.id == id)
+    this.producto = infoProducto[0];
+    this.contenedorProducto = 1;
   }
 
   letraMayuscula(nombre:string){

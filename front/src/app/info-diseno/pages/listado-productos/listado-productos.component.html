@@ -1,1 +1,58 @@
-<p>listado-productos works!</p>
+<div class="p-4">
+  <div class="linea py-4"></div>
+  <div class="row mb-5">
+    <div class="col-lg-3">
+      <div *ngIf="contenedorProducto == 1" class="info p-2 text-center rounded-1 p-4">
+        <h5 class="mb-4">Detalles Diseño</h5>
+        <div class="mb-3">
+          <h5 class="text-center mb-2 border-0">{{letraMayuscula(producto.titulo)}} - {{producto.tipo}}</h5>
+          <img class="rounded-1 shadow-sm" src="{{producto.imagen}}">
+        </div>
+        <div class="recuadros row mb-2">
+          <div class="col pe-1">
+            <p class="recuadro p-2 m-0 rounded-top">Fecha</p>
+            <p class="datos p-2 m-0 rounded-bottom">{{producto.fecha}}</p>
+          </div>
+          <div class="rounded-1 col ps-1">
+            <p class="recuadro p-2 m-0 rounded-top">Precio</p>
+            <p class="datos p-2 m-0 rounded-bottom">{{producto.precio}}€</p>
+          </div>
+        </div>
+        <div class="recuadros row mb-2">
+          <div class="col pe-1">
+            <p class="recuadro p-2 m-0 rounded-top">Tipo</p>
+            <p class="datos p-2 m-0 rounded-bottom">{{producto.tipo}}</p>
+          </div>
+          <div class="rounded-1 col ps-1">
+            <p class="recuadro p-2 m-0 rounded-top">Estado</p>
+            <p class="datos p-2 m-0 rounded-bottom">{{producto.estado}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="row">
+        <div class="col-lg-3 col-6 mb-3" *ngFor="let producto of productos | paginate: { itemsPerPage: 12, currentPage: pag }">
+          <div class="producto p-2 rounded-1 shadow-sm">
+            <img class="img-thumbnail mb-2" src="{{producto.imagen}}">
+            <label class="resaltado my-1"><span>{{letraMayuscula(producto.titulo)}} - {{producto.tipo}}</span></label>
+            <div class="d-flex justify-content-between">
+              <label>{{producto.fecha}}</label>
+              <label class="resaltado"><span>{{producto.precio}}€</span></label>
+            </div>
+            <div class="etiquetas d-flex my-3">
+              <div class="p-1 px-2 rounded-1 me-1"><label><i class="fa-solid fa-bag-shopping"></i>&nbsp;&nbsp;{{letraMayuscula(producto.tipo)}}</label></div>
+              <div class="p-1 px-2 rounded-1"><label><i class="fa-solid fa-box"></i>&nbsp;&nbsp;{{letraMayuscula(producto.estado)}}</label></div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mt-4 mb-2">
+              <button type="button" class="d-flex align-items-center rounded py-1 px-2 boton" (click)="mostrarProducto(producto.id)"><i class="fa-solid fa-info circle px-2 m-0"></i>&nbsp;&nbsp;Detalles</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pagination-controls (pageChange)="pag = $event" previousLabel="" nextLabel="" class="text-center mt-4">
+  </pagination-controls>
+</div>
+
