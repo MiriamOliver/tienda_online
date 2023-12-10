@@ -1,0 +1,8 @@
+.fondo{
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+}
+.contenedor-productos, .contenedor-diseno, .contenedor-listar-productos{
+  background-color: var(--colorTransparente);
+}

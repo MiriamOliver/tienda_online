@@ -72,6 +72,10 @@ export class ListadoDisenosComponent implements OnInit{
     return firstLetra.toUpperCase() + palabra;
   }
 
+  verDiseno(id:any){
+    this.router.navigate(['infodiseno/' + id]);
+  }
+
   mostrarDiseno(id:number){
     this.design = this.misDesignService.getDiseno(id);
     this.infoDiseno = 1;

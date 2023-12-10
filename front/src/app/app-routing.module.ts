@@ -6,6 +6,7 @@ import { EstadisticaModule } from './estadistica/estadistica.module';
 import { MainEstadisticasComponent } from './estadistica/main-estadisticas/main-estadisticas.component';
 import { ListadoDisenosComponent } from './mis-disenos/pages/listado-disenos/listado-disenos.component';
 import { MisDisenosModule } from './mis-disenos/mis-disenos.module';
+import { InfoDisenoModule } from './info-diseno/info-diseno.module';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: 'misdisenos',
     loadChildren: () => import('./mis-disenos/mis-disenos.module').then( m => m.MisDisenosModule ),
+  },
+  {
+    path: 'infodiseno',
+    loadChildren: () => import('./info-diseno/info-diseno.module').then( m => m.InfoDisenoModule ),
   },
   {
     path: '**',
