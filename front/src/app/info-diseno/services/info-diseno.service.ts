@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DatosDiseno } from '../interfaces/info-diseno';
+import { DatosDiseno, ListaProductos } from '../interfaces/info-diseno';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -15,5 +15,9 @@ export class InfoDisenoService {
 
   getDatosDiseno(id:any):Observable<DatosDiseno>{
     return this.http.get<DatosDiseno>(`${ this.baseUrl }/diseno/infodiseno/diseno/${id}`);
+  }
+
+  getDatosProductos(id:any):Observable<ListaProductos[]>{
+    return this.http.get<ListaProductos[]>(`${ this.baseUrl }/diseno/infodiseno/productos/${id}`);
   }
 }
