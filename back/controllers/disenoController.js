@@ -303,6 +303,20 @@ const registrarDiseno = (req, res = response) => {
         })
     } 
 
+    const conseguirDiseno = (req, res = response) => {
+        const conex = new ConexionSequelize();
+        conex.conseguirDiseno(req.params.id)
+        .then(resp => {
+            resp.fecha = moment(resp.fecha).format("DD-MM-YYYY") 
+            resp.avatar = process.env.URL + process.env.PORT + "/upload/" + resp.avatar;
+            resp.imagen = process.env.URL + process.env.PORT + "/upload/" + resp.imagen;
+            res.status(200).json(resp);
+        })
+        .catch(err => {
+            res.status(203).json({'success':false, 'msg':'No se encontraron registros'});
+        })
+    } 
+
 
 module.exports = {
     listadoDisenos,
@@ -326,5 +340,6 @@ module.exports = {
     modificarDiseno,
     activarDiseno,
     borrarDiseno,
-    modificarProducto
+    modificarProducto,
+    conseguirDiseno
 }

@@ -56,6 +56,7 @@ export class InfoDisenoComponent implements OnInit{
           favoritos:resp.favoritos,
           cant_productos:resp.cant_productos,
         }
+        console.log(this.diseno);
       })
     }
 }

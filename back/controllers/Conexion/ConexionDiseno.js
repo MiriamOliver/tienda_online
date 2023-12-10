@@ -736,6 +736,28 @@ class ConexionDiseno extends ConexionSequelize {
         }
     }
 
+    conseguirDiseno = async(id) => {
+
+        try{
+
+            let diseno = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, disenos.tema, disenos.estilo, disenos.descripcion, 
+                                                        disenos.createdAt AS 'fecha', users.id AS 'id_artista', users.nombre, users.avatar, 
+                                                        COUNT(disenoproductos.id_diseno) as 'cant_productos', COUNT(favoritos.id_diseno) as 'favoritos' FROM disenos 
+                                                        JOIN disenosartistas ON disenos.id=disenosartistas.id_diseno 
+                                                        JOIN users ON users.id=disenosartistas.id_user 
+                                                        LEFT JOIN disenoproductos ON disenoproductos.id_diseno=disenos.id 
+                                                        LEFT JOIN favoritos ON favoritos.id_diseno=disenos.id 
+                                                        WHERE disenos.id = ? GROUP BY disenos.id;`, 
+                                                        { replacements: [id], type: QueryTypes.SELECT });
+
+            return diseno[0]
+            
+        }catch (err){
+
+            throw err;
+        }
+    }
+
 } 
 
 module.exports = ConexionDiseno;
