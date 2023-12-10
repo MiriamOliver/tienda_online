@@ -1,6 +1,6 @@
 <div class="px-5 mx-5 mb-3 contenedor-subir">
   <div class="info mb-4 p-5 rounded-1 shadow-sm" *ngFor="let producto of listadoProductos | paginate: { itemsPerPage: 4, currentPage: pag }" id="info{{producto.id}}">
-    <div class="row">
+    <div class="row" *ngIf="id_editar != producto.id">
       <div class="col-lg-3">
         <img src="{{producto.imagen}}" class="rounded-1 shadow-sm">
       </div>
@@ -30,6 +30,99 @@
         </div>
       </div>
     </div>
+
+    <div class="row formulario" *ngIf="contenedorEditar == 'editar' && id_editar == producto.id">
+      <div class="col-lg-3">
+        <h5 class="m-0">Previsualización</h5>
+        <img [src]="previsualizacion" class="mt-3 pt-4">
+      </div>
+      <div class="col-lg-9">
+        <h5 class="m-0 mb-4 pb-3 contenedor-datos">Datos</h5>
+        <form #regForm="ngForm" [formGroup]="productoForm" (ngSubmit)="confirmarModificarProducto()">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="mb-4 text-start">
+                <label for="formFile" class="form-label">Imagen</label>
+                <input class="form-control"
+                    type="file" id="formFile"
+                    (change)="onFileSelected($event)"/>
+              </div>
+
+              <div class="form-outline mb-4 text-start">
+                <label class="form-label">Título</label>
+
+                <input type="text"
+                  formControlName="titulo"
+                  [ngClass]="{'is-invalid' : form['titulo'].invalid && form['titulo'].dirty}"
+                  value="{{titulo}}"
+                  [(ngModel)]="titulo"
+                  class="form-control" />
+
+                <div *ngIf="form['titulo'].invalid" class="invalid-feedback">
+                  <div *ngIf="form['titulo'].errors?.['required']" class="error alert alert-danger mt-2">Escribe un título
+                    para tu diseño</div>
+                </div>
+              </div>
+
+              <div class="form-outline mb-4 text-start">
+                <label class="form-label">Precio</label>
+
+                <input type="text"
+                  [(ngModel)]="precio"
+                  value="{{precio}}"
+                  formControlName="precio"
+                  [ngClass]="{'is-invalid' : form['precio'].invalid && form['precio'].dirty}"
+                  class="form-control" placeholder="0.00 €"/>
+
+                <div *ngIf="form['precio'].errors" class="invalid-feedback">
+                  <div *ngIf="form['precio'].errors?.['required']" class="error alert alert-danger mt-2">Escribe un precio al producto</div>
+                  <div *ngIf="form['precio'].errors?.['pattern']" class="error alert alert-danger mt-2">Solo números enteros o decimales</div>
+                </div>
+              </div>
+
+              <div class="form-outline text-start">
+                <label class="form-label">Tipo</label>
+
+                <select class="form-select form-control"
+                  formControlName="tipo"
+                  [(ngModel)]="tipo"
+                  [ngClass]="{'is-invalid' : form['tipo'].invalid && form['tipo'].touched}">
+                  <option value="" disabled selected hidden></option>
+                  <option value="{{tipo}}" *ngFor="let tipo of listaTipo">{{tipo}}</option>
+                </select>
+                <div *ngIf="form['tipo'].invalid" class="invalid-feedback">
+                  <div *ngIf="form['tipo'].errors?.['required']" class="error alert alert-danger mt-2">Elige un estilo
+                    de diseño</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-7">
+              <div class="form-outline text-start">
+                <label class="form-label">Descripción</label>
+
+                <textarea class="form-control" placeholder="Escribe una descripción del diseño" id="floatingTextarea"
+                  formControlName="descripcion"
+                  [(ngModel)]="descripcion"
+                  value="{{descripcion}}"
+                  [ngClass]="{'is-invalid' : form['descripcion'].invalid && form['descripcion'].dirty}"></textarea>
+
+                <div *ngIf="form['descripcion'].invalid" class="invalid-feedback">
+                  <div *ngIf="form['descripcion'].errors?.['required']" class="error alert alert-danger mt-2">Escribe una
+                    descripción para tu diseño</div>
+                </div>
+              </div>
+
+              <div class="pt-1 mb-2 mt-5 text-end">
+                <button class="btn rounded-1 boton boton-producto py-2 px-4 me-3" [disabled]="productoForm.invalid" type="submit">Guardar</button>
+                <button class="btn rounded-1 boton boton-producto py-2 px-4 ms-3" type="button" (click)="cerrarModificar()">Cancelar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <div class="position-absolute top-50 start-50 translate-middle mensaje card shadow-lg mb-5 bg-body rounded" *ngIf="confirmarBorrarProducto == 1 && id_producto==producto.id" style="width: 400px;">
       <div class="card-body text-center p-0">
         <div style="background-color: #ffa8ba;" class="p-3 mb-3"><p class="m-0" style="color:var(--colorBlanco); font-size: var(--TamTitulo);">Confirmar Borrado</p></div>
@@ -38,6 +131,13 @@
           <button (click)="borrarProducto()" class="btn boton btn-light m-4 p-1 px-3">Borrar</button>
           <button (click)="cerrarBorrarProducto()" class="btn boton btn-light m-4 p-1 px-3">Cancelar</button>
         </div>
+      </div>
+    </div>
+
+    <div class="position-absolute top-50 start-50 translate-middle mensaje card shadow-lg mb-5 bg-body rounded" *ngIf="errorModificarProducto == 1 && id_editar == producto.id" style="width: 400px;">
+      <div *ngIf="errorModificarProducto == 1" class="card-body text-center p-0 pb-3">
+        <div style="background-color: #ffa8ba;" class="p-3 mb-3"><i class="fa-solid fa-triangle-exclamation me-2" style="color:var(--colorBlanco); font-size: var(--TamTitulo);"></i></div>
+        <span class="pt-5 m-3">Error en la modificación del producto</span>
       </div>
     </div>
   </div>

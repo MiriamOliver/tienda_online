@@ -62,3 +62,14 @@ export interface Productos{
     descripcion:string,
     activado:number
 }
+
+export interface infoProducto {
+  id:any,
+  titulo:string,
+  imagen:string,
+  tipo:string,
+  precio:any,
+  descripcion:string,
+  id_artista:any,
+  id_diseno:any
+}
