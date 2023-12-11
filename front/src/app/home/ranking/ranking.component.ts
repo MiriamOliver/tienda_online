@@ -40,7 +40,6 @@ export class RankingComponent implements OnInit{
         item.fecha = moment(item.fecha, fechaCompleta).format('DD-MM-YYYY');
       })
       this.disenos = resp;
-      console.log(this.disenos);
     });
   }
 

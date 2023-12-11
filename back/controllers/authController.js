@@ -47,7 +47,6 @@ const login =  (req = request, res = response) => {
             res.status(200).json(resp);
         })
         .catch ( err => {
-            console.log(err);
             res.status(203).json({success:false, msg:'¡Error!. Fallo en Inicio de Sesión', err});
         });
 }
@@ -68,7 +67,6 @@ const guardarPassword = (req, res = response) => {
     .then(resp => {
         res.send({success:true, msg:'Restauración de contraseña exitosa'});
     }).catch(err => {
-        console.log(err);
         res.send({success:false, msg:'Fallo en la restauración de contraseña', err});
     });
 }

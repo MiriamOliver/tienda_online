@@ -43,7 +43,6 @@ export class VerDisenoComponent implements OnInit{
     this.misDisenosService.getDisenoProductos(id)
     .subscribe((resp) => {
       this.diseno = resp;
-      console.log(this.diseno)
     });
   }
 

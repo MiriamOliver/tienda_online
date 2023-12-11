@@ -102,7 +102,6 @@ export class ListadoDisenosComponent implements OnInit{
     this.id_diseno = id;
     this.contenedor = document.getElementById('info'+this.id_diseno);
     this.contenedor.style.position = 'relative';
-    console.log(this.contenedor);
   }
 
   cerrarBorrarDiseno(){

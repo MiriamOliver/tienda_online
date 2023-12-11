@@ -435,7 +435,7 @@ class ConexionDiseno extends ConexionSequelize {
             });
 
             if(producto){
-                let prueba = await models.DisenoProducto.create({
+                await models.DisenoProducto.create({
                     id_diseno: Number(req.body.id_diseno),
                     id_producto: producto.dataValues.id
                 })  
