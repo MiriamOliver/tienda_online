@@ -207,7 +207,7 @@ class ConexionDiseno extends ConexionSequelize {
         let listaProductos = [];
         let cont = 3;
 
-        productos = await models.sequelize.query(`select favoritos.id_diseno, disenos.titulo, disenos.imagen, users.nombre, disenos.createdAt AS 'fecha', 
+        productos = await models.sequelize.query(`select favoritos.id_diseno as 'id', disenos.titulo, disenos.imagen, users.nombre, disenos.createdAt AS 'fecha', 
                                                     COUNT(favoritos.id_diseno) as 'disenos' from favoritos 
                                                     JOIN disenos on disenos.id=favoritos.id_diseno 
                                                     JOIN disenosartistas on disenos.id = disenosartistas.id_diseno 
@@ -435,7 +435,7 @@ class ConexionDiseno extends ConexionSequelize {
             });
 
             if(producto){
-                let prueba = await models.DisenoProducto.create({
+                await models.DisenoProducto.create({
                     id_diseno: Number(req.body.id_diseno),
                     id_producto: producto.dataValues.id
                 })  
@@ -730,6 +730,48 @@ class ConexionDiseno extends ConexionSequelize {
               
             return producto.dataValues.id;
 
+        }catch (err){
+
+            throw err;
+        }
+    }
+
+    conseguirDiseno = async(id) => {
+
+        try{
+
+            let diseno = await models.sequelize.query(`SELECT disenos.id, disenos.titulo, disenos.imagen, disenos.tema, disenos.estilo, disenos.descripcion, 
+                                                        disenos.createdAt AS 'fecha', users.id AS 'id_artista', users.nombre, users.avatar, 
+                                                        COUNT(disenoproductos.id_diseno) as 'cant_productos', COUNT(favoritos.id_diseno) as 'favoritos' FROM disenos 
+                                                        JOIN disenosartistas ON disenos.id=disenosartistas.id_diseno 
+                                                        JOIN users ON users.id=disenosartistas.id_user 
+                                                        LEFT JOIN disenoproductos ON disenoproductos.id_diseno=disenos.id 
+                                                        LEFT JOIN favoritos ON favoritos.id_diseno=disenos.id 
+                                                        WHERE disenos.id = ? GROUP BY disenos.id;`, 
+                                                        { replacements: [id], type: QueryTypes.SELECT });
+
+            return diseno[0]
+            
+        }catch (err){
+
+            throw err;
+        }
+    }
+
+    conseguirProductos = async(id) => {
+
+        try{
+
+            let productos = await models.sequelize.query(`SELECT productos.id, productos.titulo, productos.imagen, productos.descripcion, productos.activado, productos.precio, 
+                                                            productos.estado, productos.createdAt as 'fecha', tipos.tipo FROM productos 
+                                                            JOIN tipos ON tipos.id = productos.id_tipo 
+                                                            JOIN disenoproductos ON disenoproductos.id_producto = productos.id 
+                                                            WHERE disenoproductos.id_diseno = ? AND productos.activado = 1 
+                                                            ORDER BY fecha DESC`, 
+                                                            { replacements: [id], type: QueryTypes.SELECT });
+
+            return productos
+            
         }catch (err){
 
             throw err;

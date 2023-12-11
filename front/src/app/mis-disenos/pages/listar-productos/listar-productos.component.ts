@@ -111,7 +111,7 @@ export class ListarProductosComponent implements OnInit{
     modificarProducto(id:any){
       this.id_editar = id;
       let result = this.misDesignService.obtenerProducto(id);
-      console.log(result);
+
       this.previsualizacion = result.imagen;
       this.titulo = result.titulo;
       this.precio = result.precio;
@@ -182,7 +182,6 @@ export class ListarProductosComponent implements OnInit{
       this.id_producto = id;
       this.contenedor = document.getElementById('info'+this.id_producto);
       this.contenedor.style.position = 'relative';
-      console.log(this.contenedor);
     }
 
     cerrarBorrarProducto(){

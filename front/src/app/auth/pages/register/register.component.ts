@@ -84,12 +84,15 @@ export class RegisterComponent implements OnInit{
         if (!resp.success) {
           this.registroCorrecto = 1;
           this.resultado.msg = resp.msg;
+          clearTimeout(this.timer);
+          this.timer = window.setTimeout(() => {this.registroCorrecto = -1;}, 5000);
         }else{
           this.registroCorrecto = 2;
           this.resultado.msg = resp.msg;
-        }
-        clearTimeout(this.timer);
-        this.timer = window.setTimeout(() => {this.registroCorrecto = -1;}, 8000);
+          clearTimeout(this.timer);
+          this.timer = window.setTimeout(() => {this.registroCorrecto = -1;
+            this.router.navigate(['auth/login']);}, 5000);
+          }
       });
     }
     else {

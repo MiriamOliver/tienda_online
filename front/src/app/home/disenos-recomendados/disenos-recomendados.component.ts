@@ -34,6 +34,10 @@ export class DisenosRecomendadosComponent implements OnInit{
     });
   }
 
+  verDiseno(id:any){
+    this.router.navigate(['infodiseno/' + id]);
+  }
+
   letraMayuscula(nombre:string){
     let firstLetra = nombre.charAt(0);
     let palabra = nombre.slice(1);

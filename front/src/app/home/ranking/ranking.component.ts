@@ -32,7 +32,6 @@ export class RankingComponent implements OnInit{
     this.homeService.getArtistaDestacado()
     .subscribe(resp =>{
       this.artista = resp;
-      console.log(this.artista);
     });
 
     this.homeService.getDisenosDestacados()
@@ -42,6 +41,10 @@ export class RankingComponent implements OnInit{
       })
       this.disenos = resp;
     });
+  }
+
+  verDiseno(id:any){
+    this.router.navigate(['infodiseno/' + id]);
   }
 
   letraMayuscula(nombre:string){

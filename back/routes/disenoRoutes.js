@@ -99,4 +99,8 @@ router.put('/misdisenos/producto/editar/:id',
 [midDiseno.productoExiste, midDiseno.existePropietarioProducto],
 controlador.modificarProducto);
 
+router.get('/infodiseno/diseno/:id', [midDiseno.existeDiseno], controlador.conseguirDiseno);
+
+router.get('/infodiseno/productos/:id', [midDiseno.existeDiseno], controlador.conseguirListaProductos);
+
 module.exports = router

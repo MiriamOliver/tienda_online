@@ -18,6 +18,7 @@ p{
     color: var(--colorRosa);
   }
   .resaltado{
+    cursor: pointer;
     font-size: var(--TamTituloImagen);
     overflow: hidden;
     text-overflow: ellipsis;

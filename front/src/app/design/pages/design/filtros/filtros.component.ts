@@ -25,7 +25,6 @@ export class FiltrosComponent implements OnInit{
 
   ngOnInit(): void {
     this.designService.getProductos().subscribe(resp => {
-      console.log(resp);
       this.productos = resp;
     });
   }

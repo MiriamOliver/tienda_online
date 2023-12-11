@@ -13,6 +13,8 @@ import { EstadisticaModule } from './estadistica/estadistica.module';
 import { MisDisenosModule } from './mis-disenos/mis-disenos.module';
 import { MisDisenosRoutingModule } from './mis-disenos/mis-disenos-routing.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { InfoDisenoRoutingModule } from './info-diseno/info-diseno-routing.module';
+import { InfoDisenoModule } from './info-diseno/info-diseno.module';
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     EstadisticaModule,
     MisDisenosModule,
     MisDisenosRoutingModule,
+    InfoDisenoRoutingModule,
+    InfoDisenoModule,
     NgxPaginationModule
   ],
   providers: [],
